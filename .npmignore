@@ -1,0 +1,16 @@
+.editorconfig
+.eslintignore
+.eslintrc
+.github
+.gitignore
+.husky
+.npmignore
+.prettierrc
+.vscode
+commitlint.config.js
+coverage
+pnpm-lock.yaml
+setupTests.ts
+src
+tsconfig.*
+vite.config.ts

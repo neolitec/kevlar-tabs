@@ -1,0 +1,15 @@
+src
+tsconfig.*
+vite.config.ts
+.prettierrc
+.eslintrc
+.gitignore
+.npmignore
+.vscode
+.editorconfig
+.eslintignore
+.github
+pnpm-lock.yaml
+setupTests.ts
+coverage
+commitlint.config.js

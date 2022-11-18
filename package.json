@@ -1,0 +1,84 @@
+{
+  "name": "kevlar-tabs",
+  "version": "0.0.1",
+  "description": "Yet another better tabs library for React",
+  "scripts": {
+    "ladle": "ladle serve",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+    "build:clean": "pnpm dlx rimraf dist &&  && pnpm run build",
+    "build:dts": "tsc -p tsconfig.build.json --emitDeclarationOnly",
+    "build:js": "tsc -p tsconfig.build.json && vite build",
+    "build": "pnpm run build:js && pnpm run build:dts",
+    "test": "vitest"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "tabs",
+    "kevlar",
+    "frontend"
+  ],
+  "license": "MIT",
+  "repository": "neolitec/kevlar-tabs",
+  "main": "./dist/kevlar-tabs.umd.js",
+  "module": "./dist/kevlar-tabs.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/kevlar-tabs.es.js",
+      "require": "./dist/kevlar-tabs.umd.js"
+    }
+  },
+  "packageManager": "pnpm@7.14.2",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=7.14.2"
+  },
+  "volta": {
+    "node": "18.12.1"
+  },
+  "devDependencies": {
+    "@ladle/react": "^2.4.5",
+    "@testing-library/dom": "^8.19.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.25",
+    "@types/rollup-plugin-peer-deps-external": "^2.2.1",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
+    "@vitejs/plugin-react": "^2.2.0",
+    "@vitest/coverage-c8": "^0.25.2",
+    "@vitest/ui": "^0.25.2",
+    "eslint": "^8.28.0",
+    "eslint-config-airbnb": "^19.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jest": "27.1.5",
+    "eslint-plugin-jest-dom": "^4.0.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-testing-library": "^5.0.0",
+    "happy-dom": "^7.7.0",
+    "prettier": "^2.7.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^3.3.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "sass": "^1.56.1",
+    "testing-library-selector": "^0.2.1",
+    "typescript": "^4.9.3",
+    "vite": "^3.2.4",
+    "vitest": "^0.25.2",
+    "vitest-dom": "^0.0.4"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "dependencies": {
+    "classnames": "^2.3.2"
+  }
+}

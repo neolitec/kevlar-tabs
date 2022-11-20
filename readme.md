@@ -71,6 +71,6 @@ You can use CSS classes that are set on the components:
 
 ### Misc
 
-  - [ ] Logo
+  - [ ] Logo
   - [ ] Documentation site
-  - [ ] Contribution easing
+  - [ ] Contribution easing

@@ -23,31 +23,31 @@ jobs:
           release-type: node
           package-name: kevlar-tabs
       
-      - name: Checkout
-        uses: actions/checkout@v3
+      # - name: Checkout
+      #   uses: actions/checkout@v3
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+      # - name: Install Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 18
 
-      - uses: pnpm/action-setup@v2
-        with:
-          run_install: |
-            - recursive: true
-              args: [--frozen-lockfile, --prefer-offline]
+      # - uses: pnpm/action-setup@v2
+      #   with:
+      #     run_install: |
+      #       - recursive: true
+      #         args: [--frozen-lockfile, --prefer-offline]
 
-      - run: pnpm lint
-      - run: pnpm test -- --run
-      - run: pnpm build
+      # - run: pnpm lint
+      # - run: pnpm test -- --run
+      # - run: pnpm build
 
-      - name: create tag
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git remote add gh-token "https://${{ secrets.GITHUB_TOKEN}}@github.com/yargs/yargs.git"
-          git add -f dist
-          git commit -a -m 'chore: ${{ steps.release.outputs.tag_name }} release'
-          git tag -a ${{ steps.release.outputs.tag_name }} -m 'chore: ${{ steps.release.outputs.tag_name }} release'
-          git push origin ${{ steps.release.outputs.tag_name }}
-        if: ${{ steps.release.outputs.release_created }}
+      # - name: create tag
+      #   run: |
+      #     git config user.name github-actions[bot]
+      #     git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      #     git remote add gh-token "https://${{ secrets.GITHUB_TOKEN}}@github.com/yargs/yargs.git"
+      #     git add -f dist
+      #     git commit -a -m 'chore: ${{ steps.release.outputs.tag_name }} release'
+      #     git tag -a ${{ steps.release.outputs.tag_name }} -m 'chore: ${{ steps.release.outputs.tag_name }} release'
+      #     git push origin ${{ steps.release.outputs.tag_name }}
+      #   if: ${{ steps.release.outputs.release_created }}

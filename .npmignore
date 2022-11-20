@@ -12,3 +12,4 @@ vite.config.ts
 pnpm-lock.yaml
 setupTests.ts
 coverage
+commitlint.config.js

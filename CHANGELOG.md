@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.1 (2022-11-20)
+
+
+### Miscellaneous Chores
+
+* first release ([8ea033c](https://github.com/neolitec/kevlar-tabs/commit/8ea033c0d14ef531265e0326536d95742eef0dcc))
+
 ## [0.0.3](https://github.com/neolitec/kevlar-tabs/compare/v0.0.2...v0.0.3) (2022-11-20)
 
 

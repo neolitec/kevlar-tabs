@@ -28,18 +28,3 @@ jobs:
       - run: pnpm lint
       - run: pnpm test -- --run
   
-  release-please:
-    permissions:
-      contents: write # to create release commit (google-github-actions/release-please-action)
-      pull-requests: write # to create release PR (google-github-actions/release-please-action)
-    
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: google-github-actions/release-please-action@v3
-        id: release
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          release-type: node
-          package-name: kevlar-tabs
-

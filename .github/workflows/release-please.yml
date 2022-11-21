@@ -22,7 +22,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: node
           package-name: kevlar-tabs
-          prerelease: true
+          # Remove these lines after 1.0.0
+          bump-minor-pre-major: true
+          bump-patch-for-minor-pre-major: true
 
       # The logic below handles the npm publication:
       - name: Checkout

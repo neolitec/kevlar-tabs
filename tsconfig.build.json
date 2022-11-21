@@ -10,6 +10,7 @@
   "exclude": [
     "node_modules",
     "public",
+    "src/__tests__",
     "**/*.test.tsx",
     "**/*.test.ts",
     "**/*.stories.tsx"

@@ -1,133 +1,28 @@
-import { cleanup, render } from '@testing-library/react'
+import { cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import React from 'react'
 import { byRole, byText } from 'testing-library-selector'
-import Tab from '../Tab'
-import TabList from '../TabList'
-import TabPanel from '../TabPanel'
-import type { TabsProps } from '../Tabs'
-import Tabs from '../Tabs'
-
-function displayComponent(props: Partial<TabsProps> = {}) {
-  return render(
-    <Tabs {...props}>
-      <TabList>
-        <Tab>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
-      </TabList>
-      <TabPanel>Tab 1 content</TabPanel>
-      <TabPanel>Tab 2 content</TabPanel>
-      <TabPanel>Tab 3 content</TabPanel>
-    </Tabs>
-  )
-}
-
-function displayComponentWithSparses(props: Partial<TabsProps> = {}) {
-  return render(
-    <Tabs {...props}>
-      <TabList>
-        <Tab>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
-      </TabList>
-      <TabPanel>Tab 1 content</TabPanel>
-      <TabPanel index={2}>Tab 3 content</TabPanel>
-    </Tabs>
-  )
-}
-
-function displayComponentWithNamedTabs(props: Partial<TabsProps> = {}) {
-  return render(
-    <Tabs {...props}>
-      <TabList>
-        <Tab name="tab1">Tab 1</Tab>
-        <Tab name="tab2">Tab 2</Tab>
-        <Tab name="tab3">Tab 3</Tab>
-      </TabList>
-      <TabPanel>Tab 1 content</TabPanel>
-      <TabPanel index={2}>Tab 3 content</TabPanel>
-    </Tabs>
-  )
-}
-
-function displayComponentWithControls() {
-  const WithControls = () => {
-    const [selected, setSelected] = React.useState(0)
-    const [tabs, setTabs] = React.useState(['Tab 1', 'Tab 2'])
-
-    const add = () => {
-      setTabs([...tabs, `Tab ${tabs.length + 1}`])
-    }
-
-    return (
-      <>
-        <Tabs onSelect={setSelected} selected={selected}>
-          <TabList>
-            {tabs.map((tab) => (
-              <Tab key={tab}>{tab}</Tab>
-            ))}
-          </TabList>
-          {tabs.map((tab) => (
-            <TabPanel key={tab}>{tab} content</TabPanel>
-          ))}
-        </Tabs>
-        <button type="button" onClick={() => setSelected((i) => i - 1)}>
-          Prev
-        </button>
-        <button type="button" onClick={() => setSelected((i) => i + 1)}>
-          Next
-        </button>
-        <button type="button" onClick={add}>
-          Add
-        </button>
-      </>
-    )
-  }
-
-  return render(<WithControls />)
-}
-
-function displayComponentWithExternals() {
-  return render(
-    <Tabs>
-      <TabList>
-        <Tab>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
-        <button type="button">Action</button>
-      </TabList>
-      <TabPanel>Tab 1 content</TabPanel>
-      <TabPanel>Tab 2 content</TabPanel>
-      <TabPanel>Tab 3 content</TabPanel>
-      <p>text text</p>
-    </Tabs>
-  )
-}
-
-function displayComponentWithDisabledTab(props: Partial<TabsProps> = {}) {
-  return render(
-    <Tabs {...props}>
-      <TabList>
-        <Tab>Tab 1</Tab>
-        <Tab disabled>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
-      </TabList>
-      <TabPanel>Tab 1 content</TabPanel>
-      <TabPanel>Tab 2 content</TabPanel>
-      <TabPanel>Tab 3 content</TabPanel>
-    </Tabs>
-  )
-}
+import {
+  displayComponent,
+  displayComponentWithControls,
+  displayComponentWithCustomClassNames,
+  displayComponentWithDisabledTab,
+  displayComponentWithExternals,
+  displayComponentWithNamedTabs,
+  displayComponentWithSparses,
+} from './suts'
 
 const ui = {
   tabs: byRole('tab'),
   tab1: byRole('tab', { name: 'Tab 1' }),
   tab2: byRole('tab', { name: 'Tab 2' }),
   tab3: byRole('tab', { name: 'Tab 3' }),
+  tab4: byRole('tab', { name: 'Tab 4' }),
+  tab5: byRole('tab', { name: 'Tab 5' }),
   tabPanel1: byRole('tabpanel', { name: 'Tab 1' }),
   tabPanel2: byRole('tabpanel', { name: 'Tab 2' }),
   tabPanel3: byRole('tabpanel', { name: 'Tab 3' }),
+  tabPanel4: byRole('tabpanel', { name: 'Tab 4' }),
+  tabPanel5: byRole('tabpanel', { name: 'Tab 5' }),
   tabPanel1Content: byText('Tab 1 content'),
   tabPanel2Content: byText('Tab 2 content'),
   tabPanel3Content: byText('Tab 3 content'),
@@ -484,6 +379,64 @@ describe('Tabs', () => {
           expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
           expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
         })
+      })
+    })
+  })
+
+  describe('when not using custom classNames', () => {
+    beforeEach(() => {
+      cleanup()
+      displayComponentWithDisabledTab()
+    })
+
+    it('should set the default classNames', () => {
+      expect(ui.tabList.get()).toHaveClass('tablist')
+      expect(ui.tab1.get()).toHaveClass('tab--active')
+      expect(ui.tab2.get()).toHaveClass('tab--disabled')
+      expect(ui.tab3.get()).toHaveClass('tab')
+      expect(ui.tabPanel1.get()).toHaveClass('tabpanel--active')
+      expect(ui.tabPanel2.get()).toHaveClass('tabpanel--disabled')
+      expect(ui.tabPanel3.get()).toHaveClass('tabpanel')
+    })
+  })
+
+  describe('when using custom classNames', () => {
+    beforeEach(() => {
+      cleanup()
+      displayComponentWithCustomClassNames()
+    })
+
+    it('should set the custom classNames', () => {
+      expect(ui.tabList.get()).toHaveClass('x-tablist')
+      expect(ui.tab1.get()).toHaveClass('x-tab--active')
+      expect(ui.tab2.get()).toHaveClass('x-tab--disabled')
+      expect(ui.tab3.get()).toHaveClass('x-tab')
+      expect(ui.tabPanel1.get()).toHaveClass('x-tabpanel--active')
+      expect(ui.tabPanel2.get()).toHaveClass('x-tabpanel--disabled')
+      expect(ui.tabPanel3.get()).toHaveClass('x-tabpanel')
+    })
+
+    describe('when a className is set on a tab', () => {
+      beforeEach(async () => {
+        await userEvent.click(ui.tab4.get())
+      })
+
+      it('should use this className', () => {
+        expect(ui.tab4.get()).toHaveClass('y-tab')
+        expect(ui.tab4.get()).toHaveClass('y-tab--active')
+        expect(ui.tab5.get()).toHaveClass('y-tab--disabled')
+      })
+    })
+
+    describe('when a className is set on a panel', () => {
+      beforeEach(async () => {
+        await userEvent.click(ui.tab4.get())
+      })
+
+      it('should use this className', () => {
+        expect(ui.tabPanel4.get()).toHaveClass('y-tabpanel')
+        expect(ui.tabPanel4.get()).toHaveClass('y-tabpanel--active')
+        expect(ui.tabPanel5.get()).toHaveClass('y-tabpanel--disabled')
       })
     })
   })

@@ -5,6 +5,8 @@ import React, { useEffect, useRef } from 'react'
 export type TabProps = {
   active?: boolean
   children: React.ReactNode
+  classNameActive?: string
+  classNameDisabled?: string
   disabled?: boolean
   name?: string
   onClick?: () => void
@@ -13,6 +15,9 @@ export type TabProps = {
 const Tab: FunctionComponent<TabProps> = ({
   active,
   children,
+  className,
+  classNameActive,
+  classNameDisabled,
   disabled,
   onClick,
   ...liProps
@@ -32,10 +37,10 @@ const Tab: FunctionComponent<TabProps> = ({
       ref={ref}
       role="tab"
       className={classNames([
-        'tab',
+        className || 'tab',
         {
-          'tab--active': active,
-          'tab--disabled': disabled,
+          [classNameActive || 'tab--active']: active,
+          [classNameDisabled || 'tab--disabled']: disabled,
         },
       ])}
       tabIndex={active ? 0 : -1}

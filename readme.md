@@ -60,17 +60,13 @@ You can use CSS classes that are set on the components:
   - `Tab` has the class `tab` in addition to `tab--active` when selected and `tab--disabled` when disabled.
   - `TabPanel` has the class `tabpanel` in addition to `tabpanel--active` when selected.
 
-## TODO
-
-### Features
-
-  - [ ] Customizable classes
+### Shopping list
+  
+  - [x] Disabled tabs
+  - [x] Customizable classes
   - [ ] styled-component compliance (might work but not tested yet)
   - [ ] Lazy loading
   - [ ] Prevent auto-activation of tabs when navigating with arrows
-
-### Misc
-
   - [ ] Logo
   - [ ] Documentation site
   - [ ] Contribution easing

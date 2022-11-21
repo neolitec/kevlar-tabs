@@ -9,6 +9,7 @@ export type TabListProps = {
 
 const TabList: FunctionComponent<TabListProps> = ({
   children,
+  className,
   onArrowLeftKeyDown,
   onArrowRightKeyDown,
   ...ulProps
@@ -29,7 +30,7 @@ const TabList: FunctionComponent<TabListProps> = ({
   return (
     <ul
       role="tablist"
-      className="tablist"
+      className={className || 'tablist'}
       {...ulProps}
       onKeyDown={handleKeyDown}
     >

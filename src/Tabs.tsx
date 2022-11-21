@@ -18,14 +18,31 @@ export type TabsComponent<T> = ((props: T) => JSX.Element) & {
   tabsRole: string
 }
 
+export type TabsClassNames = Partial<{
+  tabList: string
+  tab: string
+  tabActive: string
+  tabDisabled: string
+  tabPanel: string
+  tabPanelActive: string
+  tabPanelDisabled: string
+}>
+
 export interface TabsProps {
   children: React.ReactNode
+  classNames?: TabsClassNames
   onSelect?: (index: number, lastIndex: number) => void
   onNameSelect?: (name?: string, lastName?: string) => void
   selected?: number | string
 }
 
-const Tabs = ({ children, onNameSelect, onSelect, selected }: TabsProps) => {
+const Tabs = ({
+  children,
+  classNames,
+  onNameSelect,
+  onSelect,
+  selected,
+}: TabsProps) => {
   const id = useId()
   const tabProps = useMemo(() => getTabProps(children), [children])
   const tabNames = useMemo(() => tabProps.map((tab) => tab.name), [tabProps])
@@ -89,16 +106,20 @@ const Tabs = ({ children, onNameSelect, onSelect, selected }: TabsProps) => {
           children: React.Children.map(child.props.children, (tab, index) => {
             if (isTabElement(tab)) {
               return React.cloneElement(tab, {
+                className: classNames?.tab,
+                classNameActive: classNames?.tabActive,
+                classNameDisabled: classNames?.tabDisabled,
                 ...tab.props,
                 active: index === currentIndex,
-                id: `${tabIds.current[index]}-tab`,
                 'aria-controls': `${tabIds.current[index]}-panel`,
+                id: `${tabIds.current[index]}-tab`,
                 onClick: () => handleSelect(index, tab.props.name),
               })
             }
 
             return tab
           }),
+          className: classNames?.tabList,
           onArrowLeftKeyDown: selectPrevious,
           onArrowRightKeyDown: selectNext,
         })
@@ -109,7 +130,12 @@ const Tabs = ({ children, onNameSelect, onSelect, selected }: TabsProps) => {
           ? (child.props.index as number)
           : tabPanelIndex
         const panelElement = React.cloneElement(child, {
+          className: classNames?.tabPanel,
+          classNameActive: classNames?.tabPanelActive,
+          classNameDisabled: classNames?.tabPanelDisabled,
+          ...child.props,
           active: panelIndex === currentIndex,
+          disabled: tabProps[panelIndex].disabled,
           id: `${tabIds.current[panelIndex]}-panel`,
           'aria-labelledby': `${tabIds.current[panelIndex]}-tab`,
         })
@@ -123,12 +149,14 @@ const Tabs = ({ children, onNameSelect, onSelect, selected }: TabsProps) => {
     })
   }, [
     children,
+    classNames,
     currentIndex,
     handleSelect,
     id,
     selectNext,
     selectPrevious,
     tabNames.length,
+    tabProps,
   ])
 
   return <>{getChildren()}</>

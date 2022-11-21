@@ -58,3 +58,12 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         if: ${{ steps.release.outputs.release_created }}
+
+      - name: New version notification
+        uses: neolitec/notify-discord@1.0.1
+        continue-on-error: true
+        if: ${{ steps.release.outputs.release_created }}
+        with:
+          discord_webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          title: 'New version of ${{ github.repository }}'
+          message: '🎉 We just released the version [${{ steps.release.outputs.tag_name }}](https://github.com/${{ github.repository }}/releases/tag/${{ steps.release.outputs.tag_name }})'

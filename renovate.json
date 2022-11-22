@@ -1,0 +1,31 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "branchPrefix": "renovate/",
+  "username": "renovate-release",
+  "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
+  "onboarding": false,
+  "dependencyDashboard": false,
+  "platform": "github",
+  "repositories": [
+    "neolitec/kevlar-tabs"
+  ],
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "description": "lockFileMaintenance",
+      "matchUpdateTypes": [
+        "pin",
+        "digest",
+        "patch",
+        "minor",
+        "major",
+        "lockFileMaintenance"
+      ],
+      "stabilityDays": 0
+    }
+  ],
+  "lockFileMaintenance": { "enabled": true },
+  "commitMessagePrefix": "chore(deps):"
+}

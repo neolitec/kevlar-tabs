@@ -24,6 +24,11 @@
         "lockFileMaintenance"
       ],
       "stabilityDays": 0
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["engines", "volta", "packageManager"],
+      "enabled": false
     }
   ],
   "lockFileMaintenance": { "enabled": true },

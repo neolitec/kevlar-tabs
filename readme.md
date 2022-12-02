@@ -1,3 +1,7 @@
+<div align="center">
+  <img width="200" height="200" src="logo.svg" alt="Kevlar Tabs" />
+</div>
+
 # Kevlar Tabs
 
 ## Install
@@ -67,6 +71,6 @@ You can use CSS classes that are set on the components:
   - [ ] styled-component compliance (might work but not tested yet)
   - [ ] Lazy loading
   - [ ] Prevent auto-activation of tabs when navigating with arrows
-  - [ ] Logo
+  - [x] Logo
   - [ ] Documentation site
   - [ ] Contribution easing

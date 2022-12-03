@@ -1,6 +1,6 @@
 {
   "name": "kevlar-tabs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Yet another better tabs library for React",
   "scripts": {
     "ladle": "ladle serve",

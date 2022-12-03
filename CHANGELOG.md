@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/neolitec/kevlar-tabs/compare/v0.0.3...v0.0.4) (2022-12-03)
+
+
+### Features
+
+* add styled-components compliance ([#17](https://github.com/neolitec/kevlar-tabs/issues/17)) ([543c0cf](https://github.com/neolitec/kevlar-tabs/commit/543c0cfe51bbb7a32c248d050d85800d7961c943))
+
 ## [0.0.3](https://github.com/neolitec/kevlar-tabs/compare/v0.0.2...v0.0.3) (2022-11-21)
 
 

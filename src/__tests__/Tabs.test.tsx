@@ -370,6 +370,10 @@ describe('Tabs', () => {
       expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
     })
 
+    it('should have the aria-disabled property', () => {
+      expect(ui.tab2.get()).toHaveAttribute('aria-disabled', 'true')
+    })
+
     describe('given first tab is selected and second is disabled', () => {
       describe('hitting the right arrow', () => {
         it('should select the third tab', async () => {

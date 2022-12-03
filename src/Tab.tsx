@@ -45,6 +45,7 @@ const Tab: FunctionComponent<TabProps> = ({
       ])}
       tabIndex={active ? 0 : -1}
       aria-selected={active}
+      aria-disabled={disabled}
       {...liProps}
       onClick={disabled ? undefined : onClick}
     >

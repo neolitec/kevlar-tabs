@@ -4,6 +4,8 @@
 
 # Kevlar Tabs
 
+_Inspired by [react-tabs](https://www.npmjs.com/package/react-tabs)_
+
 ## Install
 
 ```sh
@@ -64,11 +66,61 @@ You can use CSS classes that are set on the components:
   - `Tab` has the class `tab` in addition to `tab--active` when selected and `tab--disabled` when disabled.
   - `TabPanel` has the class `tabpanel` in addition to `tabpanel--active` when selected.
 
-### Shopping list
+### Custom classes
+
+You use custom classes for the different states of the elements.
+
+To do it, use the `classNames` property of `Tabs` and pass an object of this shape:
+
+```ts
+export type TabsClassNames = Partial<{
+  tabList: string
+  tab: string
+  tabActive: string
+  tabDisabled: string
+  tabPanel: string
+  tabPanelActive: string
+  tabPanelDisabled: string
+}>
+```
+
+You can also pass this configuration to sub-elements: `className`, `classNameActive` and `classNameDisabled` so that different tabs can have different styling since specific configuration takes precedence over the global one.
+
+### With styled-components
+
+Using `styled-components`, one important thing to know is that you have defined the _displayName_ of the component you want to wrap.
+
+For instance:
+
+```ts
+import { Tab } from 'kevlar-tabs'
+import styled from 'styled-components'
+
+const CustomTab = styled(Tab)`
+  color: white;
+  background-color: purple;
+
+  &[aria-active='true'] {
+    font-weight: bold;
+  }
+
+  &[aria-disabled='true'] {
+    color: #ccc;
+    background-color: #544454;
+  }
+`
+
+// THIS IS IMPORTANT
+CustomTab.displayName = 'Tab'
+```
+
+`displayName` has to be set for `Tab`, `TabList` and `TabPanel`, and it takes the name of the component itself.
+
+## Shopping list
   
   - [x] Disabled tabs
   - [x] Customizable classes
-  - [ ] styled-component compliance (might work but not tested yet)
+  - [x] styled-component compliance
   - [ ] Lazy loading
   - [ ] Prevent auto-activation of tabs when navigating with arrows
   - [x] Logo

@@ -29,6 +29,7 @@ export type TabsClassNames = Partial<{
 }>
 
 export interface TabsProps {
+  autoActivate?: boolean
   children: React.ReactNode
   classNames?: TabsClassNames
   onSelect?: (index: number, lastIndex: number) => void
@@ -37,6 +38,7 @@ export interface TabsProps {
 }
 
 const Tabs = ({
+  autoActivate = true,
   children,
   classNames,
   onNameSelect,
@@ -47,6 +49,10 @@ const Tabs = ({
   const tabProps = useMemo(() => getTabProps(children), [children])
   const tabNames = useMemo(() => tabProps.map((tab) => tab.name), [tabProps])
   const tabIds = useRef(tabProps.map((_, i) => `${id}-${i}`))
+  const tabRefs = useRef<HTMLLIElement[]>([])
+  const currentFocusIndex = useRef(
+    (typeof selected === 'string' ? tabNames.indexOf(selected) : selected) ?? 0
+  )
   const [{ index: currentIndex, name: currentName }, setSelected] = useState(
     computeState(tabNames, selected)
   )
@@ -63,6 +69,7 @@ const Tabs = ({
       })
       onSelect?.(index, currentIndex)
       onNameSelect?.(name, currentName)
+      currentFocusIndex.current = index
     },
     [currentIndex, currentName, onNameSelect, onSelect]
   )
@@ -72,22 +79,32 @@ const Tabs = ({
       return
     }
 
-    const nextIndex = getNextIndex(currentIndex, tabProps)
+    const nextIndex = getNextIndex(currentFocusIndex.current, tabProps)
     const nextName = tabNames[nextIndex]
 
-    handleSelect(nextIndex, nextName)
-  }, [currentIndex, handleSelect, tabNames, tabProps])
+    if (autoActivate) {
+      handleSelect(nextIndex, nextName)
+    } else {
+      currentFocusIndex.current = nextIndex
+      tabRefs.current[nextIndex].focus()
+    }
+  }, [autoActivate, handleSelect, tabNames, tabProps])
 
   const selectPrevious = useCallback(() => {
     if (tabProps.every((tab) => tab.disabled)) {
       return
     }
 
-    const nextIndex = getPreviousIndex(currentIndex, tabProps)
-    const nextName = tabNames[nextIndex]
+    const previousIndex = getPreviousIndex(currentFocusIndex.current, tabProps)
+    const previousName = tabNames[previousIndex]
 
-    handleSelect(nextIndex, nextName)
-  }, [currentIndex, handleSelect, tabNames, tabProps])
+    if (autoActivate) {
+      handleSelect(previousIndex, previousName)
+    } else {
+      currentFocusIndex.current = previousIndex
+      tabRefs.current[previousIndex].focus()
+    }
+  }, [autoActivate, handleSelect, tabNames, tabProps])
 
   const getChildren = useCallback(() => {
     let tabPanelIndex = 0
@@ -114,6 +131,16 @@ const Tabs = ({
                 'aria-controls': `${tabIds.current[index]}-panel`,
                 id: `${tabIds.current[index]}-tab`,
                 onClick: () => handleSelect(index, tab.props.name),
+                onKeyDown: autoActivate
+                  ? undefined
+                  : (event: React.KeyboardEvent) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        handleSelect(index, tab.props.name)
+                      }
+                    },
+                ref: (elt: HTMLLIElement) => {
+                  tabRefs.current[index] = elt
+                },
               })
             }
 
@@ -148,6 +175,7 @@ const Tabs = ({
       return child
     })
   }, [
+    autoActivate,
     children,
     classNames,
     currentIndex,

@@ -1,6 +1,6 @@
 import classNames from 'classnames'
-import type { FunctionComponent, HTMLAttributes } from 'react'
-import React, { useEffect, useRef } from 'react'
+import type { ForwardRefRenderFunction, HTMLAttributes } from 'react'
+import React, { forwardRef, useEffect, useRef } from 'react'
 
 export type TabProps = {
   active?: boolean
@@ -12,21 +12,24 @@ export type TabProps = {
   onClick?: () => void
 } & HTMLAttributes<HTMLLIElement>
 
-const Tab: FunctionComponent<TabProps> = ({
-  active,
-  children,
-  className,
-  classNameActive,
-  classNameDisabled,
-  disabled,
-  onClick,
-  ...liProps
-}) => {
-  const ref = useRef<HTMLLIElement>(null)
+const Tab: ForwardRefRenderFunction<HTMLLIElement, TabProps> = (
+  {
+    active,
+    children,
+    className,
+    classNameActive,
+    classNameDisabled,
+    disabled,
+    onClick,
+    ...liProps
+  },
+  ref
+) => {
+  const privateRef = useRef<HTMLLIElement | null>(null)
 
   useEffect(() => {
-    if (active && ref.current) {
-      ref.current.focus()
+    if (active && privateRef.current) {
+      privateRef.current.focus()
     }
   }, [active])
 
@@ -34,7 +37,15 @@ const Tab: FunctionComponent<TabProps> = ({
     // Keyboard handled with the parent component.
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <li
-      ref={ref}
+      ref={(elt) => {
+        privateRef.current = elt
+        if (typeof ref === 'function') {
+          ref(elt)
+        } else if (ref) {
+          // eslint-disable-next-line no-param-reassign
+          ref.current = elt
+        }
+      }}
       role="tab"
       className={classNames([
         className || 'tab',
@@ -56,4 +67,7 @@ const Tab: FunctionComponent<TabProps> = ({
 
 Tab.displayName = 'Tab'
 
-export default Tab
+const TabWithRef = forwardRef<HTMLLIElement, TabProps>(Tab)
+TabWithRef.displayName = 'Tab'
+
+export default TabWithRef

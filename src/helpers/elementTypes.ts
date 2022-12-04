@@ -3,7 +3,8 @@
 import type {
   FunctionComponent,
   JSXElementConstructor,
-  ReactElement
+  ReactElement,
+  RefAttributes
 } from 'react'
 import { isValidElement } from 'react'
 import type { TabProps } from '../Tab'
@@ -36,7 +37,7 @@ export function isTabListElement(
 
 export function isTabElement(
   object: unknown
-): object is ReactElementWithName<TabProps> {
+): object is ReactElementWithName<TabProps & RefAttributes<HTMLLIElement>> {
   return isNamedElement(object) && object.type.displayName === 'Tab'
 }
 

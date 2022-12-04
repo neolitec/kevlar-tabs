@@ -147,6 +147,10 @@ describe('Tabs', () => {
       expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
     })
 
+    it('should give the focus to the selected tab', () => {
+      expect(ui.tab2.get()).toHaveFocus()
+    })
+
     it('should display the second tab panel', () => {
       expect(ui.tabPanel1Content.query()).not.toBeInTheDocument()
       expect(ui.tabPanel2Content.get()).toBeInTheDocument()
@@ -201,7 +205,7 @@ describe('Tabs', () => {
     })
   })
 
-  describe('when using name tabs', () => {
+  describe('when using named tabs', () => {
     beforeEach(() => {
       cleanup()
       displayComponentWithNamedTabs({ selected: 'tab1' })
@@ -283,11 +287,9 @@ describe('Tabs', () => {
   })
 
   describe('keyboard management', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
       cleanup()
       displayComponent()
-
-      await userEvent.click(ui.tabList.get())
     })
 
     describe('when hitting the left arrow', () => {
@@ -299,6 +301,10 @@ describe('Tabs', () => {
         expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
         expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
         expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+      })
+
+      it('should give the focus to the last tab', () => {
+        expect(ui.tab3.get()).toHaveFocus()
       })
     })
 
@@ -312,14 +318,16 @@ describe('Tabs', () => {
         expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
         expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
       })
+
+      it('should give the focus to the next tab', () => {
+        expect(ui.tab2.get()).toHaveFocus()
+      })
     })
 
     describe('when the selected tab is the last one', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         cleanup()
         displayComponent({ selected: 2 })
-
-        await userEvent.click(ui.tabList.get())
       })
 
       describe('when hitting the left arrow', () => {
@@ -332,6 +340,10 @@ describe('Tabs', () => {
           expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
           expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
         })
+
+        it('should give the focus to the second tab', () => {
+          expect(ui.tab2.get()).toHaveFocus()
+        })
       })
 
       describe('when hitting the right arrow', () => {
@@ -343,6 +355,112 @@ describe('Tabs', () => {
           expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
           expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
           expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+        })
+
+        it('should give the focus to the first tab', () => {
+          expect(ui.tab1.get()).toHaveFocus()
+        })
+      })
+    })
+
+    describe('when autoActivate is false', () => {
+      beforeEach(() => {
+        cleanup()
+        displayComponent({ autoActivate: false })
+      })
+
+      describe('when hitting the left arrow', () => {
+        beforeEach(async () => {
+          await userEvent.type(ui.tab1.get(), '{arrowleft}')
+        })
+
+        it('should not change the selected tab', () => {
+          expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
+          expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+          expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+        })
+
+        it('should give the focus to the last tab', () => {
+          expect(ui.tab3.get()).toHaveFocus()
+        })
+
+        describe('when hitting space', () => {
+          beforeEach(async () => {
+            await userEvent.type(ui.tab3.get(), '{space}')
+          })
+
+          it('should select the last tab', () => {
+            expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+            expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+            expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+          })
+        })
+
+        describe('when hitting enter', () => {
+          beforeEach(async () => {
+            await userEvent.type(ui.tab3.get(), '{enter}')
+          })
+
+          it('should select the last tab', () => {
+            expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+            expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+            expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+          })
+        })
+      })
+
+      describe('when hitting the right arrow', () => {
+        beforeEach(async () => {
+          await userEvent.type(ui.tab1.get(), '{arrowright}')
+        })
+
+        it('should not change the selected tab', () => {
+          expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
+          expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+          expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+        })
+
+        it('should give the focus to the next tab', () => {
+          expect(ui.tab2.get()).toHaveFocus()
+        })
+      })
+
+      describe('when the selected tab is the last one', () => {
+        beforeEach(() => {
+          cleanup()
+          displayComponent({ selected: 2, autoActivate: false })
+        })
+
+        describe('when hitting the left arrow', () => {
+          beforeEach(async () => {
+            await userEvent.type(ui.tab3.get(), '{arrowleft}')
+          })
+
+          it('should not change the selected tab', () => {
+            expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+            expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+            expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+          })
+
+          it('should give the focus to the second tab', () => {
+            expect(ui.tab2.get()).toHaveFocus()
+          })
+        })
+
+        describe('when hitting the right arrow', () => {
+          beforeEach(async () => {
+            await userEvent.type(ui.tab3.get(), '{arrowright}')
+          })
+
+          it('should not change the selected tab', () => {
+            expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+            expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+            expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+          })
+
+          it('should give the focus to the first tab', () => {
+            expect(ui.tab1.get()).toHaveFocus()
+          })
         })
       })
     })

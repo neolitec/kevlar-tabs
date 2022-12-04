@@ -52,6 +52,7 @@ Some panels could not be defined for some reason. You can manually specify the i
 
 | Property | Type | Description |
 | --- | --- | --- |
+| `autoActivate` | `boolean` | (default: `true`) If true, it prevents auto activation of tabs on focus. |
 | `selected` | `number` \| `string` | The index or the name of the selected tab. |
 | `onSelect` | `function` | Callback function that is called when a tab is selected. Gives the index as a parameter. |
 | `onNameSelect` | `function` | Callback function that is called when a tab is selected. Gives the name as a parameter. |
@@ -116,13 +117,16 @@ CustomTab.displayName = 'Tab'
 
 `displayName` has to be set for `Tab`, `TabList` and `TabPanel`, and it takes the name of the component itself.
 
-## Shopping list
+## Features
+
+ - Disabled tabs
+ - Customizable classes
+ - Styled-Components compliance
+ - Lazy loading
+ - Keyboard navigation
+ - Auto activation
+
+## Roadmap
   
-  - [x] Disabled tabs
-  - [x] Customizable classes
-  - [x] styled-component compliance
-  - [x] Lazy loading
-  - [ ] Prevent auto-activation of tabs when navigating with arrows
-  - [x] Logo
   - [ ] Documentation site
-  - [ ] Contribution easing
+  - [ ] Contribution guide

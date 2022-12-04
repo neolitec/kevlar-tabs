@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.6](https://github.com/neolitec/kevlar-tabs/compare/v0.0.5...v0.0.6) (2022-12-04)
+
+
+### Features
+
+* allow auto activation disabling ([#21](https://github.com/neolitec/kevlar-tabs/issues/21)) ([5070b0b](https://github.com/neolitec/kevlar-tabs/commit/5070b0b7593a60358426423f5f93c3606fb81965))
+
 ## [0.0.5](https://github.com/neolitec/kevlar-tabs/compare/v0.0.4...v0.0.5) (2022-12-04)
 
 

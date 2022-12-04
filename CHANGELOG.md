@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/neolitec/kevlar-tabs/compare/v0.0.4...v0.0.5) (2022-12-04)
+
+
+### Features
+
+* improve lazy loading ([#19](https://github.com/neolitec/kevlar-tabs/issues/19)) ([2270034](https://github.com/neolitec/kevlar-tabs/commit/2270034780f1515ce7d29e116fa7010a42e5deb3))
+
 ## [0.0.4](https://github.com/neolitec/kevlar-tabs/compare/v0.0.3...v0.0.4) (2022-12-03)
 
 

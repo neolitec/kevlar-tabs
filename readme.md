@@ -121,7 +121,7 @@ CustomTab.displayName = 'Tab'
   - [x] Disabled tabs
   - [x] Customizable classes
   - [x] styled-component compliance
-  - [ ] Lazy loading
+  - [x] Lazy loading
   - [ ] Prevent auto-activation of tabs when navigating with arrows
   - [x] Logo
   - [ ] Documentation site

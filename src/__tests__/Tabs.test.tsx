@@ -1,8 +1,9 @@
-import { cleanup } from '@testing-library/react'
+import { act, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { byRole, byText } from 'testing-library-selector'
 import {
   displayComponent,
+  displayComponentWithAsyncTab,
   displayComponentWithControls,
   displayComponentWithCustomClassNames,
   displayComponentWithDisabledTab,
@@ -23,6 +24,8 @@ const ui = {
   tabPanel3: byRole('tabpanel', { name: 'Tab 3' }),
   tabPanel4: byRole('tabpanel', { name: 'Tab 4' }),
   tabPanel5: byRole('tabpanel', { name: 'Tab 5' }),
+  getAllTabPanels: () => byRole('tabpanel', { hidden: true }).getAll(),
+  getTabPanel: (index: number) => ui.getAllTabPanels()[index],
   tabPanel1Content: byText('Tab 1 content'),
   tabPanel2Content: byText('Tab 2 content'),
   tabPanel3Content: byText('Tab 3 content'),
@@ -32,6 +35,9 @@ const ui = {
   addButton: byRole('button', { name: 'Add' }),
   externalButton: byRole('button', { name: 'Action' }),
   externalParagraph: byText('text text'),
+  asyncTab: byRole('tab', { name: 'Async' }),
+  loadingContent: byText('Loading...'),
+  asyncContent: byText('Async content loaded'),
 }
 
 describe('Tabs', () => {
@@ -51,8 +57,8 @@ describe('Tabs', () => {
 
   it('should render all the tab panels', () => {
     expect(ui.tabPanel1.get()).toBeInTheDocument()
-    expect(ui.tabPanel2.get()).toBeInTheDocument()
-    expect(ui.tabPanel3.get()).toBeInTheDocument()
+    expect(ui.getTabPanel(1)).toBeInTheDocument()
+    expect(ui.getTabPanel(2)).toBeInTheDocument()
   })
 
   it('should set ids to tabs', () => {
@@ -90,11 +96,11 @@ describe('Tabs', () => {
       'id',
       expect.stringMatching(/-0-panel$/)
     )
-    expect(ui.tabPanel2.get()).toHaveAttribute(
+    expect(ui.getTabPanel(1)).toHaveAttribute(
       'id',
       expect.stringMatching(/-1-panel$/)
     )
-    expect(ui.tabPanel3.get()).toHaveAttribute(
+    expect(ui.getTabPanel(2)).toHaveAttribute(
       'id',
       expect.stringMatching(/-2-panel$/)
     )
@@ -105,11 +111,11 @@ describe('Tabs', () => {
       'aria-labelledby',
       expect.stringMatching(/-0-tab$/)
     )
-    expect(ui.tabPanel2.get()).toHaveAttribute(
+    expect(ui.getTabPanel(1)).toHaveAttribute(
       'aria-labelledby',
       expect.stringMatching(/-1-tab$/)
     )
-    expect(ui.tabPanel3.get()).toHaveAttribute(
+    expect(ui.getTabPanel(2)).toHaveAttribute(
       'aria-labelledby',
       expect.stringMatching(/-2-tab$/)
     )
@@ -181,12 +187,13 @@ describe('Tabs', () => {
       })
 
       it('should display the 2 panels', () => {
-        expect(ui.tabPanel1.get()).toBeInTheDocument()
-        expect(ui.tabPanel3.get()).toBeInTheDocument()
+        expect(ui.getAllTabPanels()).toHaveLength(2)
+        expect(ui.getTabPanel(0)).toBeInTheDocument()
+        expect(ui.getTabPanel(1)).toBeInTheDocument()
       })
 
       it('should set the right id to the last panel', () => {
-        expect(ui.tabPanel3.get()).toHaveAttribute(
+        expect(ui.getTabPanel(1)).toHaveAttribute(
           'id',
           expect.stringMatching(/-2-panel$/)
         )
@@ -255,7 +262,7 @@ describe('Tabs', () => {
       })
 
       it('should give the right id to the third panel', () => {
-        expect(ui.tabPanel3.get()).toHaveAttribute(
+        expect(ui.getTabPanel(2)).toHaveAttribute(
           'id',
           expect.stringMatching(/-2-panel$/)
         )
@@ -399,8 +406,8 @@ describe('Tabs', () => {
       expect(ui.tab2.get()).toHaveClass('tab--disabled')
       expect(ui.tab3.get()).toHaveClass('tab')
       expect(ui.tabPanel1.get()).toHaveClass('tabpanel--active')
-      expect(ui.tabPanel2.get()).toHaveClass('tabpanel--disabled')
-      expect(ui.tabPanel3.get()).toHaveClass('tabpanel')
+      expect(ui.getTabPanel(1)).toHaveClass('tabpanel--disabled')
+      expect(ui.getTabPanel(2)).toHaveClass('tabpanel')
     })
   })
 
@@ -416,8 +423,8 @@ describe('Tabs', () => {
       expect(ui.tab2.get()).toHaveClass('x-tab--disabled')
       expect(ui.tab3.get()).toHaveClass('x-tab')
       expect(ui.tabPanel1.get()).toHaveClass('x-tabpanel--active')
-      expect(ui.tabPanel2.get()).toHaveClass('x-tabpanel--disabled')
-      expect(ui.tabPanel3.get()).toHaveClass('x-tabpanel')
+      expect(ui.getTabPanel(1)).toHaveClass('x-tabpanel--disabled')
+      expect(ui.getTabPanel(2)).toHaveClass('x-tabpanel')
     })
 
     describe('when a className is set on a tab', () => {
@@ -440,7 +447,44 @@ describe('Tabs', () => {
       it('should use this className', () => {
         expect(ui.tabPanel4.get()).toHaveClass('y-tabpanel')
         expect(ui.tabPanel4.get()).toHaveClass('y-tabpanel--active')
-        expect(ui.tabPanel5.get()).toHaveClass('y-tabpanel--disabled')
+        expect(byRole('tabpanel', { hidden: true }).getAll()[4]).toHaveClass(
+          'y-tabpanel--disabled'
+        )
+      })
+    })
+  })
+
+  describe('with tab containing async content', () => {
+    beforeEach(() => {
+      vi.useFakeTimers()
+      cleanup()
+      displayComponentWithAsyncTab()
+    })
+
+    it('should call the callback', () => {
+      expect(ui.loadingContent.get()).toBeInTheDocument()
+    })
+
+    it('should show the loaded content', async () => {
+      await act(() => {
+        vi.advanceTimersByTime(10000)
+      })
+      expect(ui.asyncContent.get()).toBeInTheDocument()
+    })
+
+    describe('when already loaded', () => {
+      beforeEach(async () => {
+        await act(() => {
+          vi.advanceTimersByTime(10000)
+        })
+        expect(ui.asyncContent.get()).toBeInTheDocument()
+        vi.useRealTimers()
+        await userEvent.click(ui.tab1.get())
+        await userEvent.click(ui.asyncTab.get())
+      })
+
+      it('should show the loaded content directly', () => {
+        expect(ui.asyncContent.get()).toBeInTheDocument()
       })
     })
   })

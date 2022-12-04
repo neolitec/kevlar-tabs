@@ -4,7 +4,7 @@ import { byRole } from 'testing-library-selector'
 import TabPanel from '../TabPanel'
 
 function createTab() {
-  render(<TabPanel>Test</TabPanel>)
+  render(<TabPanel active>Test</TabPanel>)
 }
 
 const ui = {

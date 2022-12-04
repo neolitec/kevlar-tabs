@@ -5,6 +5,7 @@ import TabList from '../TabList'
 import TabPanel from '../TabPanel'
 import type { TabsProps } from '../Tabs'
 import Tabs from '../Tabs'
+import AsyncContent from './AsyncContent'
 
 export function displayComponent(props: Partial<TabsProps> = {}) {
   return render(
@@ -156,3 +157,17 @@ export function displayComponentWithCustomClassNames() {
     </Tabs>
   )
 }
+
+export const displayComponentWithAsyncTab = () =>
+  render(
+    <Tabs>
+      <TabList>
+        <Tab>Async</Tab>
+        <Tab>Tab 1</Tab>
+      </TabList>
+      <TabPanel>
+        <AsyncContent />
+      </TabPanel>
+      <TabPanel>Tab 1 content</TabPanel>
+    </Tabs>
+  )

@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import type { FunctionComponent, HTMLAttributes } from 'react'
-import React from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 
 export type TabPanelProps = {
   active?: boolean
@@ -21,18 +21,29 @@ const TabPanel: FunctionComponent<TabPanelProps> = ({
   classNameDisabled,
   disabled,
   ...divProps
-}) => (
-  <div
-    role="tabpanel"
-    className={classNames(className || 'tabpanel', {
-      [classNameActive || 'tabpanel--active']: active,
-      [classNameDisabled || 'tabpanel--disabled']: disabled,
-    })}
-    {...divProps}
-  >
-    {active && children}
-  </div>
-)
+}) => {
+  const hasBeenActive = useRef(active)
+
+  useLayoutEffect(() => {
+    if (!hasBeenActive.current && active) {
+      hasBeenActive.current = true
+    }
+  }, [active])
+
+  return (
+    <div
+      role="tabpanel"
+      className={classNames(className || 'tabpanel', {
+        [classNameActive || 'tabpanel--active']: active,
+        [classNameDisabled || 'tabpanel--disabled']: disabled,
+      })}
+      style={!active ? { display: 'none' } : undefined}
+      {...divProps}
+    >
+      {(active || hasBeenActive.current) && children}
+    </div>
+  )
+}
 
 TabPanel.displayName = 'TabPanel'
 

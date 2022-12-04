@@ -136,3 +136,36 @@ export const StyledComponents = () => {
     </>
   )
 }
+
+export const AutoActivationDisabled = () => {
+  const { selected, setSelected, tabs, add } = useTabs()
+
+  return (
+    <>
+      <div>Selected index: {selected}</div>
+      <Tabs onSelect={setSelected} selected={selected} autoActivate={false}>
+        <TabList>
+          {tabs.map((tab, i) => (
+            <Tab key={tab} disabled={i >= 1 && i < 3}>
+              {tab}
+            </Tab>
+          ))}
+          <button type="button">Action</button>
+        </TabList>
+        {tabs.map((tab) => (
+          <TabPanel key={tab}>{tab} content</TabPanel>
+        ))}
+        <p>text text</p>
+      </Tabs>
+      <button type="button" onClick={() => setSelected((i) => i - 1)}>
+        Prev
+      </button>
+      <button type="button" onClick={() => setSelected((i) => i + 1)}>
+        Next
+      </button>
+      <button type="button" onClick={add}>
+        Add
+      </button>
+    </>
+  )
+}

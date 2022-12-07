@@ -31,6 +31,7 @@ export type TabsClassNames = Partial<{
 export interface TabsProps {
   autoActivate?: boolean
   children: React.ReactNode
+  className?: string
   classNames?: TabsClassNames
   onSelect?: (index: number, lastIndex: number) => void
   onNameSelect?: (name?: string, lastName?: string) => void
@@ -40,6 +41,7 @@ export interface TabsProps {
 const Tabs = ({
   autoActivate = true,
   children,
+  className,
   classNames,
   onNameSelect,
   onSelect,
@@ -187,7 +189,7 @@ const Tabs = ({
     tabProps,
   ])
 
-  return <>{getChildren()}</>
+  return <div className={className}>{getChildren()}</div>
 }
 
 function computeState(

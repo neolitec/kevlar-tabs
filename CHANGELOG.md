@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/neolitec/kevlar-tabs/compare/v0.0.6...v1.0.0) (2022-12-07)
+
+
+### Bug Fixes
+
+* allow tabs styling ([#23](https://github.com/neolitec/kevlar-tabs/issues/23)) ([a590c88](https://github.com/neolitec/kevlar-tabs/commit/a590c887c87e789adc7196d9fcae6981541f28ac))
+
 ## [0.0.6](https://github.com/neolitec/kevlar-tabs/compare/v0.0.5...v0.0.6) (2022-12-04)
 
 

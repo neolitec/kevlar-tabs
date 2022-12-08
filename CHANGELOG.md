@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/neolitec/kevlar-tabs/compare/v1.0.0...v1.0.1) (2022-12-08)
+
+
+### Bug Fixes
+
+* avoid reset selected tab when children update ([#25](https://github.com/neolitec/kevlar-tabs/issues/25)) ([843ce81](https://github.com/neolitec/kevlar-tabs/commit/843ce81a49b1d605a09debe3b145696dd3d5c8f8))
+
 ## [1.0.0](https://github.com/neolitec/kevlar-tabs/compare/v0.0.6...v1.0.0) (2022-12-07)
 
 

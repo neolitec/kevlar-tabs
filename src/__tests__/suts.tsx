@@ -1,11 +1,10 @@
 import { render } from '@testing-library/react'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Tab from '../Tab'
 import TabList from '../TabList'
 import TabPanel from '../TabPanel'
 import type { TabsProps } from '../Tabs'
 import Tabs from '../Tabs'
-import AsyncContent from './AsyncContent'
 
 export function displayComponent(props: Partial<TabsProps> = {}) {
   return render(
@@ -158,16 +157,31 @@ export function displayComponentWithCustomClassNames() {
   )
 }
 
-export const displayComponentWithAsyncTab = () =>
-  render(
+const TabWithAsyncContent = () => {
+  const [content, setContent] = useState<string | null>(null)
+  const timeoutId = useRef<NodeJS.Timeout | number | null>(null)
+
+  useEffect(() => {
+    timeoutId.current = setTimeout(() => {
+      setContent('Async content loaded')
+    }, 3000)
+
+    return () => {
+      if (timeoutId.current) clearTimeout(timeoutId.current)
+    }
+  }, [])
+
+  return (
     <Tabs>
       <TabList>
         <Tab>Async</Tab>
         <Tab>Tab 1</Tab>
       </TabList>
-      <TabPanel>
-        <AsyncContent />
-      </TabPanel>
-      <TabPanel>Tab 1 content</TabPanel>
+      <TabPanel>{content ? <b>{content}</b> : 'Loading...'}</TabPanel>
+      <TabPanel>Content 1</TabPanel>
     </Tabs>
   )
+}
+
+export const displayComponentWithAsyncTab = () =>
+  render(<TabWithAsyncContent />)

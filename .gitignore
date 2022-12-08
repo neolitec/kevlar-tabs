@@ -22,6 +22,8 @@ test-report.xml
 
 # Dependency directories
 node_modules/
+.yalc
+yalc.lock
 
 # Optional eslint cache
 .eslintcache

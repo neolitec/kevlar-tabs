@@ -1,0 +1,10 @@
+{
+  "version": "v1",
+  "packages": {
+    "kevlar-tabs": {
+      "version": "1.0.0",
+      "signature": "6e2a4cf8aae7e14366b7b70d8c001d4e",
+      "file": true
+    }
+  }
+}

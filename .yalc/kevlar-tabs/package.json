@@ -1,0 +1,47 @@
+{
+  "name": "kevlar-tabs",
+  "version": "1.0.0",
+  "description": "Yet another better tabs library for React",
+  "scripts": {
+    "ladle": "ladle serve",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+    "build:clean": "pnpm dlx rimraf dist &&  && pnpm run build",
+    "build:dts": "tsc -p tsconfig.build.json --emitDeclarationOnly",
+    "build:js": "tsc -p tsconfig.build.json && vite build",
+    "build": "pnpm run build:js && pnpm run build:dts",
+    "test": "vitest"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "tabs",
+    "kevlar",
+    "frontend"
+  ],
+  "license": "MIT",
+  "repository": "neolitec/kevlar-tabs",
+  "main": "./dist/kevlar-tabs.umd.js",
+  "module": "./dist/kevlar-tabs.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/kevlar-tabs.es.js",
+      "require": "./dist/kevlar-tabs.umd.js"
+    }
+  },
+  "packageManager": "pnpm@7.14.2",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=7.14.2"
+  },
+  "volta": {
+    "node": "18.12.1"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "dependencies": {
+    "classnames": "^2.3.2"
+  },
+  "yalcSig": "6e2a4cf8aae7e14366b7b70d8c001d4e"
+}

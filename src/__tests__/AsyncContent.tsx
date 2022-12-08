@@ -7,14 +7,14 @@ const AsyncContent = () => {
   useEffect(() => {
     timeoutId.current = setTimeout(() => {
       setContent('Async content loaded')
-    }, 1000)
+    }, 0)
 
     return () => {
       if (timeoutId.current) clearTimeout(timeoutId.current)
     }
   }, [])
 
-  return <div>{content ?? 'Loading...'}</div>
+  return <div>{content ? <b>{content}</b> : 'Loading...'}</div>
 }
 
 export default AsyncContent

@@ -60,11 +60,25 @@ const Tabs = ({
   )
 
   useEffect(() => {
+    console.log('children changed')
+  }, [children])
+
+  useEffect(() => {
+    console.log('tabNames changed', tabNames)
+  }, [tabNames])
+
+  useEffect(() => {
+    console.log('selected changed', selected)
+  }, [selected])
+
+  useEffect(() => {
+    console.log('reset selected', computeState(tabNames, selected))
     setSelected(computeState(tabNames, selected))
   }, [selected, tabNames])
 
   const handleSelect = useCallback(
     (index: number, name?: string) => {
+      console.log('handleSelect', index, name)
       setSelected({
         index,
         name,
@@ -189,7 +203,11 @@ const Tabs = ({
     tabProps,
   ])
 
-  return <div className={className}>{getChildren()}</div>
+  return (
+    <div className={className}>
+      {currentIndex} - {getChildren()}
+    </div>
+  )
 }
 
 function computeState(

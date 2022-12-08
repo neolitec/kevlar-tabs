@@ -171,9 +171,13 @@ const Tabs = ({
           classNameDisabled: classNames?.tabPanelDisabled,
           ...child.props,
           active: panelIndex === currentIndex,
-          disabled: tabProps[panelIndex].disabled,
-          id: `${tabIds.current[panelIndex]}-panel`,
-          'aria-labelledby': `${tabIds.current[panelIndex]}-tab`,
+          disabled: tabProps[panelIndex]?.disabled,
+          id: tabIds.current[panelIndex]
+            ? `${tabIds.current[panelIndex]}-panel`
+            : undefined,
+          'aria-labelledby': tabIds.current[panelIndex]
+            ? `${tabIds.current[panelIndex]}-tab`
+            : undefined,
         })
 
         tabPanelIndex += 1

@@ -9,6 +9,7 @@ import {
   displayComponentWithDisabledTab,
   displayComponentWithExternals,
   displayComponentWithNamedTabs,
+  displayComponentWithoutAnyTab,
   displayComponentWithSparses,
 } from './suts'
 
@@ -604,6 +605,22 @@ describe('Tabs', () => {
       it('should show the loaded content directly', () => {
         expect(ui.asyncContent.get()).toBeInTheDocument()
       })
+    })
+  })
+
+  describe('when the is no tab to display', () => {
+    beforeEach(() => {
+      cleanup()
+      displayComponentWithoutAnyTab()
+    })
+
+    it('should still display the first panel by default', () => {
+      expect(ui.tabPanel1Content.get()).toBeInTheDocument()
+    })
+
+    it('should display the text before and after', () => {
+      expect(byText(/before/i).get()).toBeInTheDocument()
+      expect(byText(/after/i).get()).toBeInTheDocument()
     })
   })
 })

@@ -61,7 +61,14 @@ const Tabs = ({
 
   useEffect(() => {
     setSelected(computeState(tabNames, selected))
-  }, [selected, tabNames])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    selected,
+    // Hack: use deep equal to compare to previous tabNames,
+    // so that children update don't lead to a reset of the selected tab.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    tabNames.join(','),
+  ])
 
   const handleSelect = useCallback(
     (index: number, name?: string) => {

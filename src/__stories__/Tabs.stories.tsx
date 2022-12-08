@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import '../styles.scss'
 import Tab from '../Tab'
 import TabList from '../TabList'
 import TabPanel from '../TabPanel'
 import Tabs from '../Tabs'
-import AsyncContent from '../__tests__/AsyncContent'
 
 const CustomTabs = styled(Tabs)`
   background-color: pink;
@@ -91,18 +90,31 @@ export const Default = () => {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const LazyLoading = () => (
-  <Tabs>
-    <TabList>
-      <Tab>Tab 1</Tab>
-      <Tab>Async</Tab>
-    </TabList>
-    <TabPanel>Content 1</TabPanel>
-    <TabPanel>
-      <AsyncContent />
-    </TabPanel>
-  </Tabs>
-)
+export const LazyLoading = () => {
+  const [content, setContent] = useState<string | null>(null)
+  const timeoutId = useRef<NodeJS.Timeout | number | null>(null)
+
+  useEffect(() => {
+    timeoutId.current = setTimeout(() => {
+      setContent('Async content loaded')
+    }, 5000)
+
+    return () => {
+      if (timeoutId.current) clearTimeout(timeoutId.current)
+    }
+  }, [])
+
+  return (
+    <Tabs>
+      <TabList>
+        <Tab>Tab 1</Tab>
+        <Tab>Async</Tab>
+      </TabList>
+      <TabPanel>Content 1</TabPanel>
+      <TabPanel>{content ? <b>{content}</b> : 'Loading...'}</TabPanel>
+    </Tabs>
+  )
+}
 
 export const StyledComponents = () => {
   const { selected, setSelected, tabs, add } = useTabs()

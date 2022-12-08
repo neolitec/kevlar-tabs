@@ -1,0 +1,44 @@
+name: 🐛 Bug report
+description: File a bug report
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Please provide a description of the issue.
+      placeholder: Tell us what you see.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+      description: What did you expect to happen?
+      placeholder: Tell us what was expected.
+  - type: textarea
+    id: versions
+    attributes:
+      label: Version
+      description: Output of `npx envinfo --system --binaries --browsers --npmPackages "kevlar-tabs"`
+      placeholder: Latest
+  - type: input
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: If you were able to create a reproduction repository, please provide the URL here so that we can take a look.
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe do you think it is?
+      options:
+        - Low (just a detail)
+        - Medium (annoying but I have a workaround)
+        - High (I can't use the library)

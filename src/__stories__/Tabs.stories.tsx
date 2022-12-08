@@ -181,3 +181,14 @@ export const AutoActivationDisabled = () => {
     </>
   )
 }
+
+export const EmptyTabs = () => (
+  <>
+    before
+    <Tabs>
+      <TabList />
+      <TabPanel>Tab 1 content</TabPanel>
+      <TabPanel>Tab 2 content</TabPanel>
+    </Tabs>
+  </>
+)

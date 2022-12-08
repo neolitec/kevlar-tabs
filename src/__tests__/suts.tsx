@@ -185,3 +185,13 @@ const TabWithAsyncContent = () => {
 
 export const displayComponentWithAsyncTab = () =>
   render(<TabWithAsyncContent />)
+
+export const displayComponentWithoutAnyTab = () =>
+  render(
+    <Tabs>
+      Before
+      <TabPanel>Tab 1 content</TabPanel>
+      <TabPanel>Tab 2 content</TabPanel>
+      After
+    </Tabs>
+  )

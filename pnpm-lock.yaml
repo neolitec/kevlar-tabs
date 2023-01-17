@@ -33,7 +33,7 @@ specifiers:
   prettier: ^2.7.1
   react: ^18.2.0
   react-dom: ^18.2.0
-  rimraf: ^3.0.2
+  rimraf: ^4.0.0
   rollup: ^3.3.0
   rollup-plugin-peer-deps-external: ^2.2.4
   sass: ^1.56.1
@@ -79,7 +79,7 @@ devDependencies:
   prettier: 2.7.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
-  rimraf: 3.0.2
+  rimraf: 4.1.0
   rollup: 3.3.0
   rollup-plugin-peer-deps-external: 2.2.4_rollup@3.3.0
   sass: 1.56.1
@@ -5774,6 +5774,12 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
+    dev: true
+
+  /rimraf/4.1.0:
+    resolution: {integrity: sha512-ZJdkUR5/dRrRJHdcSKJLrpRn6tVjl9ALxd4yrTCxFsMpjQNzwHF6GLqMsuEzEYIXxHlFPDSk21Vr8VPuFBEz0g==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /rollup-plugin-peer-deps-external/2.2.4_rollup@3.3.0:

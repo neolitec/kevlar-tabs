@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/neolitec/kevlar-tabs/compare/v1.1.0...v1.2.0) (2023-01-18)
+
+
+### Miscellaneous Chores
+
+* remove pnpm from engines ([89231d9](https://github.com/neolitec/kevlar-tabs/commit/89231d9f9f21b62dcb4e3167ecf334b4d99194be))
+
 ## [1.1.0](https://github.com/neolitec/kevlar-tabs/compare/v1.0.1...v1.1.0) (2022-12-08)
 
 

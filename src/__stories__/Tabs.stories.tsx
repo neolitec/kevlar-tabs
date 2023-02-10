@@ -182,6 +182,20 @@ export const AutoActivationDisabled = () => {
   )
 }
 
+export const HiddenTab = () => (
+  <Tabs>
+    <TabList>
+      {false && <Tab>tab 1</Tab>}
+      <Tab>tab 2</Tab>
+      <Tab>tab 3</Tab>
+    </TabList>
+    {false && <TabPanel>content 1</TabPanel>}
+    <TabPanel>content 2</TabPanel>
+    <TabPanel>content 3</TabPanel>
+    <p>text text</p>
+  </Tabs>
+)
+
 export const EmptyTabs = () => (
   <>
     before

@@ -129,32 +129,34 @@ const Tabs = ({
       if (isTabListElement(child)) {
         return React.cloneElement(child, {
           ...child.props,
-          children: React.Children.map(child.props.children, (tab, index) => {
-            if (isTabElement(tab)) {
-              return React.cloneElement(tab, {
-                className: classNames?.tab,
-                classNameActive: classNames?.tabActive,
-                classNameDisabled: classNames?.tabDisabled,
-                ...tab.props,
-                active: index === currentIndex,
-                'aria-controls': `${tabIds.current[index]}-panel`,
-                id: `${tabIds.current[index]}-tab`,
-                onClick: () => handleSelect(index, tab.props.name),
-                onKeyDown: autoActivate
-                  ? undefined
-                  : (event: React.KeyboardEvent) => {
-                      if (event.key === 'Enter' || event.key === ' ') {
-                        handleSelect(index, tab.props.name)
-                      }
-                    },
-                ref: (elt: HTMLLIElement) => {
-                  tabRefs.current[index] = elt
-                },
-              })
-            }
+          children: React.Children.toArray(child.props.children).map(
+            (tab, index) => {
+              if (isTabElement(tab)) {
+                return React.cloneElement(tab, {
+                  className: classNames?.tab,
+                  classNameActive: classNames?.tabActive,
+                  classNameDisabled: classNames?.tabDisabled,
+                  ...tab.props,
+                  active: index === currentIndex,
+                  'aria-controls': `${tabIds.current[index]}-panel`,
+                  id: `${tabIds.current[index]}-tab`,
+                  onClick: () => handleSelect(index, tab.props.name),
+                  onKeyDown: autoActivate
+                    ? undefined
+                    : (event: React.KeyboardEvent) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          handleSelect(index, tab.props.name)
+                        }
+                      },
+                  ref: (elt: HTMLLIElement) => {
+                    tabRefs.current[index] = elt
+                  },
+                })
+              }
 
-            return tab
-          }),
+              return tab
+            }
+          ),
           className: classNames?.tabList,
           onArrowLeftKeyDown: selectPrevious,
           onArrowRightKeyDown: selectNext,

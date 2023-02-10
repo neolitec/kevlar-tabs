@@ -195,3 +195,17 @@ export const displayComponentWithoutAnyTab = () =>
       After
     </Tabs>
   )
+
+export const displayComponentWithHiddenTab = () =>
+  render(
+    <Tabs>
+      <TabList>
+        {false && <Tab>Tab 1</Tab>}
+        <Tab>Tab 2</Tab>
+        <Tab>Tab 3</Tab>
+      </TabList>
+      {false && <TabPanel>Tab content 1</TabPanel>}
+      <TabPanel>Tab content 2</TabPanel>
+      <TabPanel>Tab content 3</TabPanel>
+    </Tabs>
+  )

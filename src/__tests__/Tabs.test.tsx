@@ -8,6 +8,7 @@ import {
   displayComponentWithCustomClassNames,
   displayComponentWithDisabledTab,
   displayComponentWithExternals,
+  displayComponentWithHiddenTab,
   displayComponentWithNamedTabs,
   displayComponentWithoutAnyTab,
   displayComponentWithSparses,
@@ -621,6 +622,29 @@ describe('Tabs', () => {
     it('should display the text before and after', () => {
       expect(byText(/before/i).get()).toBeInTheDocument()
       expect(byText(/after/i).get()).toBeInTheDocument()
+    })
+  })
+
+  describe('when a tab is programmatically hidden', () => {
+    beforeEach(() => {
+      cleanup()
+      displayComponentWithHiddenTab()
+    })
+
+    it('should not show up', () => {
+      expect(ui.tab1.query()).not.toBeInTheDocument()
+      expect(ui.tab2.get()).toBeInTheDocument()
+      expect(ui.tab3.get()).toBeInTheDocument()
+    })
+
+    it('should display the first available tab as selected', () => {
+      expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
+      expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+    })
+
+    it('should display the first available tab panel', () => {
+      expect(ui.tabPanel2.get()).toBeInTheDocument()
+      expect(ui.tabPanel3.query()).not.toBeInTheDocument()
     })
   })
 })

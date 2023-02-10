@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/neolitec/kevlar-tabs/compare/v1.2.0...v1.3.0) (2023-02-10)
+
+
+### Features
+
+* fix programmatically hidden tab ([4b3a019](https://github.com/neolitec/kevlar-tabs/commit/4b3a019ea7c2310beaf1bf001ed3bda369766f46))
+
 ## [1.2.0](https://github.com/neolitec/kevlar-tabs/compare/v1.1.0...v1.2.0) (2023-01-18)
 
 

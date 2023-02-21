@@ -123,6 +123,10 @@ describe('Tabs', () => {
     )
   })
 
+  it('should not give the focus by default if focusOnInit is falsy', () => {
+    expect(ui.tab1.get()).not.toHaveFocus()
+  })
+
   describe('by default', () => {
     it('should select the first tab', () => {
       expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
@@ -140,7 +144,7 @@ describe('Tabs', () => {
   describe('when a tab is selected', () => {
     beforeEach(() => {
       cleanup()
-      displayComponent({ selected: 1 })
+      displayComponent({ focusOnInit: true, selected: 1 })
     })
 
     it('should select the second tab', () => {
@@ -291,7 +295,7 @@ describe('Tabs', () => {
   describe('keyboard management', () => {
     beforeEach(() => {
       cleanup()
-      displayComponent()
+      displayComponent({ focusOnInit: true })
     })
 
     describe('when hitting the left arrow', () => {
@@ -329,7 +333,7 @@ describe('Tabs', () => {
     describe('when the selected tab is the last one', () => {
       beforeEach(() => {
         cleanup()
-        displayComponent({ selected: 2 })
+        displayComponent({ focusOnInit: true, selected: 2 })
       })
 
       describe('when hitting the left arrow', () => {

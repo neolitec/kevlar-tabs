@@ -33,6 +33,7 @@ export interface TabsProps {
   children: React.ReactNode
   className?: string
   classNames?: TabsClassNames
+  focusOnInit?: boolean
   onSelect?: (index: number, lastIndex: number) => void
   onNameSelect?: (name?: string, lastName?: string) => void
   selected?: number | string
@@ -43,6 +44,7 @@ const Tabs = ({
   children,
   className,
   classNames,
+  focusOnInit,
   onNameSelect,
   onSelect,
   selected,
@@ -137,6 +139,7 @@ const Tabs = ({
                   classNameActive: classNames?.tabActive,
                   classNameDisabled: classNames?.tabDisabled,
                   ...tab.props,
+                  autoFocus: focusOnInit && index === currentIndex,
                   active: index === currentIndex,
                   'aria-controls': `${tabIds.current[index]}-panel`,
                   id: `${tabIds.current[index]}-tab`,
@@ -192,8 +195,15 @@ const Tabs = ({
   }, [
     autoActivate,
     children,
-    classNames,
+    classNames?.tab,
+    classNames?.tabActive,
+    classNames?.tabDisabled,
+    classNames?.tabList,
+    classNames?.tabPanel,
+    classNames?.tabPanelActive,
+    classNames?.tabPanelDisabled,
     currentIndex,
+    focusOnInit,
     handleSelect,
     id,
     selectNext,

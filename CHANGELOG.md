@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/neolitec/kevlar-tabs/compare/v1.3.0...v1.4.0) (2023-02-21)
+
+
+### Features
+
+* add focus on init ([1a3c68b](https://github.com/neolitec/kevlar-tabs/commit/1a3c68b684f44eaf9648c1fadde098e3d834ddcc))
+
 ## [1.3.0](https://github.com/neolitec/kevlar-tabs/compare/v1.2.0...v1.3.0) (2023-02-10)
 
 

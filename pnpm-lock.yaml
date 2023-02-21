@@ -5,7 +5,7 @@ specifiers:
   '@commitlint/config-conventional': ^17.2.0
   '@ladle/react': ^2.4.5
   '@testing-library/dom': ^9.0.0
-  '@testing-library/react': ^13.4.0
+  '@testing-library/react': ^14.0.0
   '@testing-library/user-event': ^14.4.3
   '@types/node': ^18.11.9
   '@types/react': ^18.0.25
@@ -52,7 +52,7 @@ devDependencies:
   '@commitlint/config-conventional': 17.2.0
   '@ladle/react': 2.4.5_3dg3ku2mutn5pk6xg43hvtgutu
   '@testing-library/dom': 9.0.0
-  '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
+  '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
   '@testing-library/user-event': 14.4.3_@testing-library+dom@9.0.0
   '@types/node': 18.11.9
   '@types/react': 18.0.25
@@ -2132,15 +2132,15 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/react/13.4.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-sXOGON+WNTh3MLE9rve97ftaZukN3oNf2KjDy7YTx6hcTO2uuLHuCGynMDhFwGw/jYf4OJ2Qk0i4i79qMNNkyw==}
-    engines: {node: '>=12'}
+  /@testing-library/react/14.0.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-S04gSNJbYE30TlIMLTzv6QCTzt9AqIF5y6s6SzVFILNcNvbV/jU96GeiTPillGQo+Ny64M/5PV7klNYYgv5Dfg==}
+    engines: {node: '>=14'}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
     dependencies:
       '@babel/runtime': 7.20.1
-      '@testing-library/dom': 8.19.0
+      '@testing-library/dom': 9.0.0
       '@types/react-dom': 18.0.9
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0

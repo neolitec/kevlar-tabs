@@ -53,6 +53,7 @@ Some panels could not be defined for some reason. You can manually specify the i
 | Property | Type | Description |
 | --- | --- | --- |
 | `autoActivate` | `boolean` | (default: `true`) If true, it prevents auto activation of tabs on focus. |
+| `focusOnInit` | `boolean` | (default: `false`) If true, the default selection tab takes the focus on init. |
 | `selected` | `number` \| `string` | The index or the name of the selected tab. |
 | `onSelect` | `function` | Callback function that is called when a tab is selected. Gives the index as a parameter. |
 | `onNameSelect` | `function` | Callback function that is called when a tab is selected. Gives the name as a parameter. |

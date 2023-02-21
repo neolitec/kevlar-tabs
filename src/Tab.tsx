@@ -4,6 +4,7 @@ import React, { forwardRef, useEffect, useRef } from 'react'
 
 export type TabProps = {
   active?: boolean
+  autoFocus?: boolean
   children: React.ReactNode
   classNameActive?: string
   classNameDisabled?: string
@@ -15,6 +16,7 @@ export type TabProps = {
 const Tab: ForwardRefRenderFunction<HTMLLIElement, TabProps> = (
   {
     active,
+    autoFocus,
     children,
     className,
     classNameActive,
@@ -28,10 +30,10 @@ const Tab: ForwardRefRenderFunction<HTMLLIElement, TabProps> = (
   const privateRef = useRef<HTMLLIElement | null>(null)
 
   useEffect(() => {
-    if (active && privateRef.current) {
+    if (active && privateRef.current && autoFocus) {
       privateRef.current.focus()
     }
-  }, [active])
+  }, [active, autoFocus])
 
   return (
     // Keyboard handled with the parent component.

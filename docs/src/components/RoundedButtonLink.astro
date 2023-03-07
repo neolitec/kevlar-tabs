@@ -1,0 +1,39 @@
+---
+interface Props {
+  href: string
+}
+
+const { href } = Astro.props
+---
+
+<a class="rounded-button" href={href}>
+  <slot />
+</a>
+<style lang="scss">
+  .rounded-button {
+    display: inline-block;
+    line-height: 2rem;
+    text-align: center;
+    background-color: $secondary2;
+    color: $inverted-color;
+    padding: 0.5rem 1.5rem;
+    border-radius: 1.5rem;
+    text-decoration: none;
+    box-shadow: $shadow1;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+
+    &:hover,
+    &:focus {
+      background-color: $secondary2-dark;
+      box-shadow: $shadow5;
+    }
+
+    &:active,
+    &:focus-visible {
+      outline: 2px solid $secondary2-light;
+      outline-offset: 2px;
+    }
+  }
+</style>

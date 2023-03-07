@@ -1,0 +1,45 @@
+name: Build and Deploy docs
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: [Release]
+    types: [completed]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Install and Build 🔧
+        run: |
+          cd docs
+          yarn install --frozen-lockfile
+          yarn build
+
+      - name: Deploy 🚀
+        id: deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs/dist
+
+      - name: New version notification
+        uses: neolitec/notify-action@v1.0.1
+        continue-on-error: true
+        if: ${{ steps.deploy.outputs.deployment-status == 'success' }}
+        with:
+          discord_webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          title: '📖 Documentation for ${{ github.repository }} has been deployed'
+          message: 'You can access it [here](https://neolitec.github.io/kevlar-tabs)'

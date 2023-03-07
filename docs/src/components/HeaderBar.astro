@@ -1,0 +1,84 @@
+---
+import { SITE } from '../config'
+import LogoAndName from './LogoAndName.astro'
+import SocialButton from './SocialButton.astro'
+
+interface Props {
+  showLogo?: boolean
+}
+
+const { showLogo } = Astro.props
+---
+
+<div class="header">
+  {showLogo && <LogoAndName />}
+  <div class="header__right">
+    {
+      SITE.github && (
+        <SocialButton link={SITE.github} external>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-github"
+          >
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+          </svg>
+        </SocialButton>
+      )
+    }
+  </div>
+</div>
+<script>
+  document.addEventListener('scroll', () => {
+    const header = document.querySelector('.header')
+    if (header) {
+      if (window.scrollY > 0) {
+        header.classList.add('header_scrolled')
+      } else {
+        header.classList.remove('header_scrolled')
+      }
+    }
+  })
+</script>
+<style lang="scss">
+  .header {
+    height: 4rem;
+    padding: 0 2rem;
+    font-size: 1.2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px transparent solid;
+
+    &__right {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+  }
+
+  @include media('>small') {
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+
+      transition: all 0.5s ease-in-out;
+
+      &_scrolled {
+        background-color: $background1-color;
+        border-bottom-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+</style>

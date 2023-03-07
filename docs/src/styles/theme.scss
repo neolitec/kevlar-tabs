@@ -1,0 +1,95 @@
+:root {
+  // Astro code theme (Nord) related variables
+  --astro-code-background-color: #2e3440ff;
+
+  // Custom theme for custom template :)
+  --primary1: #8373f8;
+  --primary1-light: #b1a9ff;
+  --primary1-dark: #574dc3;
+  
+  --primary2: #c4bcff;
+  --primary2-light: #e0d9ff;
+  --primary2-dark: #8d7fc3;
+  
+  --secondary1: #e3fff8;
+  --secondary1-light: #f2fffd;
+  --secondary1-dark: #b8e6d8;
+  
+  --secondary2: #a7ffea;
+  --secondary2-light: #d6fff7;
+  --secondary2-dark: #5ec5ae;
+  
+  --accent1: #d8a1ff;
+  --accent1-light: #e7c7ff;
+  --accent1-dark: #a27fdb;
+  
+  --accent2: #8be3ff;
+  --accent2-light: #c4f0ff;
+  --accent2-dark: #59a7c9;
+  
+  --accent3: #ffc8a1;
+  --accent3-light: #ffe2d4;
+  --accent3-dark: #e69172;
+  
+  --accent4: #ff8ba5;
+  --accent4-light: #ffb3bc;
+  --accent4-dark: #c95a68;
+
+  --dark-color: #111;
+  --inverted-color: var(--dark-color);
+
+  --text-color: #f4f3ff;
+  --text2-color: #c5c5c5;
+  --background1-color: #201e2b;
+  --background2-color: #16151f;
+  --background3-color: #545169;
+  --background4-color: #7f7a97;
+  --border1-color: #545169;
+  --border2-color: #7f7a97;
+  --code-background-color: #3a3848;
+  --code-color: var(--text2-color);
+
+  --success-color: #a5f77b;
+
+  --radius-normal: 0.5rem;
+
+  --shadow1: 0 0.2rem 0.125rem rgba(0, 0, 0, 0.3);
+  --shadow2: 0 0.2rem 0.25rem rgba(0, 0, 0, 0.3);
+  --shadow3: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.3);
+  --shadow4: 0 0.2rem 1rem rgba(0, 0, 0, 0.3);
+  --shadow5: 0 0.2rem 2rem rgba(0, 0, 0, 0.3);
+
+  --font1: 'Source Sans Pro', sans-serif;
+  --font2: 'IBM Plex Mono', monospace;
+
+  /* Title */
+  --headings-font-family: var(--font1);
+  --headings1-font-size: 2.2rem;
+  --headings1-font-weight: bold;
+  --headings1-line-height: 1.2;
+  --headings2-font-size: 1.8rem;
+  --headings2-font-weight: bold;
+  --headings2-line-height: 1.2;
+  --headings3-font-size: 1.4rem;
+  --headings3-font-weight: bold;
+  --headings3-line-height: 1.2;
+
+  /* Bodies */
+  --body-font-family: var(--font1);
+  --body-font-size: 1rem;
+  --body-font-weight: normal;
+  --body-line-height: 1.5;
+  --body-letter-spacing: 0.01em;
+  --body-text-color: #333;
+
+  /* Buttons */
+  --button-font-family: var(--font1);
+  --button-font-size: 1.2rem;
+  --button-font-weight: bold;
+  --button-letter-spacing: 0.05em;
+  --button-text-color: var(--inverted-color);
+  --button-bg-color: var(--secondary2);
+  --button-hover-bg-color: var(--secondary2-dark);
+  --button-border-radius: var(--radius-normal);
+  --button-padding: 0.8rem 1.6rem;
+}

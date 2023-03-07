@@ -3,7 +3,11 @@ import { SITE } from '../config'
 ---
 
 <a class="logo-name" href={SITE.url}>
-  <img class="logo-name__logo" src="/logo.svg" alt={SITE.title} />
+  <img
+    class="logo-name__logo"
+    src={`${import.meta.env.BASE_URL}/logo.svg`}
+    alt={SITE.title}
+  />
   <h1 class="logo-name__title">{SITE.title}</h1>
 </a>
 <style lang="scss">

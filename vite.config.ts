@@ -11,7 +11,8 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'kevlar-tabs',
-      fileName: (format) => `kevlar-tabs.${format}.js`
+      formats: ['es'],
+      fileName: (format) => `kevlar-tabs.${format}.js`,
     },
     sourcemap: true,
     rollupOptions: {
@@ -19,10 +20,10 @@ export default defineConfig({
         // Provide global variables to use in the UMD build
         // for externalized deps
         globals: {
-          react: 'React'
-        }
-      }
-    }
+          react: 'React',
+        },
+      },
+    },
   },
   test: {
     globals: true,
@@ -30,7 +31,7 @@ export default defineConfig({
     setupFiles: './setupTests.ts',
     coverage: {
       exclude: ['setupTests.ts', '**/*.test.tsx', '**/*.stories.tsx'],
-      reporter: ['text', 'json', 'html']
-    }
-  }
+      reporter: ['text', 'json', 'html'],
+    },
+  },
 })

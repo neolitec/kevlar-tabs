@@ -17,22 +17,19 @@
     "component",
     "tabs",
     "kevlar",
-    "frontend"
+    "frontend",
+    "typescript"
   ],
   "license": "MIT",
   "repository": "neolitec/kevlar-tabs",
-  "main": "./dist/kevlar-tabs.umd.js",
+  "main": "./dist/kevlar-tabs.es.js",
   "module": "./dist/kevlar-tabs.es.js",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/kevlar-tabs.es.js",
-      "require": "./dist/kevlar-tabs.umd.js"
-    }
-  },
-  "packageManager": "pnpm@7.14.2",
+  "type": "module",
+  "packageManager": "pnpm@7.28.0",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=16.0.0",
+    "pnpm": ">=7.14.2"
   },
   "volta": {
     "node": "18.12.1"

@@ -14,6 +14,8 @@ npm install kevlar-tabs
 
 ## Usage
 
+** This package is only built as a module. ** 
+
 ```tsx
 import Tabs from 'kevlar-tabs';
 

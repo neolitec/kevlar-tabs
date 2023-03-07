@@ -1,0 +1,42 @@
+---
+import { Code } from 'astro/components'
+import type { ComponentProps } from 'react'
+import theme from '../../shiki-theme.json'
+
+type Props = {
+  name: string
+} & ComponentProps<typeof Code>
+
+const { name, lang, code } = Astro.props
+---
+
+<div class="code-sample-component">
+  <div class="code-sample-component__title">
+    {name}
+  </div>
+  <div class="code-sample-component__code">
+    <Code lang={lang} code={code} theme={theme as any} />
+  </div>
+</div>
+<style lang="scss">
+  .code-sample-component {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 400px;
+
+    &__title {
+      font-style: italic;
+      font-size: 1.2em;
+    }
+
+    &__code {
+      background-color: $astro-code-background-color;
+      border-radius: $radius-normal;
+      border: 1px $astro-code-background-color inset;
+      box-shadow: inset 0.2rem 0.2rem 0.6rem rgba(#000, 0.5);
+      padding: 1rem;
+      line-height: 1.2;
+    }
+  }
+</style>

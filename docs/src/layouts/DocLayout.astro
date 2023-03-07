@@ -1,0 +1,95 @@
+---
+import HeaderBar from '../components/HeaderBar.astro'
+import LogoAndName from '../components/LogoAndName.astro'
+import { SITE } from '../config'
+import '../styles/index.scss'
+export interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <title>{SITE.title} - {title}</title>
+  </head>
+  <body class="doc-container">
+    <div class="top">
+      <div class="top__left-side">
+        <LogoAndName />
+      </div>
+      <div class="top__right-side">
+        <HeaderBar />
+      </div>
+    </div>
+    <div class="body">
+      <aside class="body__left-side">menu</aside>
+      <main class="body__right-side doc">
+        <slot />
+      </main>
+    </div>
+  </body>
+  <style lang="scss">
+    .doc-container {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      align-items: stretch;
+
+      &__left-side {
+        background-color: $background2-color;
+        min-width: 300px;
+        display: flex;
+        align-items: center;
+        padding-left: 2rem;
+        border-bottom: 1px $background1-color solid;
+      }
+
+      &__right-side {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        background-color: $background1-color;
+        box-shadow: $shadow5;
+      }
+    }
+
+    .body {
+      flex: 1;
+      display: flex;
+      align-items: stretch;
+      min-height: 100vh;
+
+      &__left-side {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background-color: $background2-color;
+        width: 300px;
+        padding: 5rem 2rem 1rem 2rem;
+      }
+
+      &__right-side {
+        flex: 1;
+        padding: 5rem 2rem 2rem calc(300px + 2rem);
+      }
+    }
+  </style>
+</html>

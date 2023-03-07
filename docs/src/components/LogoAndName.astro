@@ -1,0 +1,39 @@
+---
+import { SITE } from '../config'
+---
+
+<a class="logo-name" href={SITE.url}>
+  <img class="logo-name__logo" src="/logo.svg" alt={SITE.title} />
+  <h1 class="logo-name__title">{SITE.title}</h1>
+</a>
+<style lang="scss">
+  .logo-name {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    height: 24px;
+    transition: opacity 0.15s ease-in-out;
+    cursor: pointer;
+    color: $text-color;
+    text-decoration: none;
+
+    &:visited {
+      color: $text-color;
+    }
+
+    &:focus,
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &__logo {
+      height: 32px;
+    }
+
+    &__title {
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: 0.03em;
+    }
+  }
+</style>

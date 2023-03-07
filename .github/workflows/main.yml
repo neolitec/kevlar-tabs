@@ -1,4 +1,4 @@
-name: CI
+name: Test and Build
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v3
 
       - name: Install Node.js
@@ -22,7 +22,7 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           run_install: |
-            - recursive: true
+            - recursive: false
               args: [--frozen-lockfile, --prefer-offline]
 
       - run: pnpm lint

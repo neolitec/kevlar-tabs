@@ -1,0 +1,171 @@
+@use "./colors" as *;
+@use "./effects" as *;
+@use "./metrics" as *;
+@use "./typography" as *;
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-height: 100%;
+  font-family: $font1;
+  font-size: 16px;
+  background-color: $background1-color;
+  color: $text-color;
+}
+
+body {
+  min-height: 100%;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Titles */
+.heading1 {
+  font-family: $headings-font-family;
+  font-size: $headings1-font-size;
+  font-weight: $headings1-font-weight;
+  line-height: $headings1-line-height;
+}
+
+.heading2 {
+  font-family: $headings-font-family;
+  font-size: $headings2-font-size;
+  font-weight: $headings2-font-weight;
+  line-height: $headings2-line-height;
+}
+
+.heading3 {
+  font-family: $headings-font-family;
+  font-size: $headings3-font-size;
+  font-weight: $headings3-font-weight;
+  line-height: $headings3-line-height;
+}
+
+.button {
+  font-family: $button-font-family;
+  font-size: $button-font-size;
+  font-weight: $button-font-weight;
+  letter-spacing: $button-letter-spacing;
+  color: $button-text-color;
+  background-color: $button-bg-color;
+  border-radius: $button-border-radius;
+  padding: $button-padding;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: $button-hover-bg-color;
+  }
+}
+
+/* Doc styles */
+.doc {
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  
+  h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  
+  h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+    margin-top: 1.17em;
+    margin-bottom: 0.5em;
+  }
+  
+  h4 {
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
+  
+  h5 {
+    font-size: 0.83em;
+    font-weight: bold;
+    margin-top: 0.83em;
+    margin-bottom: 0.5em;
+  }
+  
+  h6 {
+    font-size: 0.67em;
+    font-weight: bold;
+    margin-top: 0.67em;
+    margin-bottom: 0.5em;
+  }
+
+  a {
+    color: blue;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  ul {
+    list-style-type: disc;
+    margin-left: 1em;
+    margin-bottom: 1em;
+    li {
+      margin-left: 0.5em;
+    }
+  }
+  
+  ol {
+    list-style-type: decimal;
+    margin-left: 1em;
+    margin-bottom: 1em;
+    li {
+      margin-left: 0.5em;
+    }
+  }
+
+  pre.astro-code {
+    padding: 1rem;
+    border-radius: $radius-normal;
+  }
+  code {
+    font-family: $font2;
+    font-size: 0.9em;
+  }
+  
+  blockquote {
+    background-color: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+    &:before {
+      color: #ccc;
+      content: open-quote;
+      font-size: 4em;
+      line-height: 0.1em;
+      margin-right: 0.25em;
+      vertical-align: -0.4em;
+    }
+    p {
+      display: inline;
+    }
+    &:after {
+      content: close-quote;
+      font-size: 4em;
+      line-height: 0.1em;
+      margin-left: 0.25em;
+      vertical-align: -0.4em;
+    }
+  }  
+}

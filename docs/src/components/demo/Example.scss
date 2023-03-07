@@ -1,0 +1,32 @@
+.example__tabs {
+  display: flex;
+  flex-direction: column;
+
+  .tablist {
+    display: flex;
+    gap: 2px;
+    border-bottom: 2px $border2-color solid;
+  }
+
+  .tab {
+    padding: 0.5rem 1rem;
+    border: 2px transparent solid;
+    background-color: $background3-color;
+    text-align: center;
+    border-top-left-radius: $radius-normal;
+    border-top-right-radius: $radius-normal;
+    cursor: pointer;
+
+    &--active {
+      background-color: $background4-color;
+    }
+
+    &:hover {
+      border: 2px $border2-color solid;
+    }
+  }
+
+  .tabpanel {
+    padding: 1rem;
+  }
+}

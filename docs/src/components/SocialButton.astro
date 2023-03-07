@@ -1,0 +1,30 @@
+---
+interface Props {
+  external?: boolean
+  link: string
+}
+
+const { external, link } = Astro.props
+---
+
+<a
+  class="social-button"
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
+  href={link}
+>
+  <slot />
+</a>
+<style lang="scss">
+  .social-button {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--text2-color);
+    transition: color 0.15s ease-in-out;
+
+    &:focus,
+    &:hover {
+      color: var(--text-color);
+    }
+  }
+</style>

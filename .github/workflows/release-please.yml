@@ -1,4 +1,4 @@
-name: CI
+name: Release
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
           #bump-patch-for-minor-pre-major: true
 
       # The logic below handles the npm publication:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v3
         if: ${{ steps.release.outputs.release_created }}
 

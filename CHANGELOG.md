@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/neolitec/kevlar-tabs/compare/v1.4.0...v1.5.0) (2023-03-07)
+
+
+### Miscellaneous Chores
+
+* trigger 1.5.0 ([1021e6b](https://github.com/neolitec/kevlar-tabs/commit/1021e6b7ac5f3f69cf8fc43317923db151770809))
+
 ## [1.4.0](https://github.com/neolitec/kevlar-tabs/compare/v1.3.0...v1.4.0) (2023-02-21)
 
 

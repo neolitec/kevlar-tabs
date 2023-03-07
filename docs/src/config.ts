@@ -10,7 +10,7 @@ interface ISite {
 
 export const SITE: ISite = {
   title: 'Kevlar Tabs',
-  url: 'https://kevlar-tabs.netlify.app',
+  url: 'https://neolitec.github.io/kevlar-tabs',
   subtitle: 'A simple tabs library for React.',
   description: '100% customizable, accessible and built with Typescript.',
   github: 'https://github.com/neolitec/kevlar-tabs',

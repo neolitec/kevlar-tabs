@@ -2,9 +2,10 @@ name: Build and Deploy docs
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: [Release]
-    types: [completed]
+  pull_request:
+  # workflow_run:
+  #   workflows: [Release]
+  #   types: [completed]
 
 permissions:
   contents: write
@@ -21,7 +22,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'yarn'
 
       - name: Install and Build 🔧
         run: |
@@ -29,16 +29,16 @@ jobs:
           yarn install --frozen-lockfile
           yarn build
 
-      - name: Deploy 🚀
-        id: deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: docs/dist
+      - name: Deploy with gh-pages 🚀
+        run: |
+          cd docs
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          yarn deploy --user "github-actions-bot <support+actions@github.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: New version notification
         uses: neolitec/notify-action@v1.0.1
-        continue-on-error: true
-        if: ${{ steps.deploy.outputs.deployment-status == 'success' }}
         with:
           discord_webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           title: '📖 Documentation for ${{ github.repository }} has been deployed'

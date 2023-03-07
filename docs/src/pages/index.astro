@@ -21,7 +21,7 @@ const cssCode = rawCssCode.replace('.example__tabs', '.tabs')
         <div class="logo-container__background"></div>
         <img
           class="logo-container__logo"
-          src="/logo.svg"
+          src={`${import.meta.env.BASE_URL}/logo.svg`}
           alt={`Logo of ${SITE.title}`}
         />
       </div>

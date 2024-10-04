@@ -25,7 +25,7 @@ const Tab: ForwardRefRenderFunction<HTMLLIElement, TabProps> = (
     onClick,
     ...liProps
   },
-  ref
+  ref,
 ) => {
   const privateRef = useRef<HTMLLIElement | null>(null)
 
@@ -37,14 +37,12 @@ const Tab: ForwardRefRenderFunction<HTMLLIElement, TabProps> = (
 
   return (
     // Keyboard handled with the parent component.
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <li
       ref={(elt) => {
         privateRef.current = elt
         if (typeof ref === 'function') {
           ref(elt)
         } else if (ref) {
-          // eslint-disable-next-line no-param-reassign
           ref.current = elt
         }
       }}

@@ -18,7 +18,6 @@ function isTabChild(object: unknown) {
   return isTabElement(object) || isTabListElement(object)
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export function deepMap(
   children: ReactNode,
   callback: (child: ChildType) => ReactNode

@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react'
-import React from 'react'
 import styled from 'styled-components'
 import { byRole, byText } from 'testing-library-selector'
 import Tab from '../Tab'
@@ -33,7 +32,7 @@ function displayComponent(props: Partial<TabsProps> = {}) {
       <TabPanel>Tab 1 content</TabPanel>
       <TabPanel>Tab 2 content</TabPanel>
       <TabPanel>Tab 3 content</TabPanel>
-    </CustomTabs>
+    </CustomTabs>,
   )
 }
 

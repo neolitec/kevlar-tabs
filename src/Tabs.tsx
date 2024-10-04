@@ -55,10 +55,10 @@ const Tabs = ({
   const tabIds = useRef(tabProps.map((_, i) => `${id}-${i}`))
   const tabRefs = useRef<HTMLLIElement[]>([])
   const currentFocusIndex = useRef(
-    (typeof selected === 'string' ? tabNames.indexOf(selected) : selected) ?? 0
+    (typeof selected === 'string' ? tabNames.indexOf(selected) : selected) ?? 0,
   )
   const [{ index: currentIndex, name: currentName }, setSelected] = useState(
-    computeState(tabNames, selected)
+    computeState(tabNames, selected),
   )
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const Tabs = ({
       onNameSelect?.(name, currentName)
       currentFocusIndex.current = index
     },
-    [currentIndex, currentName, onNameSelect, onSelect]
+    [currentIndex, currentName, onNameSelect, onSelect],
   )
 
   const selectNext = useCallback(() => {
@@ -121,10 +121,11 @@ const Tabs = ({
     let tabPanelIndex = 0
 
     const idsToCreate = tabNames.length - tabIds.current.length
+
     tabIds.current.push(
       ...Array.from(new Array(idsToCreate)).map(
-        (_, index) => `${id}-${tabNames.length + index - 1}`
-      )
+        (_, index) => `${id}-${tabNames.length + index - 1}`,
+      ),
     )
 
     return React.Children.map(children, (child) => {
@@ -158,7 +159,7 @@ const Tabs = ({
               }
 
               return tab
-            }
+            },
           ),
           className: classNames?.tabList,
           onArrowLeftKeyDown: selectPrevious,
@@ -217,7 +218,7 @@ const Tabs = ({
 
 function computeState(
   tabNames: (string | undefined)[],
-  selected?: number | string
+  selected?: number | string,
 ): {
   index: number
   name?: string

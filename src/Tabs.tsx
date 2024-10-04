@@ -122,11 +122,13 @@ const Tabs = ({
 
     const idsToCreate = tabNames.length - tabIds.current.length
 
-    tabIds.current.push(
-      ...Array.from(new Array(idsToCreate)).map(
-        (_, index) => `${id}-${tabNames.length + index - 1}`,
-      ),
-    )
+    if (idsToCreate > 0) {
+      tabIds.current.push(
+        ...Array.from(new Array(idsToCreate)).map(
+          (_, index) => `${id}-${tabNames.length + index - 1}`,
+        ),
+      )
+    }
 
     return React.Children.map(children, (child) => {
       if (isTabListElement(child)) {

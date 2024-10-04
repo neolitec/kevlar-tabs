@@ -35,6 +35,7 @@ const ui = {
   prevButton: byRole('button', { name: 'Prev' }),
   nextButton: byRole('button', { name: 'Next' }),
   addButton: byRole('button', { name: 'Add' }),
+  removeButton: byRole('button', { name: 'Remove' }),
   externalButton: byRole('button', { name: 'Action' }),
   externalParagraph: byText('text text'),
   asyncTab: byRole('tab', { name: 'Async' }),
@@ -288,6 +289,17 @@ describe('Tabs', () => {
           expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
           expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
         })
+      })
+    })
+
+    describe('when removing a tab', () => {
+      beforeEach(async () => {
+        expect(ui.tab2.get()).toBeInTheDocument()
+        await userEvent.click(ui.removeButton.get())
+      })
+
+      it('should remove the second tab', () => {
+        expect(ui.tab2.query()).not.toBeInTheDocument()
       })
     })
   })

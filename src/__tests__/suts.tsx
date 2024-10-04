@@ -58,6 +58,10 @@ export function displayComponentWithControls() {
       setTabs([...tabs, `Tab ${tabs.length + 1}`])
     }
 
+    const remove = () => {
+      setTabs(tabs.slice(0, tabs.length - 1))
+    }
+
     return (
       <>
         <Tabs onSelect={setSelected} selected={selected}>
@@ -78,6 +82,9 @@ export function displayComponentWithControls() {
         </button>
         <button type="button" onClick={add}>
           Add
+        </button>
+        <button type="button" onClick={remove}>
+          Remove
         </button>
       </>
     )

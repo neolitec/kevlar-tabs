@@ -1,6 +1,6 @@
 {
   "name": "kevlar-tabs",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Yet another better tabs library for React",
   "type": "module",
   "scripts": {

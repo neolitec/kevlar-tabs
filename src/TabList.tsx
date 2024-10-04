@@ -31,6 +31,7 @@ const TabList: FunctionComponent<TabListProps> = ({
     <ul
       role="tablist"
       className={className || 'tablist'}
+      tabIndex={0}
       {...ulProps}
       onKeyDown={handleKeyDown}
     >

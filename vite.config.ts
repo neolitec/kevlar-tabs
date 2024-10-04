@@ -1,12 +1,9 @@
-/// <reference types="vitest" />
-
 import react from '@vitejs/plugin-react'
 import path from 'path'
-import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  plugins: [react(), peerDepsExternal()],
+  plugins: [react()],
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
@@ -16,6 +13,7 @@ export default defineConfig({
     },
     sourcemap: true,
     rollupOptions: {
+      external: ['react', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps

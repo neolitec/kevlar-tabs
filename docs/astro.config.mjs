@@ -5,6 +5,9 @@ import theme from './shiki-theme.json'
 
 // https://astro.build/config
 export default defineConfig({
+  server: {
+    host: '0.0.0.0',
+  },
   site: 'https://neolitec.github.com/kevlar-tabs',
   base: '/kevlar-tabs',
   trailingSlash: 'never',

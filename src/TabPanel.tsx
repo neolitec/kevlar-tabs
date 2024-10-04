@@ -9,7 +9,6 @@ export type TabPanelProps = {
   classNameDisabled?: string
   disabled?: boolean
   // Only used in the Tabs component to override the index of the tab panel.
-  // eslint-disable-next-line react/no-unused-prop-types
   index?: number
 } & HTMLAttributes<HTMLDivElement>
 

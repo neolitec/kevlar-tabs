@@ -47,7 +47,7 @@ export default function CopyLine({ copyValue, text }: CopyLineProps) {
     return () => {
       clearTimeout(delayId)
     }
-  }, [copied, copyValue])
+  }, [copyValue])
 
   return (
     <Container>

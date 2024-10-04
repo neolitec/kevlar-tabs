@@ -4,6 +4,7 @@ import parser from 'recast/parsers/babel'
 export function extractComponentContent(code: string) {
   const ast = parse(code, { parser })
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let jsxElementNode: any
 
   visit(ast, {

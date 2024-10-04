@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "esnext",
     "target": "es2018",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "lib": ["dom", "es2015", "es2017"],
     "strict": true,
     "noEmit": true,
@@ -17,8 +17,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "types": ["vitest/globals"],
-    "typeRoots": ["node_modules/@types", "src/types"],
   },
-  "include": ["src", "vite.config.ts", "setupTests.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src", "vite.config.ts", "vite.ladle.config.ts", "setupTests.ts"],
+  "exclude": ["node_modules", "dist", "docs"]
 }

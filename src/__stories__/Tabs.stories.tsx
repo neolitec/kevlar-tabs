@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import '../styles.scss'
 import Tab from '../Tab'
@@ -47,15 +47,19 @@ function useTabs() {
     setTabs([...tabs, `Tab ${tabs.length + 1}`])
   }
 
+  const remove = () => {
+    setTabs((prev) => prev.slice(0, -1))
+  }
+
   return {
     selected,
     setSelected,
     tabs,
     add,
+    remove,
   }
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export const Default = () => {
   const { selected, setSelected, tabs, add } = useTabs()
 
@@ -89,7 +93,6 @@ export const Default = () => {
   )
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export const LazyLoading = () => {
   const [content, setContent] = useState<string | null>(null)
   const timeoutId = useRef<NodeJS.Timeout | number | null>(null)
@@ -150,7 +153,7 @@ export const StyledComponents = () => {
 }
 
 export const AutoActivationDisabled = () => {
-  const { selected, setSelected, tabs, add } = useTabs()
+  const { selected, setSelected, tabs, add, remove } = useTabs()
 
   return (
     <>
@@ -177,6 +180,9 @@ export const AutoActivationDisabled = () => {
       </button>
       <button type="button" onClick={add}>
         Add
+      </button>
+      <button type="button" onClick={remove}>
+        Remove
       </button>
     </>
   )

@@ -10,6 +10,7 @@
 		"astro": "astro",
     "deploy": "gh-pages --dist dist --dotfiles"
 	},
+  "packageManager": "yarn@1.22.22",
 	"dependencies": {
 		"@astrojs/mdx": "^0.17.0",
 		"@astrojs/prism": "^2.0.0",

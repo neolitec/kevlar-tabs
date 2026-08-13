@@ -1,0 +1,31 @@
+.github/workflows/dependabot-auto-merge.yml
+  s_20c4d701226fde::t_f2954270eec2f0 68
+  s_20c4d701226fde::t_04b15b37d35fe9 30,40-47
+  s_20c4d701226fde::t_84c5b70056a5cf 55
+  s_20c4d701226fde::t_a86b5ea60f110b 48-50
+  s_20c4d701226fde::t_d15e50e339322f 51
+.github/workflows/main.yml
+  s_20c4d701226fde::t_33d02d6ada28d1 31-50
+.github/dependabot.yml
+  s_20c4d701226fde::t_595e9f708c2e97 87-95
+docs/package.json
+  s_20c4d701226fde::t_ad9429532ef7c9 15-16
+docs/yarn.lock
+  s_20c4d701226fde::t_60c5f258d6c080 41,60-63,65-66,68,79,83,516,539-548,665-673,1447-1451,1786,2965,3048,3407
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "07907c205f8ef2ceb16b60b9903333a95fd52c48",
+  "prompts": {},
+  "sessions": {
+    "s_20c4d701226fde": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b99314f3-517a-44af-b04a-44bb058fa900",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

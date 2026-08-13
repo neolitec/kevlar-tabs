@@ -1,0 +1,112 @@
+# Dependabot configuration for automated dependency updates
+# Documentation: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # Library dependencies (pnpm workspace at the root)
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'tuesday'
+      time: '05:45'
+      timezone: 'Etc/UTC'
+
+    # Limit the number of open pull requests
+    open-pull-requests-limit: 5
+
+    # One PR per dependency type instead of one PR per package
+    groups:
+      production-dependencies:
+        dependency-type: 'production'
+        update-types:
+          - 'minor'
+          - 'patch'
+      development-dependencies:
+        dependency-type: 'development'
+        update-types:
+          - 'minor'
+          - 'patch'
+
+    # Conventional commits: required by commitlint and release-please.
+    # `chore` never triggers a release, which is what we want for deps.
+    commit-message:
+      prefix: 'chore'
+      prefix-development: 'chore'
+      include: 'scope'
+
+    labels:
+      - 'dependencies'
+      - 'automated'
+
+    # Major bumps of the React peer dependency are a breaking change for
+    # consumers of the library: they must be reviewed and released manually.
+    ignore:
+      - dependency-name: 'react'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'react-dom'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@types/react'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@types/react-dom'
+        update-types: ['version-update:semver-major']
+
+    allow:
+      - dependency-type: 'direct'
+
+    rebase-strategy: 'auto'
+
+  # Documentation site (Astro, own yarn.lock)
+  - package-ecosystem: 'npm'
+    directory: '/docs'
+    schedule:
+      interval: 'weekly'
+      day: 'tuesday'
+      time: '05:45'
+      timezone: 'Etc/UTC'
+
+    open-pull-requests-limit: 3
+
+    groups:
+      docs-dependencies:
+        patterns:
+          - '*'
+        update-types:
+          - 'minor'
+          - 'patch'
+
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+
+    labels:
+      - 'dependencies'
+      - 'documentation'
+      - 'automated'
+
+    allow:
+      - dependency-type: 'direct'
+
+    rebase-strategy: 'auto'
+
+  # GitHub Actions used by the workflows
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'tuesday'
+      time: '05:45'
+      timezone: 'Etc/UTC'
+
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+
+    commit-message:
+      prefix: 'ci'
+      include: 'scope'
+
+    labels:
+      - 'github-actions'
+      - 'automated'

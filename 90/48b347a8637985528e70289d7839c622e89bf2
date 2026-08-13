@@ -1,0 +1,21 @@
+.github/workflows/dependabot-auto-merge.yml
+  s_20c4d701226fde::t_ff96394699924a 1-79
+.github/dependabot.yml
+  s_20c4d701226fde::t_90a13b09f1a366 1-112
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "9048b347a8637985528e70289d7839c622e89bf2",
+  "prompts": {},
+  "sessions": {
+    "s_20c4d701226fde": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b99314f3-517a-44af-b04a-44bb058fa900",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

@@ -21,16 +21,16 @@
 		"copy-to-clipboard": "^3.3.3",
 		"gh-pages": "^5.0.0",
 		"include-media": "^2.0.0",
-		"kevlar-tabs": "^1.5.0",
+		"kevlar-tabs": "^1.5.2",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0",
 		"react-live": "^3.1.2",
-		"recast": "^0.22.0",
-		"styled-components": "6.0.0-beta.11"
+		"recast": "^0.24.0",
+		"styled-components": "6.5.1"
 	},
 	"devDependencies": {
-		"acorn": "^8.8.2",
-		"sass": "^1.58.3",
+		"acorn": "^8.18.0",
+		"sass": "^1.102.0",
 		"shiki": "^0.14.1"
 	}
 }

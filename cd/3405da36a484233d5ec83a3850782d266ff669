@@ -1,0 +1,21 @@
+.github/workflows/main.yml
+  s_20c4d701226fde::t_8304256467f3db 34,45
+.github/workflows/deploy-docs.yml
+  s_20c4d701226fde::t_0160d2dc830758 23-24,28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "cd3405da36a484233d5ec83a3850782d266ff669",
+  "prompts": {},
+  "sessions": {
+    "s_20c4d701226fde": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b99314f3-517a-44af-b04a-44bb058fa900",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

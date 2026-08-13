@@ -31,6 +31,7 @@ jobs:
 
   # The docs site has its own dependency tree and was previously only built on
   # push to main, so a broken bump could not be caught before merging.
+  # Node 22: recast 0.24 declares engines.node ">= 22".
   build-docs:
     runs-on: ubuntu-latest
 
@@ -41,7 +42,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install and Build 🔧
         run: |

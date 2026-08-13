@@ -28,4 +28,24 @@ jobs:
       - run: pnpm lint
       - run: pnpm test -- --run
       - run: pnpm build
+
+  # The docs site has its own dependency tree and was previously only built on
+  # push to main, so a broken bump could not be caught before merging.
+  build-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install and Build 🔧
+        run: |
+          cd docs
+          yarn install --frozen-lockfile
+          yarn build
   

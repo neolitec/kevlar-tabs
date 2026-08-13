@@ -12,8 +12,8 @@
 	},
   "packageManager": "yarn@1.22.22",
 	"dependencies": {
-		"@astrojs/mdx": "^0.19.7",
-		"@astrojs/prism": "^4.0.2",
+		"@astrojs/mdx": "^0.17.0",
+		"@astrojs/prism": "^2.0.0",
 		"@astrojs/react": "^2.0.2",
 		"@types/react": "^18.0.21",
 		"@types/react-dom": "^18.0.6",

@@ -71,16 +71,17 @@ jobs:
             decide true 'the autorelease: pending label'
           fi
 
-          # Otherwise: only when the change can actually affect the suite —
-          # the library source or the suite itself. Unit tests and stories are
-          # excluded: they ship nothing.
-          # Listed in its own step so a failing API call fails the job, instead
-          # of being read as "nothing relevant changed".
+          # Otherwise: only when the change can actually affect the suite — the
+          # library source, the suite itself, or the config that builds the
+          # stories the suite drives. Unit tests and stories are excluded: they
+          # ship nothing.
+          # Listed in its own variable so a failing API call fails the job,
+          # instead of being read as "nothing relevant changed".
           files=$(gh api "repos/$REPO/pulls/$PR_NUMBER/files" --paginate --jq '.[].filename')
 
           changed=$(
             printf '%s\n' "$files" \
-              | grep -E '^(src/|e2e/|playwright\.config\.ts$)' \
+              | grep -E '^(src/|e2e/|(playwright\.config|vite\.ladle\.config)\.ts$)' \
               | grep -Ev '^src/(__tests__|__stories__)/' \
               || true
           )

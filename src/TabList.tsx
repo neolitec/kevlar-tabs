@@ -7,6 +7,8 @@ export type TabListProps = {
   children?: React.ReactNode
   onArrowLeftKeyDown?: () => void
   onArrowRightKeyDown?: () => void
+  onHomeKeyDown?: () => void
+  onEndKeyDown?: () => void
 } & HTMLAttributes<HTMLUListElement>
 
 const TabList: FunctionComponent<TabListProps> = ({
@@ -14,6 +16,8 @@ const TabList: FunctionComponent<TabListProps> = ({
   className,
   onArrowLeftKeyDown,
   onArrowRightKeyDown,
+  onHomeKeyDown,
+  onEndKeyDown,
   ...ulProps
 }: TabListProps & HTMLAttributes<HTMLUListElement>) => {
   const handleKeyDown = useCallback(
@@ -24,9 +28,15 @@ const TabList: FunctionComponent<TabListProps> = ({
       } else if (event.key === 'ArrowRight') {
         onArrowRightKeyDown?.()
         event.preventDefault()
+      } else if (event.key === 'Home') {
+        onHomeKeyDown?.()
+        event.preventDefault()
+      } else if (event.key === 'End') {
+        onEndKeyDown?.()
+        event.preventDefault()
       }
     },
-    [onArrowLeftKeyDown, onArrowRightKeyDown]
+    [onArrowLeftKeyDown, onArrowRightKeyDown, onHomeKeyDown, onEndKeyDown]
   )
 
   return (

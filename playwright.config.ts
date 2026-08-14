@@ -26,8 +26,9 @@ export default defineConfig({
   ],
 
   // The suite runs against the built stories rather than `ladle serve`: the
-  // static build is deterministic, and the dev server needs the docs/ workspace
-  // dependencies installed to boot.
+  // static build is deterministic, and the dev server currently serves nothing
+  // but 404s — @vitejs/plugin-react 6 cannot run inside the Vite 6 that Ladle
+  // pins, see issue #125.
   webServer: {
     command: 'pnpm run stories:build && pnpm run stories:preview',
     url: BASE_URL,

@@ -1,4 +1,5 @@
 dist/
+.claude/worktrees/
 
 # Astro's generated types (docs/)
 .astro/

@@ -14,7 +14,7 @@ npm install kevlar-tabs
 
 ## Usage
 
-** This package is only built as a module. ** 
+**This package is ESM-only.** It ships a single ES module build and cannot be loaded with `require()` — use `import`, or any bundler that understands ES modules. In Node, `require('kevlar-tabs')` fails with `ERR_PACKAGE_PATH_NOT_EXPORTED`.
 
 ```tsx
 import Tabs from 'kevlar-tabs';

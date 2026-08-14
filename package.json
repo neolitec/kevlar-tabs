@@ -39,6 +39,9 @@
     "./styles.css": "./dist/styles.css",
     "./package.json": "./package.json"
   },
+  "files": [
+    "dist"
+  ],
   "packageManager": "pnpm@9.3.0",
   "devDependencies": {
     "@commitlint/cli": "^21.2.2",

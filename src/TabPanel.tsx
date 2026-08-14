@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import type { FunctionComponent, HTMLAttributes } from 'react'
-import React, { useLayoutEffect, useRef } from 'react'
+import React, { useState } from 'react'
 
 export type TabPanelProps = {
   active?: boolean
@@ -21,13 +21,15 @@ const TabPanel: FunctionComponent<TabPanelProps> = ({
   disabled,
   ...divProps
 }) => {
-  const hasBeenActive = useRef(active)
+  // State rather than a ref: this value is read during render to decide
+  // whether children stay mounted, which a ref cannot safely provide.
+  // Adjusting it during render lets React re-run the component immediately,
+  // where a layout effect would only apply it on the following pass.
+  const [hasBeenActive, setHasBeenActive] = useState(active)
 
-  useLayoutEffect(() => {
-    if (!hasBeenActive.current && active) {
-      hasBeenActive.current = true
-    }
-  }, [active])
+  if (active && !hasBeenActive) {
+    setHasBeenActive(true)
+  }
 
   return (
     <div
@@ -39,7 +41,7 @@ const TabPanel: FunctionComponent<TabPanelProps> = ({
       style={!active ? { display: 'none' } : undefined}
       {...divProps}
     >
-      {(active || hasBeenActive.current) && children}
+      {(active || hasBeenActive) && children}
     </div>
   )
 }

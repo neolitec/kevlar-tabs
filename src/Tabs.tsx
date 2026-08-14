@@ -1,11 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import React, { useCallback, useId, useMemo, useRef, useState } from 'react'
 import { getTabProps } from './helpers/childrenUtils'
 import {
   isTabElement,
@@ -52,25 +45,32 @@ const Tabs = ({
   const id = useId()
   const tabProps = useMemo(() => getTabProps(children), [children])
   const tabNames = useMemo(() => tabProps.map((tab) => tab.name), [tabProps])
-  const tabIds = useRef(tabProps.map((_, i) => `${id}-${i}`))
+  // Derived, not a ref: reading and growing a ref during render is unsafe
+  // under concurrent rendering. The ids are a pure function of the tab list.
+  const tabIds = useMemo(
+    () => tabNames.map((_, i) => `${id}-${i}`),
+    [id, tabNames],
+  )
   const tabRefs = useRef<HTMLLIElement[]>([])
   const currentFocusIndex = useRef(
     (typeof selected === 'string' ? tabNames.indexOf(selected) : selected) ?? 0,
   )
   const [{ index: currentIndex, name: currentName }, setSelected] = useState(
-    computeState(tabNames, selected),
+    () => computeState(tabNames, selected),
   )
 
-  useEffect(() => {
+  // Compared as a string so that a children update producing an equal tab list
+  // does not reset the selected tab.
+  const tabNamesKey = tabNames.join(',')
+  const [previous, setPrevious] = useState({ selected, tabNamesKey })
+
+  // Adjusting state during render is React's documented alternative to
+  // synchronising props into state from an effect: React re-runs the component
+  // immediately, without committing the intermediate result or painting it.
+  if (previous.selected !== selected || previous.tabNamesKey !== tabNamesKey) {
+    setPrevious({ selected, tabNamesKey })
     setSelected(computeState(tabNames, selected))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    selected,
-    // Hack: use deep equal to compare to previous tabNames,
-    // so that children update don't lead to a reset of the selected tab.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    tabNames.join(','),
-  ])
+  }
 
   const handleSelect = useCallback(
     (index: number, name?: string) => {
@@ -120,16 +120,6 @@ const Tabs = ({
   const getChildren = useCallback(() => {
     let tabPanelIndex = 0
 
-    const idsToCreate = tabNames.length - tabIds.current.length
-
-    if (idsToCreate > 0) {
-      tabIds.current.push(
-        ...Array.from(new Array(idsToCreate)).map(
-          (_, index) => `${id}-${tabNames.length + index - 1}`,
-        ),
-      )
-    }
-
     return React.Children.map(children, (child) => {
       if (isTabListElement(child)) {
         return React.cloneElement(child, {
@@ -144,8 +134,8 @@ const Tabs = ({
                   ...tab.props,
                   autoFocus: focusOnInit && index === currentIndex,
                   active: index === currentIndex,
-                  'aria-controls': `${tabIds.current[index]}-panel`,
-                  id: `${tabIds.current[index]}-tab`,
+                  'aria-controls': `${tabIds[index]}-panel`,
+                  id: `${tabIds[index]}-tab`,
                   onClick: () => handleSelect(index, tab.props.name),
                   onKeyDown: autoActivate
                     ? undefined
@@ -180,11 +170,11 @@ const Tabs = ({
           ...child.props,
           active: panelIndex === currentIndex,
           disabled: tabProps[panelIndex]?.disabled,
-          id: tabIds.current[panelIndex]
-            ? `${tabIds.current[panelIndex]}-panel`
+          id: tabIds[panelIndex]
+            ? `${tabIds[panelIndex]}-panel`
             : undefined,
-          'aria-labelledby': tabIds.current[panelIndex]
-            ? `${tabIds.current[panelIndex]}-tab`
+          'aria-labelledby': tabIds[panelIndex]
+            ? `${tabIds[panelIndex]}-tab`
             : undefined,
         })
 
@@ -208,10 +198,9 @@ const Tabs = ({
     currentIndex,
     focusOnInit,
     handleSelect,
-    id,
     selectNext,
     selectPrevious,
-    tabNames.length,
+    tabIds,
     tabProps,
   ])
 

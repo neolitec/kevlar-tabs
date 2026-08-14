@@ -1,0 +1,23 @@
+package.json
+  s_20c4d701226fde::t_d1928f8c870da5 50
+eslint.config.js
+  s_20c4d701226fde::t_5adcc3a55c8b8e 45-51
+pnpm-lock.yaml
+  s_20c4d701226fde::t_1db7c15636b664 70-71,1942-1944,1946,2265-2270,3830-3838,5839,5841-5842,5844-5848,6302-6307,8248-8253
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "3e60732333fb3f9252c9715bbeac83fbbd920657",
+  "prompts": {},
+  "sessions": {
+    "s_20c4d701226fde": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b99314f3-517a-44af-b04a-44bb058fa900",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

@@ -57,6 +57,24 @@ test.describe('Keyboard navigation with auto activation', () => {
       '-1',
     )
   })
+
+})
+
+test.describe('Tab stops', () => {
+  test('a single Tab press moves focus onto the active tab', async ({
+    page,
+  }) => {
+    await gotoStory(page, 'tabs--default')
+
+    // The tablist itself must not be a tab stop.
+    await expect(page.getByRole('tablist')).not.toHaveAttribute('tabindex')
+
+    // From a fresh page, the first Tab press must land on the active tab,
+    // not on the tablist container.
+    await page.keyboard.press('Tab')
+
+    await expect(page.getByRole('tab', { name: 'Tab 1' })).toBeFocused()
+  })
 })
 
 test.describe('Keyboard navigation without auto activation', () => {

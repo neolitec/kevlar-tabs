@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { byRole } from 'testing-library-selector'
 import TabList from '../TabList'
 
@@ -20,9 +19,7 @@ describe('Tab', () => {
     expect(ui.tabList.get()).toBeInTheDocument()
   })
 
-  it('can take the focus', async () => {
-    await userEvent.click(ui.tabList.get())
-
-    expect(ui.tabList.get()).toHaveFocus()
+  it('is not in the tab sequence', () => {
+    expect(ui.tabList.get()).not.toHaveAttribute('tabindex')
   })
 })

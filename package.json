@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "ladle serve -h 127.0.0.1 --viteConfig vite.ladle.config.ts",
-    "build:clean": "pnpm dlx rimraf dist &&  && pnpm run build",
+    "build:clean": "rimraf dist && pnpm run build",
     "build:dts": "tsc -p tsconfig.build.json --emitDeclarationOnly",
     "build:js": "tsc -p tsconfig.build.json && vite build",
     "build": "pnpm run build:js && pnpm run build:dts",

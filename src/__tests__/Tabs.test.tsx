@@ -10,6 +10,7 @@ import {
   displayComponentWithExternals,
   displayComponentWithFirstTabDisabled,
   displayComponentWithHiddenTab,
+  displayComponentWithLastTabDisabled,
   displayComponentWithNamedTabs,
   displayComponentWithoutAnyTab,
   displayComponentWithSparses,
@@ -432,10 +433,106 @@ describe('Tabs', () => {
       })
     })
 
+    describe('when hitting the end key', () => {
+      beforeEach(async () => {
+        await userEvent.type(ui.tab1.get(), '{end}')
+      })
+
+      it('should select the last tab', () => {
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+      })
+
+      it('should give the focus to the last tab', () => {
+        expect(ui.tab3.get()).toHaveFocus()
+      })
+    })
+
+    describe('when the selected tab is the last one and hitting the home key', () => {
+      beforeEach(async () => {
+        cleanup()
+        displayComponent({ focusOnInit: true, selected: 2 })
+        await userEvent.type(ui.tab3.get(), '{home}')
+      })
+
+      it('should select the first tab', () => {
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+      })
+
+      it('should give the focus to the first tab', () => {
+        expect(ui.tab1.get()).toHaveFocus()
+      })
+    })
+
+    describe('when the first tab is disabled and hitting the home key', () => {
+      beforeEach(async () => {
+        cleanup()
+        displayComponentWithFirstTabDisabled({ selected: 2 })
+        await userEvent.type(ui.tab3.get(), '{home}')
+      })
+
+      it('should select the first non-disabled tab', () => {
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+      })
+    })
+
+    describe('when the last tab is disabled and hitting the end key', () => {
+      beforeEach(async () => {
+        cleanup()
+        displayComponentWithLastTabDisabled()
+        await userEvent.type(ui.tab1.get(), '{end}')
+      })
+
+      it('should select the last non-disabled tab', () => {
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+      })
+    })
+
     describe('when autoActivate is false', () => {
       beforeEach(() => {
         cleanup()
         displayComponent({ autoActivate: false })
+      })
+
+      describe('when hitting the end key', () => {
+        beforeEach(async () => {
+          await userEvent.type(ui.tab1.get(), '{end}')
+        })
+
+        it('should not change the selected tab', () => {
+          expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
+          expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+          expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+        })
+
+        it('should give the focus to the last tab', () => {
+          expect(ui.tab3.get()).toHaveFocus()
+        })
+      })
+
+      describe('when hitting the home key from the last tab', () => {
+        beforeEach(async () => {
+          cleanup()
+          displayComponent({ selected: 2, autoActivate: false })
+          await userEvent.type(ui.tab3.get(), '{home}')
+        })
+
+        it('should not change the selected tab', () => {
+          expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+          expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+          expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+        })
+
+        it('should give the focus to the first tab', () => {
+          expect(ui.tab1.get()).toHaveFocus()
+        })
       })
 
       describe('when hitting the left arrow', () => {

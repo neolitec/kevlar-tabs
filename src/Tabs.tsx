@@ -117,6 +117,38 @@ const Tabs = ({
     }
   }, [autoActivate, handleSelect, tabNames, tabProps])
 
+  const selectFirst = useCallback(() => {
+    if (tabProps.every((tab) => tab.disabled)) {
+      return
+    }
+
+    const firstIndex = getFirstIndex(tabProps)
+    const firstName = tabNames[firstIndex]
+
+    if (autoActivate) {
+      handleSelect(firstIndex, firstName)
+    } else {
+      currentFocusIndex.current = firstIndex
+      tabRefs.current[firstIndex].focus()
+    }
+  }, [autoActivate, handleSelect, tabNames, tabProps])
+
+  const selectLast = useCallback(() => {
+    if (tabProps.every((tab) => tab.disabled)) {
+      return
+    }
+
+    const lastIndex = getLastIndex(tabProps)
+    const lastName = tabNames[lastIndex]
+
+    if (autoActivate) {
+      handleSelect(lastIndex, lastName)
+    } else {
+      currentFocusIndex.current = lastIndex
+      tabRefs.current[lastIndex].focus()
+    }
+  }, [autoActivate, handleSelect, tabNames, tabProps])
+
   const getChildren = useCallback(() => {
     let tabPanelIndex = 0
 
@@ -156,6 +188,8 @@ const Tabs = ({
           className: classNames?.tabList,
           onArrowLeftKeyDown: selectPrevious,
           onArrowRightKeyDown: selectNext,
+          onHomeKeyDown: selectFirst,
+          onEndKeyDown: selectLast,
         })
       }
 
@@ -198,6 +232,8 @@ const Tabs = ({
     currentIndex,
     focusOnInit,
     handleSelect,
+    selectFirst,
+    selectLast,
     selectNext,
     selectPrevious,
     tabIds,
@@ -269,6 +305,24 @@ function getPreviousIndex(currentIndex: number, tabProps: TabProps[]) {
   }
 
   return previousIndex
+}
+
+function getFirstIndex(tabProps: TabProps[]) {
+  let firstIndex = 0
+  while (tabProps[firstIndex].disabled) {
+    firstIndex += 1
+  }
+
+  return firstIndex
+}
+
+function getLastIndex(tabProps: TabProps[]) {
+  let lastIndex = tabProps.length - 1
+  while (tabProps[lastIndex].disabled) {
+    lastIndex -= 1
+  }
+
+  return lastIndex
 }
 
 export default Tabs

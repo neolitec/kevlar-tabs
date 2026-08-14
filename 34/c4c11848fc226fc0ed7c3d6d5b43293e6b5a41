@@ -1,0 +1,19 @@
+package.json
+  s_a9e9b20f6b7157::t_83595f687c59b1 32-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "34c4c11848fc226fc0ed7c3d6d5b43293e6b5a41",
+  "prompts": {},
+  "sessions": {
+    "s_a9e9b20f6b7157": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3a506c32-4386-45b6-96bb-5104ca3ee617",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

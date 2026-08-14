@@ -92,6 +92,11 @@ updates:
     ignore:
       - dependency-name: 'astro'
       - dependency-name: '@astrojs/*'
+      # shiki belongs to the same lock: Astro 2 imports BUNDLED_LANGUAGES from
+      # it, which shiki removed in 1.0. The dependency is declared here only to
+      # pin the version Astro's own highlighter expects, so it cannot move
+      # ahead of Astro.
+      - dependency-name: 'shiki'
 
     allow:
       - dependency-type: 'direct'

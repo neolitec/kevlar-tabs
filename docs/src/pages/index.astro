@@ -40,7 +40,7 @@ const cssCode = rawCssCode.replace('.example__tabs', '.tabs')
           {
             SITE.installScript && (
               <CopyLine
-                client:only
+                client:only="react"
                 text={`$ ${SITE.installScript}`}
                 copyValue={SITE.installScript}
               />
@@ -50,7 +50,7 @@ const cssCode = rawCssCode.replace('.example__tabs', '.tabs')
       </div>
     </div>
     <div class="example">
-      <Example className="example__tabs" client:only />
+      <Example className="example__tabs" client:only="react" />
     </div>
     <section class="source">
       <div class="source__content">

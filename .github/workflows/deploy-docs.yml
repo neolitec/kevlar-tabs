@@ -20,8 +20,9 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v7
 
-      # Node 22: recast 0.24 declares engines.node ">= 22". Keep in sync with
-      # the build-docs job in main.yml, which gates this workflow.
+      # Node 22: astro 7 and the @astrojs/* integrations declare engines.node
+      # ">=22.12.0" (recast 0.24 wants ">= 22"). Keep in sync with the
+      # build-docs job in main.yml, which gates this workflow.
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:

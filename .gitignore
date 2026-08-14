@@ -1,5 +1,8 @@
 dist/
 
+# Astro's generated types (docs/)
+.astro/
+
 # Playwright
 /playwright-report/
 /test-results/

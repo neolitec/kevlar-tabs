@@ -62,7 +62,7 @@ Panels are keyboard-focusable by default (`tabIndex={0}`), as [the APG recommend
 
 | Property | Type | Description |
 | --- | --- | --- |
-| `autoActivate` | `boolean` | (default: `true`) If true, it prevents auto activation of tabs on focus. |
+| `autoActivate` | `boolean` | (default: `true`) If true, moving keyboard focus with the arrow, Home or End keys also activates the focused tab. If false, those keys only move focus and the tab is activated with Enter, Space or a click, [as described in the APG](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/). |
 | `focusOnInit` | `boolean` | (default: `false`) If true, the default selection tab takes the focus on init. |
 | `selected` | `number` \| `string` | The index or the name of the selected tab. |
 | `onSelect` | `function` | Callback function that is called when a tab is selected. Gives the index as a parameter. |

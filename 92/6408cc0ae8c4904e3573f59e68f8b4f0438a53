@@ -1,0 +1,29 @@
+package.json
+  s_06a750043f1085::t_2b09d79349f759 51,66
+src/__stories__/Tabs.stories.tsx
+  s_06a750043f1085::t_d972abe2dba14d 77-81
+  s_06a750043f1085::t_5ae590a55d69ea 140
+  s_06a750043f1085::t_d2d8dde67231a3 173
+e2e/accessibility.spec.ts
+  s_06a750043f1085::t_720017a29f2a15 1-50
+e2e/fixtures/story.ts
+  s_06a750043f1085::t_b0c5b28ef4cf2b 4-13
+pnpm-lock.yaml
+  s_06a750043f1085::t_0fb459f4179af4 15-17,126-130,3539-3543
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "926408cc0ae8c4904e3573f59e68f8b4f0438a53",
+  "prompts": {},
+  "sessions": {
+    "s_06a750043f1085": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89b1773f-e224-4ff8-8337-82c22dee4ae2",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

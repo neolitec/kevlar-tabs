@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.3](https://github.com/neolitec/kevlar-tabs/compare/v1.5.2...v1.5.3) (2026-08-14)
+
+
+### Bug Fixes
+
+* repair the docs build and close the gap that let it break ([#103](https://github.com/neolitec/kevlar-tabs/issues/103)) ([83ff28a](https://github.com/neolitec/kevlar-tabs/commit/83ff28a0f889dddc102058d89849c50ab6cc2d0e))
+
 ## [1.5.2](https://github.com/neolitec/kevlar-tabs/compare/v1.5.1...v1.5.2) (2024-10-04)
 
 

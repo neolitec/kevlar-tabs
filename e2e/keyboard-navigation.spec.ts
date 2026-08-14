@@ -46,6 +46,28 @@ test.describe('Keyboard navigation with auto activation', () => {
     await expect(page.getByText('Selected index: 0')).toBeVisible()
   })
 
+  test('Enter activates the focused tab', async ({ page }) => {
+    await page.getByRole('tab', { name: 'Tab 4' }).focus()
+    await page.keyboard.press('Enter')
+
+    await expect(page.getByRole('tab', { name: 'Tab 4' })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    )
+    await expect(page.getByText('Selected index: 3')).toBeVisible()
+  })
+
+  test('Space activates the focused tab', async ({ page }) => {
+    await page.getByRole('tab', { name: 'Tab 5' }).focus()
+    await page.keyboard.press(' ')
+
+    await expect(page.getByRole('tab', { name: 'Tab 5' })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    )
+    await expect(page.getByText('Selected index: 4')).toBeVisible()
+  })
+
   test('only the selected tab is reachable with Tab', async ({ page }) => {
     // Roving tabindex: the selected tab holds tabindex=0, the others -1.
     await expect(page.getByRole('tab', { name: 'Tab 1' })).toHaveAttribute(

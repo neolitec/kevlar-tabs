@@ -169,13 +169,13 @@ const Tabs = ({
                   'aria-controls': `${tabIds[index]}-panel`,
                   id: `${tabIds[index]}-tab`,
                   onClick: () => handleSelect(index, tab.props.name),
-                  onKeyDown: autoActivate
-                    ? undefined
-                    : (event: React.KeyboardEvent) => {
-                        if (event.key === 'Enter' || event.key === ' ') {
-                          handleSelect(index, tab.props.name)
-                        }
-                      },
+                  onKeyDown: (event: React.KeyboardEvent) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      // Prevent Space from scrolling the page.
+                      event.preventDefault()
+                      handleSelect(index, tab.props.name)
+                    }
+                  },
                   ref: (elt: HTMLLIElement) => {
                     tabRefs.current[index] = elt
                   },
@@ -220,7 +220,6 @@ const Tabs = ({
       return child
     })
   }, [
-    autoActivate,
     children,
     classNames?.tab,
     classNames?.tabActive,

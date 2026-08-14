@@ -50,6 +50,16 @@ updates:
         update-types: ['version-update:semver-major']
       - dependency-name: '@types/react-dom'
         update-types: ['version-update:semver-major']
+      # ESLint 10 and TypeScript 7 are blocked by the plugin ecosystem, not by
+      # anything in this repo — see the tracking issues. Only majors are held
+      # back, so 9.x and 5.x fixes still come through. Remove these entries
+      # when the blocks lift; the issues say what to watch for.
+      - dependency-name: 'eslint'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@eslint/js'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'typescript'
+        update-types: ['version-update:semver-major']
 
     allow:
       - dependency-type: 'direct'

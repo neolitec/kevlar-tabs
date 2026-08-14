@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useCallback, useId, useMemo, useRef, useState } from 'react'
 import { getTabProps } from './helpers/childrenUtils'
 import {

@@ -1,3 +1,5 @@
+'use client'
+
 import type { FunctionComponent, HTMLAttributes } from 'react'
 import React, { useCallback } from 'react'
 

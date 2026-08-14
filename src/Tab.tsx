@@ -1,3 +1,5 @@
+'use client'
+
 import classNames from 'classnames'
 import type { ForwardRefRenderFunction, HTMLAttributes } from 'react'
 import React, { forwardRef, useEffect, useRef } from 'react'

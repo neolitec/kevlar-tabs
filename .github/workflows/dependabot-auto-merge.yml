@@ -27,7 +27,7 @@ jobs:
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
 
-      - name: Wait for CI to complete
+      - name: Wait for the library build
         uses: fountainhead/action-wait-for-check@v1.2.0
         id: wait-for-ci
         with:
@@ -37,9 +37,22 @@ jobs:
           timeoutSeconds: 1800 # 30 minutes
           intervalSeconds: 30
 
+      # Both gates must be green: the library build does not cover the docs
+      # site, and a docs-only bump can break it without test-and-build noticing.
+      - name: Wait for the docs build
+        uses: fountainhead/action-wait-for-check@v1.2.0
+        id: wait-for-docs
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: 'build-docs'
+          ref: ${{ github.event.pull_request.head.sha }}
+          timeoutSeconds: 1800 # 30 minutes
+          intervalSeconds: 30
+
       - name: Auto-merge minor and patch updates
         if: |
           steps.wait-for-ci.outputs.conclusion == 'success' &&
+          steps.wait-for-docs.outputs.conclusion == 'success' &&
           (steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
            steps.metadata.outputs.update-type == 'version-update:semver-minor')
         run: |
@@ -52,6 +65,7 @@ jobs:
       - name: Auto-merge major GitHub Actions updates
         if: |
           steps.wait-for-ci.outputs.conclusion == 'success' &&
+          steps.wait-for-docs.outputs.conclusion == 'success' &&
           steps.metadata.outputs.update-type == 'version-update:semver-major' &&
           steps.metadata.outputs.package-ecosystem == 'github_actions'
         run: |

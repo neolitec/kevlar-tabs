@@ -84,6 +84,15 @@ updates:
       - 'documentation'
       - 'automated'
 
+    # The docs site is pinned to Astro 2. The whole Astro ecosystem has to move
+    # together, so any isolated bump breaks the build: @astrojs/prism 4 needs
+    # Node >=22.12 and targets Astro 5, and @astrojs/mdx 0.19 calls
+    # addContentEntryType, which does not exist in Astro 2. These are held back
+    # until the site is migrated — see the tracking issue.
+    ignore:
+      - dependency-name: 'astro'
+      - dependency-name: '@astrojs/*'
+
     allow:
       - dependency-type: 'direct'
 

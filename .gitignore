@@ -39,3 +39,4 @@ yalc.lock
 .vscode/
 .idea
 .idea/
+build/

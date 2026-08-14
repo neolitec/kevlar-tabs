@@ -63,7 +63,13 @@ Some panels could not be defined for some reason. You can manually specify the i
 
 ## Styling
 
-You can use CSS classes that are set on the components:
+The components ship unstyled by default. A minimal stylesheet is published with the package and can be imported explicitly if you want a working look out of the box:
+
+```ts
+import 'kevlar-tabs/styles.css'
+```
+
+For anything custom, you can use CSS classes that are set on the components:
 
   - `Tabs` have no class (but you can create your own container).
   - `TabList` has the class `tablist`.

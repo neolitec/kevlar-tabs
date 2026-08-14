@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "ladle serve -h 127.0.0.1 --viteConfig vite.ladle.config.ts",
     "build:clean": "rimraf dist && pnpm run build",
+    "build:css": "sass src/styles.scss dist/styles.css --no-source-map",
     "build:dts": "tsc -p tsconfig.build.json --emitDeclarationOnly",
     "build:js": "tsc -p tsconfig.build.json && vite build",
-    "build": "pnpm run build:js && pnpm run build:dts",
+    "build": "pnpm run build:js && pnpm run build:dts && pnpm run build:css",
     "lint": "eslint .",
     "stories:build": "ladle build --viteConfig vite.ladle.config.ts",
     "stories:preview": "ladle preview -h 127.0.0.1 -p 61000",
@@ -30,6 +31,14 @@
   "main": "./dist/kevlar-tabs.es.js",
   "module": "./dist/kevlar-tabs.es.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/kevlar-tabs.es.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
   "packageManager": "pnpm@9.3.0",
   "devDependencies": {
     "@commitlint/cli": "^21.2.2",

@@ -29,6 +29,9 @@
   ],
   "license": "MIT",
   "repository": "neolitec/kevlar-tabs",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "main": "./dist/kevlar-tabs.es.js",
   "module": "./dist/kevlar-tabs.es.js",
   "types": "./dist/index.d.ts",

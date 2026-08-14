@@ -1,0 +1,21 @@
+.github/dependabot.yml
+  s_20c4d701226fde::t_ba399e8b26bf5f 95-99
+docs/yarn.lock
+  s_20c4d701226fde::t_5c73cc9dcf5de4 1840
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "f0fcef0d6da56b10cede8d562580efdb98161671",
+  "prompts": {},
+  "sessions": {
+    "s_20c4d701226fde": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b99314f3-517a-44af-b04a-44bb058fa900",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

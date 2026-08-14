@@ -1,0 +1,21 @@
+readme.md
+  s_975cd29ef704fb::t_d6d6ce6c583f4e 17-21
+package.json
+  s_975cd29ef704fb::t_80975db4b60bd3 30-37,41-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "f3878cb1b2cf540745b405506255aa8c99f405ae",
+  "prompts": {},
+  "sessions": {
+    "s_975cd29ef704fb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "72ff17d8-f500-41e8-9075-28509c0394c2",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

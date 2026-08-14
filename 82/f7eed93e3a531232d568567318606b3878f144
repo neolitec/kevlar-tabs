@@ -1,0 +1,26 @@
+src/Tabs.tsx
+  s_974d111bcaccd5::t_fa6afc26ec2deb 140-146
+src/__tests__/Tabs.test.tsx
+  s_974d111bcaccd5::t_1e4a43510add69 396-436
+src/Tab.tsx
+  s_974d111bcaccd5::t_d1a42094329355 65
+  s_974d111bcaccd5::t_7d1246935338a1 28
+e2e/keyboard-navigation.spec.ts
+  s_974d111bcaccd5::t_580066589a7f64 49-70
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "82f7eed93e3a531232d568567318606b3878f144",
+  "prompts": {},
+  "sessions": {
+    "s_974d111bcaccd5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "47b7213b-49ae-4e56-a112-b7880c82328d",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

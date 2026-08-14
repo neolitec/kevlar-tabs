@@ -1,0 +1,21 @@
+readme.md
+  s_9307fd19e4197c::t_0e846c9b5d402b 17
+package.json
+  s_9307fd19e4197c::t_403138c7f92143 42-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "f789e998a59c7161e62fa8358b9b35f1b8bf475c",
+  "prompts": {},
+  "sessions": {
+    "s_9307fd19e4197c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "607866d7-2b78-48a0-98ff-20704c122237",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

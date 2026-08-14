@@ -50,6 +50,14 @@ Some panels could not be defined for some reason. You can manually specify the i
 <TabPanel index={2}>Tab 3 content</TabPanel>
 ```
 
+Panels are keyboard-focusable by default (`tabIndex={0}`), as [the APG recommends](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) when a panel contains no focusable element. If your panel content starts with a focusable element, you can opt out:
+
+```tsx
+<TabPanel tabIndex={-1}>
+  <input placeholder="Already focusable" />
+</TabPanel>
+```
+
 ## Tabs properties
 
 | Property | Type | Description |

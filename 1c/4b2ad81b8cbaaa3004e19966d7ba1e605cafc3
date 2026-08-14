@@ -1,0 +1,19 @@
+readme.md
+  s_649b37bac86a99::t_a266e739403fca 65
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "1c4b2ad81b8cbaaa3004e19966d7ba1e605cafc3",
+  "prompts": {},
+  "sessions": {
+    "s_649b37bac86a99": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f17912a0-21a5-4e46-954f-bfc7dd5c37ff",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

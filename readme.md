@@ -129,6 +129,25 @@ CustomTab.displayName = 'Tab'
  - Keyboard navigation
  - Auto activation
 
+## Testing
+
+Unit tests run on every pull request:
+
+```sh
+pnpm test          # watch mode
+pnpm test -- --run # single run
+```
+
+End-to-end tests drive the Ladle stories with Playwright in Chromium, Firefox and WebKit. They cover what jsdom cannot: focus management, real key events and cross-browser styling.
+
+```sh
+pnpm exec playwright install # once, to download the browsers
+pnpm test:e2e                # builds the stories, serves them, runs the suite
+pnpm test:e2e:ui             # same, in Playwright's UI mode
+```
+
+In CI, the e2e suite only runs on release pull requests — the ones opened by release-please — and can be triggered manually from the Actions tab (`E2E` workflow).
+
 ## Roadmap
   
   - [ ] Documentation site

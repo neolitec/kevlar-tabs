@@ -10,7 +10,11 @@
     "build:js": "tsc -p tsconfig.build.json && vite build",
     "build": "pnpm run build:js && pnpm run build:dts",
     "lint": "eslint .",
+    "stories:build": "ladle build --viteConfig vite.ladle.config.ts",
+    "stories:preview": "ladle preview -h 127.0.0.1 -p 61000",
     "test": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "prepare": "husky"
   },
   "keywords": [
@@ -32,6 +36,7 @@
     "@commitlint/config-conventional": "^21.2.2",
     "@eslint/js": "^9.9.0",
     "@ladle/react": "^5.1.1",
+    "@playwright/test": "^1.62.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",

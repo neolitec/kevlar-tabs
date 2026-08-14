@@ -1,8 +1,8 @@
 'use client'
 
-import classNames from 'classnames'
 import type { ForwardRefRenderFunction, HTMLAttributes } from 'react'
 import React, { forwardRef, useEffect, useRef } from 'react'
+import { classNames } from './helpers/classNames'
 
 export type TabProps = {
   active?: boolean
@@ -50,13 +50,10 @@ const Tab: ForwardRefRenderFunction<HTMLLIElement, TabProps> = (
         }
       }}
       role="tab"
-      className={classNames([
-        className || 'tab',
-        {
-          [classNameActive || 'tab--active']: active,
-          [classNameDisabled || 'tab--disabled']: disabled,
-        },
-      ])}
+      className={classNames(className || 'tab', {
+        [classNameActive || 'tab--active']: active,
+        [classNameDisabled || 'tab--disabled']: disabled,
+      })}
       tabIndex={active ? 0 : -1}
       aria-selected={active}
       aria-disabled={disabled}

@@ -1,0 +1,19 @@
+playwright.config.ts
+  s_6b892378f0a79a::t_a5c02351eac77e 29-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "faebac5b8f0451df9b685e005c9471b26dd01e01",
+  "prompts": {},
+  "sessions": {
+    "s_6b892378f0a79a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "796747c4-fcae-44d8-81ca-2d44a7e01f11",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

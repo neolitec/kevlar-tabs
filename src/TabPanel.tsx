@@ -1,8 +1,8 @@
 'use client'
 
-import classNames from 'classnames'
 import type { FunctionComponent, HTMLAttributes } from 'react'
 import React, { useState } from 'react'
+import { classNames } from './helpers/classNames'
 
 export type TabPanelProps = {
   active?: boolean

@@ -73,8 +73,12 @@ export const Default = () => {
               {tab}
             </Tab>
           ))}
-          <button type="button">Action</button>
         </TabList>
+        {/* A tablist may only contain tabs (axe: aria-required-children),
+            so external actions live next to it, not inside. The "Tabs
+            tolerate non-Tab children" behavior stays covered by the unit
+            test displayComponentWithExternals. */}
+        <button type="button">Action</button>
         {tabs.map((tab) => (
           <TabPanel key={tab}>{tab} content</TabPanel>
         ))}
@@ -132,8 +136,8 @@ export const StyledComponents = () => {
               {tab}
             </CustomTab>
           ))}
-          <button type="button">Action</button>
         </TabList>
+        <button type="button">Action</button>
         {tabs.map((tab) => (
           <CustomTabPanel key={tab}>{tab} content</CustomTabPanel>
         ))}
@@ -165,8 +169,8 @@ export const AutoActivationDisabled = () => {
               {tab}
             </Tab>
           ))}
-          <button type="button">Action</button>
         </TabList>
+        <button type="button">Action</button>
         {tabs.map((tab) => (
           <TabPanel key={tab}>{tab} content</TabPanel>
         ))}

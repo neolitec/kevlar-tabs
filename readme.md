@@ -146,7 +146,11 @@ pnpm test:e2e                # builds the stories, serves them, runs the suite
 pnpm test:e2e:ui             # same, in Playwright's UI mode
 ```
 
-In CI, the e2e suite only runs on release pull requests — the ones opened by release-please — and can be triggered manually from the Actions tab (`E2E` workflow).
+In CI, the e2e suite does not run on every pull request. It runs on:
+
+ - release pull requests — the ones opened by release-please, or any pull request labelled `autorelease: pending`;
+ - pull requests touching the library source (`src/`, except `__tests__` and `__stories__`) or the suite itself (`e2e/`, `playwright.config.ts`);
+ - manual runs, from the Actions tab (`E2E` workflow).
 
 ## Roadmap
   

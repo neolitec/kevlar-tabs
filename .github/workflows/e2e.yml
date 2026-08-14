@@ -1,9 +1,14 @@
 name: E2E
 
 # The Playwright suite drives the Ladle stories in three real browsers, which is
-# far slower than the unit tests. It therefore runs only on release pull
-# requests — the last gate before a version is published to npm — instead of on
-# every pull request.
+# far slower than the unit tests, so it does not run on every pull request. It
+# runs on the two kinds of pull request where it earns its cost: release ones,
+# the last gate before a version is published to npm, and any that touch the
+# library source or the suite itself. The `gate` job below decides.
+#
+# The decision cannot live in an `on.paths` filter: a release pull request only
+# changes CHANGELOG.md and package.json, so a path filter would keep the
+# workflow from triggering there at all.
 on:
   pull_request:
     branches:
@@ -16,14 +21,79 @@ permissions:
   contents: read
 
 jobs:
+  gate:
+    name: Decide whether to run
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    permissions:
+      contents: read
+      pull-requests: read # to list the files the pull request touches
+
+    outputs:
+      run: ${{ steps.decide.outputs.run }}
+
+    steps:
+      - name: Decide
+        id: decide
+        env:
+          # Everything from the event goes through the environment: interpolating
+          # a branch name straight into a shell script is a script injection.
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          HEAD_REF: ${{ github.head_ref }}
+          LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          decide() {
+            echo "run=$1" >> "$GITHUB_OUTPUT"
+            echo "Running the suite: $1 — $2" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          }
+
+          # Manual dispatch always runs.
+          if [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
+            decide true 'manual dispatch'
+          fi
+
+          # release-please opens its release pull request from a
+          # `release-please--*` branch and labels it `autorelease: pending`.
+          # Either marker is enough, so a hand-made release pull request
+          # carrying the label is covered too.
+          case "$HEAD_REF" in
+            release-please--*) decide true "release branch $HEAD_REF" ;;
+          esac
+
+          if printf '%s' "$LABELS" | grep -qF 'autorelease: pending'; then
+            decide true 'the autorelease: pending label'
+          fi
+
+          # Otherwise: only when the change can actually affect the suite —
+          # the library source or the suite itself. Unit tests and stories are
+          # excluded: they ship nothing.
+          # Listed in its own step so a failing API call fails the job, instead
+          # of being read as "nothing relevant changed".
+          files=$(gh api "repos/$REPO/pulls/$PR_NUMBER/files" --paginate --jq '.[].filename')
+
+          changed=$(
+            printf '%s\n' "$files" \
+              | grep -E '^(src/|e2e/|playwright\.config\.ts$)' \
+              | grep -Ev '^src/(__tests__|__stories__)/' \
+              || true
+          )
+
+          if [ -n "$changed" ]; then
+            decide true "$(printf 'changed files:\n%s' "$changed")"
+          fi
+
+          decide false 'no release marker, and no change under src/ or e2e/'
+
   e2e:
-    # release-please opens its release PR from a `release-please--branches--*`
-    # branch and labels it `autorelease: pending`. Either marker is enough, so a
-    # manually created release PR carrying the label is covered too.
-    if: |
-      github.event_name == 'workflow_dispatch'
-      || startsWith(github.head_ref, 'release-please--')
-      || contains(github.event.pull_request.labels.*.name, 'autorelease: pending')
+    needs: gate
+    if: needs.gate.outputs.run == 'true'
 
     runs-on: ubuntu-latest
     timeout-minutes: 30

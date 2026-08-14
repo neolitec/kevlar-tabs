@@ -14,7 +14,7 @@ import {
 } from './helpers/elementTypes'
 import type { TabProps } from './Tab'
 
-export type TabsComponent<T> = ((props: T) => JSX.Element) & {
+export type TabsComponent<T> = ((props: T) => React.JSX.Element) & {
   tabsRole: string
 }
 

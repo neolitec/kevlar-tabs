@@ -1,0 +1,19 @@
+.gitignore
+  s_0fb0c6364a35cb::t_52f18f179d8098 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "820e47a6e1493e375e8d00cae50882e924651fc3",
+  "prompts": {},
+  "sessions": {
+    "s_0fb0c6364a35cb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "adfdbed0-ab5c-433a-add4-e2e7e6b1a98a",
+        "model": "unknown"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

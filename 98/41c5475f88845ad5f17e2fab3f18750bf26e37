@@ -1,0 +1,39 @@
+src/__tests__/TabPanel.test.tsx
+  s_0fb0c6364a35cb::t_ff47e3af903839 3
+src/helpers/childrenUtils.ts
+  s_0fb0c6364a35cb::t_ff47e3af903839 3-5
+src/__tests__/TabList.test.tsx
+  s_0fb0c6364a35cb::t_ff47e3af903839 3
+src/__stories__/Tabs.stories.tsx
+  s_0fb0c6364a35cb::t_ff47e3af903839 4-7
+src/__tests__/suts.tsx
+  s_0fb0c6364a35cb::t_ff47e3af903839 3-7
+src/__tests__/Tab.test.tsx
+  s_0fb0c6364a35cb::t_ff47e3af903839 3
+src/helpers/elementTypes.ts
+  s_0fb0c6364a35cb::t_ff47e3af903839 10-12
+src/index.ts
+  s_0fb0c6364a35cb::t_ff47e3af903839 3-10
+src/__tests__/Tabs.test.tsx
+  s_0fb0c6364a35cb::t_ff47e3af903839 17
+src/Tabs.tsx
+  s_0fb0c6364a35cb::t_ff47e3af903839 4,9-10
+src/__tests__/StyledComponents.test.tsx
+  s_0fb0c6364a35cb::t_ff47e3af903839 4-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "9841c5475f88845ad5f17e2fab3f18750bf26e37",
+  "prompts": {},
+  "sessions": {
+    "s_0fb0c6364a35cb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "adfdbed0-ab5c-433a-add4-e2e7e6b1a98a",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

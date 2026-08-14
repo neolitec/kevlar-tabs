@@ -1,7 +1,12 @@
-import mdx from '@astrojs/mdx'
 import react from '@astrojs/react'
 import { defineConfig } from 'astro/config'
-import theme from './shiki-theme.json'
+import { fileURLToPath } from 'node:url'
+
+// Sass' modern API resolves `@use` relative to the importing file, where the
+// legacy API Astro 2 used resolved it from the working directory. The shared
+// partials below are addressed from the project root, so it has to be on the
+// load path explicitly.
+const projectRoot = fileURLToPath(new URL('.', import.meta.url))
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,32 +16,15 @@ export default defineConfig({
   site: 'https://neolitec.github.com/kevlar-tabs',
   base: '/kevlar-tabs',
   trailingSlash: 'never',
-  integrations: [
-    mdx({
-      syntaxHighlight: 'shiki',
-      shikiConfig: { theme: 'nord' }
-    }),
-    react()
-  ],
-  markdown: {
-    syntaxHighlight: 'prism',
-    shikiConfig: {
-      // Choose from Shiki's built-in themes (or add your own)
-      // https://github.com/shikijs/shiki/blob/main/docs/themes.md
-      theme,
-      // Add custom languages
-      // Note: Shiki has countless langs built-in, including .astro!
-      // https://github.com/shikijs/shiki/blob/main/docs/languages.md
-      // langs: ['ts', 'tsx', 'js', 'jsx', 'json', 'css', 'html', 'astro'],
-      langs: ['tsx'],
-      // Enable word wrap to prevent horizontal scrolling
-      wrap: true
-    }
-  },
+  integrations: [react()],
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
+          loadPaths: [projectRoot],
+          // include-media still uses the deprecated `if()` syntax. Nothing we
+          // can fix from here, and it warns on every stylesheet.
+          quietDeps: true,
           additionalData: `
             @use "src/styles/typography" as *;
             @use "src/styles/colors" as *;
@@ -44,9 +32,9 @@ export default defineConfig({
             @use "src/styles/effects" as *;
             @use "node_modules/include-media/dist/include-media" as *;
             $breakpoints: (small: 800px, medium: 1024px, large: 1440px);
-          `
-        }
-      }
-    }
-  }
+          `,
+        },
+      },
+    },
+  },
 })

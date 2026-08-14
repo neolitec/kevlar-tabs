@@ -1,0 +1,21 @@
+scripts/add-dts-import-extensions.mjs
+  s_0fb0c6364a35cb::t_43e324a700ffa6 1-61
+package.json
+  s_0fb0c6364a35cb::t_c42ed497952403 10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "68b9d8128953788d78b808a941b294f3a66f8083",
+  "prompts": {},
+  "sessions": {
+    "s_0fb0c6364a35cb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "adfdbed0-ab5c-433a-add4-e2e7e6b1a98a",
+        "model": "claude-fable-5"
+      },
+      "human_author": null
+    }
+  }
+}

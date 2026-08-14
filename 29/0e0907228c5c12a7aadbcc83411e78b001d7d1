@@ -1,0 +1,19 @@
+.github/workflows/e2e.yml
+  s_6b892378f0a79a::t_2bc7da03ce3bdb 74-79,84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "290e0907228c5c12a7aadbcc83411e78b001d7d1",
+  "prompts": {},
+  "sessions": {
+    "s_6b892378f0a79a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "796747c4-fcae-44d8-81ca-2d44a7e01f11",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

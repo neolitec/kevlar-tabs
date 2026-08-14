@@ -52,12 +52,10 @@ const Tabs = ({
     [id, tabNames],
   )
   const tabRefs = useRef<HTMLLIElement[]>([])
-  const currentFocusIndex = useRef(
-    (typeof selected === 'string' ? tabNames.indexOf(selected) : selected) ?? 0,
-  )
   const [{ index: currentIndex, name: currentName }, setSelected] = useState(
-    () => computeState(tabNames, selected),
+    () => computeState(tabProps, selected),
   )
+  const currentFocusIndex = useRef(currentIndex)
 
   // Compared as a string so that a children update producing an equal tab list
   // does not reset the selected tab.
@@ -69,7 +67,7 @@ const Tabs = ({
   // immediately, without committing the intermediate result or painting it.
   if (previous.selected !== selected || previous.tabNamesKey !== tabNamesKey) {
     setPrevious({ selected, tabNamesKey })
-    setSelected(computeState(tabNames, selected))
+    setSelected(computeState(tabProps, selected))
   }
 
   const handleSelect = useCallback(
@@ -208,22 +206,49 @@ const Tabs = ({
 }
 
 function computeState(
-  tabNames: (string | undefined)[],
+  tabProps: TabProps[],
   selected?: number | string,
 ): {
   index: number
   name?: string
 } {
   if (Number.isInteger(selected)) {
-    return { index: selected as number, name: tabNames[selected as number] }
+    const index = selected as number
+    if (index >= 0 && index < tabProps.length) {
+      return { index, name: tabProps[index].name }
+    }
+    return fallbackState(tabProps, `no tab exists at index ${index}`)
   }
   if (selected) {
-    return {
-      index: tabNames.indexOf(selected as string),
-      name: selected as string,
+    const index = tabProps.findIndex((tab) => tab.name === selected)
+    if (index !== -1) {
+      return { index, name: selected as string }
     }
+    return fallbackState(tabProps, `no tab is named "${selected}"`)
   }
-  return { index: 0, name: tabNames[0] }
+  return { index: 0, name: tabProps[0]?.name }
+}
+
+// The library ships without node's ambient types: `process.env.NODE_ENV` is
+// left in the bundle for the consumer's bundler to substitute and eliminate.
+declare const process: { env: { NODE_ENV?: string } }
+
+function fallbackState(tabProps: TabProps[], reason: string) {
+  const index = Math.max(
+    tabProps.findIndex((tab) => !tab.disabled),
+    0,
+  )
+
+  if (
+    typeof process !== 'undefined' &&
+    process.env.NODE_ENV !== 'production'
+  ) {
+    console.warn(
+      `kevlar-tabs: ${reason}; falling back to the first non-disabled tab`,
+    )
+  }
+
+  return { index, name: tabProps[index]?.name }
 }
 
 function getNextIndex(currentIndex: number, tabProps: TabProps[]) {

@@ -127,6 +127,23 @@ export function displayComponentWithDisabledTab(
   )
 }
 
+export function displayComponentWithFirstTabDisabled(
+  props: Partial<TabsProps> = {}
+) {
+  return render(
+    <Tabs {...props}>
+      <TabList>
+        <Tab disabled>Tab 1</Tab>
+        <Tab>Tab 2</Tab>
+        <Tab>Tab 3</Tab>
+      </TabList>
+      <TabPanel>Tab 1 content</TabPanel>
+      <TabPanel>Tab 2 content</TabPanel>
+      <TabPanel>Tab 3 content</TabPanel>
+    </Tabs>
+  )
+}
+
 export function displayComponentWithCustomClassNames() {
   return render(
     <Tabs

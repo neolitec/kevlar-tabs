@@ -8,6 +8,7 @@ import {
   displayComponentWithCustomClassNames,
   displayComponentWithDisabledTab,
   displayComponentWithExternals,
+  displayComponentWithFirstTabDisabled,
   displayComponentWithHiddenTab,
   displayComponentWithNamedTabs,
   displayComponentWithoutAnyTab,
@@ -165,14 +166,51 @@ describe('Tabs', () => {
     })
 
     describe('when the select index is out of bound', () => {
+      let warnSpy: ReturnType<typeof vi.spyOn>
+
       beforeEach(() => {
         cleanup()
+        warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
         displayComponent({ selected: 3 })
       })
 
-      it('should not select any tab', () => {
-        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+      afterEach(() => {
+        warnSpy.mockRestore()
+      })
+
+      it('should fall back to the first tab', () => {
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
         expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+      })
+
+      it('should display the first tab panel', () => {
+        expect(ui.tabPanel1Content.get()).toBeInTheDocument()
+      })
+
+      it('should emit a warning', () => {
+        expect(warnSpy).toHaveBeenCalledWith(
+          'kevlar-tabs: no tab exists at index 3; falling back to the first non-disabled tab'
+        )
+      })
+    })
+
+    describe('when the select index is out of bound and the first tab is disabled', () => {
+      let warnSpy: ReturnType<typeof vi.spyOn>
+
+      beforeEach(() => {
+        cleanup()
+        warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+        displayComponentWithFirstTabDisabled({ selected: 3 })
+      })
+
+      afterEach(() => {
+        warnSpy.mockRestore()
+      })
+
+      it('should fall back to the first non-disabled tab', () => {
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
         expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
       })
     })
@@ -225,15 +263,28 @@ describe('Tabs', () => {
     })
 
     describe('when the name does not exist', () => {
+      let warnSpy: ReturnType<typeof vi.spyOn>
+
       beforeEach(() => {
         cleanup()
+        warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
         displayComponentWithNamedTabs({ selected: 'tab4' })
       })
 
-      it('should not select any tab', () => {
-        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+      afterEach(() => {
+        warnSpy.mockRestore()
+      })
+
+      it('should fall back to the first tab', () => {
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
         expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
         expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+      })
+
+      it('should emit a warning', () => {
+        expect(warnSpy).toHaveBeenCalledWith(
+          'kevlar-tabs: no tab is named "tab4"; falling back to the first non-disabled tab'
+        )
       })
     })
   })

@@ -1,0 +1,19 @@
+docs/tsconfig.json
+  s_6b892378f0a79a::t_bb1fb939ae7108 2-8,10-24,28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "c8433b2f3055d8a8ca5502b5137466801d9044b8",
+  "prompts": {},
+  "sessions": {
+    "s_6b892378f0a79a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "796747c4-fcae-44d8-81ca-2d44a7e01f11",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

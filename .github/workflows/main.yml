@@ -17,7 +17,8 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: 20
+          # 22 is the floor for @eslint-react/eslint-plugin (engines >=22).
+          node-version: 22
 
       - uses: pnpm/action-setup@v6
         with:

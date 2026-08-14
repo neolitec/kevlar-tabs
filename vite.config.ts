@@ -27,6 +27,8 @@ export default defineConfig({
     globals: true,
     environment: 'happy-dom',
     setupFiles: './setupTests.ts',
+    // e2e/ holds Playwright specs, which must not be picked up by Vitest.
+    exclude: ['**/node_modules/**', '**/dist/**', 'e2e/**'],
     coverage: {
       exclude: ['setupTests.ts', '**/*.test.tsx', '**/*.stories.tsx'],
       reporter: ['text', 'json', 'html'],

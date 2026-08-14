@@ -1,0 +1,31 @@
+src/Tabs.tsx
+  s_975cd29ef704fb::t_bc5cabf6460af4 1-2
+src/index.ts
+  s_975cd29ef704fb::t_3e1eea699e9444 1-2
+src/TabPanel.tsx
+  s_975cd29ef704fb::t_22d93603bf7405 1-2
+vite.config.ts
+  s_975cd29ef704fb::t_7a7c0881fb918b 41-43
+  s_975cd29ef704fb::t_cd9f31c0dce56d 44-47
+  s_975cd29ef704fb::t_4efc7b2970f638 3-27,30
+src/TabList.tsx
+  s_975cd29ef704fb::t_c3b4b9a7bf0d0f 1-2
+src/Tab.tsx
+  s_975cd29ef704fb::t_c6ca5c0afae831 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "e05428eab90fa5cca6ba379339143ef45621c0b4",
+  "prompts": {},
+  "sessions": {
+    "s_975cd29ef704fb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "72ff17d8-f500-41e8-9075-28509c0394c2",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

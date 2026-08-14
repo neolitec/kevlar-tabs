@@ -1,0 +1,19 @@
+.github/dependabot.yml
+  s_20c4d701226fde::t_d26f590d1a4c56 53-62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a5ec87cdd2f6cbc18e51b48b0a6e5575888a9f7b",
+  "prompts": {},
+  "sessions": {
+    "s_20c4d701226fde": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b99314f3-517a-44af-b04a-44bb058fa900",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

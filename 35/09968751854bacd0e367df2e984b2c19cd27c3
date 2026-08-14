@@ -1,0 +1,25 @@
+readme.md
+  s_5da9f0f6aca7d5::t_d8052ef01fa5d5 53-60
+src/TabPanel.tsx
+  s_5da9f0f6aca7d5::t_3d17d6aabbefcf 27
+  s_5da9f0f6aca7d5::t_471831af664639 15-17
+  s_5da9f0f6aca7d5::t_be14f273e34c36 48
+src/__tests__/TabPanel.test.tsx
+  s_5da9f0f6aca7d5::t_171caa71589bc7 11,14-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "3509968751854bacd0e367df2e984b2c19cd27c3",
+  "prompts": {},
+  "sessions": {
+    "s_5da9f0f6aca7d5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "39150feb-6c29-4476-a1be-d406ff58ea55",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

@@ -9,7 +9,8 @@ type ChildType =
   | number
   | boolean
   | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-  | React.ReactFragment
+  // React 19 removed React.ReactFragment; this is what it was defined as.
+  | Iterable<ReactNode>
   | React.ReactPortal
   | null
   | undefined

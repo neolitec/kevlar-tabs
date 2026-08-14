@@ -1,0 +1,31 @@
+src/TabPanel.tsx
+  s_1460a30613f35a::t_8f816248e92f3f 1-2
+src/TabList.tsx
+  s_1460a30613f35a::t_cce34717216275 1-2
+src/Tabs.tsx
+  s_1460a30613f35a::t_08d6136f5ddef8 1-2
+scripts/verify-use-client.mjs
+  s_1460a30613f35a::t_f19db9eedcd204 1-28
+src/Tab.tsx
+  s_1460a30613f35a::t_997cb53091a9f3 1-2
+src/index.ts
+  s_1460a30613f35a::t_1bf84a8f19f5a9 1-2
+package.json
+  s_1460a30613f35a::t_e68414b499d9e6 12-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "92b5f2ce4cb1ccfee293491021f495868d792347",
+  "prompts": {},
+  "sessions": {
+    "s_1460a30613f35a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2fe78135-8e4a-4188-b72c-4351792355c6",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

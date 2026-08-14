@@ -7,7 +7,7 @@
     "dev": "ladle serve -h 127.0.0.1 --viteConfig vite.ladle.config.ts",
     "build:clean": "rimraf dist && pnpm run build",
     "build:css": "sass src/styles.scss dist/styles.css --no-source-map",
-    "build:dts": "tsc -p tsconfig.build.json --emitDeclarationOnly",
+    "build:dts": "tsc -p tsconfig.build.json --emitDeclarationOnly && node scripts/add-dts-import-extensions.mjs",
     "build:js": "tsc -p tsconfig.build.json && vite build",
     "build:verify": "node scripts/verify-use-client.mjs",
     "build": "pnpm run build:js && pnpm run build:dts && pnpm run build:css && pnpm run build:verify",

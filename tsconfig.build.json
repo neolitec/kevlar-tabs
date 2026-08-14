@@ -3,6 +3,9 @@
   "compilerOptions": {
     "noEmit": false,
     "outDir": "dist",
+    // TypeScript 7 requires `rootDir` to be explicit rather than inferred from
+    // the common source directory.
+    "rootDir": "src",
     "sourceMap": true,
     "declarationDir": "dist",
     "declaration": true,

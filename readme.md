@@ -129,6 +129,19 @@ CustomTab.displayName = 'Tab'
  - Keyboard navigation
  - Auto activation
 
+## TypeScript
+
+The build runs on TypeScript 7, but two TypeScript packages are installed on purpose:
+
+| Package | Version | Role |
+|---|---|---|
+| `@typescript/native` (alias of `typescript`) | 7.x | provides the `tsc` binary — what `pnpm build` runs |
+| `typescript` (alias of `@typescript/typescript6`) | 6.x | what `import 'typescript'` resolves to |
+
+TypeScript 7.0 ships no compiler API; the new one is expected in 7.1. Until then, tools that need programmatic access to the compiler — `typescript-eslint` here — have to keep reading the TypeScript 6 API, and `typescript-eslint` throws outright when it resolves a major >= 7. This is the [side-by-side layout Microsoft recommends](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#running-side-by-side-with-typescript-6.0) for exactly this case, so `tsc` is 7 while linting stays on 6.
+
+One consequence: `node_modules/typescript` is the 6.x compatibility shim and ships no `tsserver`, so an editor set to "use the workspace TypeScript version" will fall back to its own. The aliases collapse back to a single `typescript` entry once `typescript-eslint` supports the 7.1 API.
+
 ## Testing
 
 Unit tests run on every pull request:

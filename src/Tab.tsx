@@ -25,6 +25,7 @@ const Tab: ForwardRefRenderFunction<HTMLLIElement, TabProps> = (
     classNameDisabled,
     disabled,
     onClick,
+    onKeyDown,
     ...liProps
   },
   ref,
@@ -61,6 +62,7 @@ const Tab: ForwardRefRenderFunction<HTMLLIElement, TabProps> = (
       aria-disabled={disabled}
       {...liProps}
       onClick={disabled ? undefined : onClick}
+      onKeyDown={disabled ? undefined : onKeyDown}
     >
       {children}
     </li>

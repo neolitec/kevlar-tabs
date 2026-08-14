@@ -393,6 +393,47 @@ describe('Tabs', () => {
       })
     })
 
+    describe('when hitting enter on a focused unselected tab', () => {
+      beforeEach(async () => {
+        act(() => ui.tab3.get().focus())
+        await userEvent.keyboard('{Enter}')
+      })
+
+      it('should select the focused tab', () => {
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+      })
+    })
+
+    describe('when hitting space on a focused unselected tab', () => {
+      beforeEach(async () => {
+        act(() => ui.tab3.get().focus())
+        await userEvent.keyboard(' ')
+      })
+
+      it('should select the focused tab', () => {
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+      })
+    })
+
+    describe('when hitting enter on a focused disabled tab', () => {
+      beforeEach(async () => {
+        cleanup()
+        displayComponentWithDisabledTab()
+        act(() => ui.tab2.get().focus())
+        await userEvent.keyboard('{Enter}')
+      })
+
+      it('should not select the disabled tab', () => {
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+      })
+    })
+
     describe('when the selected tab is the last one', () => {
       beforeEach(() => {
         cleanup()

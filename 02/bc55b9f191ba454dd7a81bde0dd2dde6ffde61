@@ -1,0 +1,25 @@
+src/Tabs.tsx
+  s_20c4d701226fde::t_f5c3ca841ddc29 48-53,59,62-71,73
+  s_20c4d701226fde::t_9484e69bfb0af6 203
+  s_20c4d701226fde::t_67f008de20b920 1
+  s_20c4d701226fde::t_3d9e2dbd236972 137-138,173-174,176-177
+src/TabPanel.tsx
+  s_20c4d701226fde::t_088f43c504b5ce 24-28,30-32
+  s_20c4d701226fde::t_0e409bc7b93b7c 3,44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "02bc55b9f191ba454dd7a81bde0dd2dde6ffde61",
+  "prompts": {},
+  "sessions": {
+    "s_20c4d701226fde": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b99314f3-517a-44af-b04a-44bb058fa900",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

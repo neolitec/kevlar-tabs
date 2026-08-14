@@ -50,14 +50,22 @@ updates:
         update-types: ['version-update:semver-major']
       - dependency-name: '@types/react-dom'
         update-types: ['version-update:semver-major']
-      # TypeScript 7 is blocked by the plugin ecosystem, not by anything in
-      # this repo — see the tracking issue. Only the major is held back, so
-      # 5.x fixes still come through. Remove this entry when the block lifts;
-      # the issue says what to watch for.
+      # The build runs on TypeScript 7 (`@typescript/native`), while the
+      # `typescript` entry is an alias to the TS 6 compatibility package that
+      # typescript-eslint needs — TS 7.0 ships no compiler API, and the new one
+      # is expected in 7.1. See the tracking issue.
+      #
+      # That alias must not be bumped past 6.x: typescript-eslint declares
+      # `peerDependencies.typescript: ">=4.8.4 <6.1.0"` and hard-throws on a
+      # major >= 7, so a major bump here would break `pnpm lint` outright.
+      # 6.0.x fixes still come through. Drop this once typescript-eslint
+      # supports the 7.1 API and the alias can collapse back to `typescript`.
       #
       # The matching ESLint entries are gone: ESLint 10 was adopted by moving
       # off eslint-plugin-react (see #119), so there is nothing left to hold.
       - dependency-name: 'typescript'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@typescript/typescript6'
         update-types: ['version-update:semver-major']
 
     allow:

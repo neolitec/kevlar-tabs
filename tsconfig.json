@@ -14,7 +14,10 @@
     "removeComments": false,
     "preserveConstEnums": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
+    // `node` (i.e. node10) was removed in TypeScript 7. `bundler` is the right
+    // replacement here — Vite does the bundling — and it is compatible with
+    // the `"module": "esnext"` above.
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "types": ["vitest/globals"],
   },

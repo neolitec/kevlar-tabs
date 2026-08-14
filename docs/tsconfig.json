@@ -1,9 +1,30 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  // Inlined from `astro/tsconfigs/strict` (astro 2.0.17), which this file used
+  // to `extends`. The docs site keeps its dependencies in docs/yarn.lock, so
+  // `astro` is not installed at the repo root — and every root-level Vite or
+  // Ladle command scans this file, fails to resolve the extends, and logs a
+  // stack trace. Inlining the options removes the cross-tree dependency.
+  // Re-check these against Astro's own preset when the site is migrated (#104).
   "compilerOptions": {
+    // astro/tsconfigs/base.json
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    // astro/tsconfigs/strict.json — minus `importsNotUsedAsValues`, which
+    // TypeScript 5 removed. Nothing type-checks this project, so the option
+    // only ever produced an editor diagnostic.
+    "strict": true,
+    // Options this file already set for itself
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "strictNullChecks": true,
-    "typeRoots": ["node_modules/@types", "types"],
+    "typeRoots": ["node_modules/@types", "types"]
   }
 }

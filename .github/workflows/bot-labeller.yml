@@ -1,0 +1,42 @@
+# Triage incoming pull requests for machine authorship.
+#
+# WHY pull_request_target AND NOT pull_request
+#
+# The point of this check is PRs from forks — and on a `pull_request` event from
+# a fork, GITHUB_TOKEN is read-only, so the label and the comment would both fail
+# silently. `pull_request_target` runs in the base repository's context, so the
+# token can write.
+#
+# That trigger is dangerous when misused, because it grants a write token to a
+# workflow running against a PR the author controls. It is safe HERE for one
+# specific reason: the action never checks out or executes the PR's code. There
+# is no actions/checkout, no install step, no build — only PR metadata reads over
+# the API, plus one label and one comment.
+#
+# If a checkout or a build step is ever added to this file, that guarantee is
+# void and those steps must move to a separate `pull_request` workflow.
+
+name: bot-labeller
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write # the label and the comment
+
+concurrency:
+  group: bot-labeller-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Labels are write-once: once a `bot:` label is on a PR, later runs stop
+      # without re-scoring or removing it, because from then on a maintainer owns
+      # that verdict. fail-on is left at its empty default — this is
+      # informational, and blocking a PR on a heuristic is not the intent.
+      - uses: neolitec/bot-labeller@v1

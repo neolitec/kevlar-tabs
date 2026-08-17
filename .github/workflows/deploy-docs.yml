@@ -1,13 +1,14 @@
 name: Build and Deploy docs
 
 on:
+  # Deploy only for an actual release, so the published docs describe the
+  # version available on npm. A `workflow_run` on the Release workflow would
+  # not work: release-please runs on every push to main to refresh its release
+  # PR, so it completes even when nothing is released. Use workflow_dispatch
+  # for doc-only fixes that should not wait for the next release.
   workflow_dispatch:
-  push:
-    branches:
-      - main
-  # workflow_run:
-  #   workflows: [Release]
-  #   types: [completed]
+  release:
+    types: [published]
 
 permissions:
   contents: write

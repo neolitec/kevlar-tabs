@@ -1,0 +1,19 @@
+.github/workflows/bot-labeller.yml
+  s_5a0fad9ff30662::t_576674b8c8d4c6 1-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "eddd16f9d85404a562b4e4548250aa2da2faa44b",
+  "prompts": {},
+  "sessions": {
+    "s_5a0fad9ff30662": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0592f135-9755-496c-8dbe-0e51cf7d3278",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

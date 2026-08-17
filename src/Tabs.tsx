@@ -31,6 +31,7 @@ export interface TabsProps {
   focusOnInit?: boolean
   onSelect?: (index: number, lastIndex: number) => void
   onNameSelect?: (name?: string, lastName?: string) => void
+  orientation?: 'horizontal' | 'vertical'
   selected?: number | string
 }
 
@@ -42,6 +43,7 @@ const Tabs = ({
   focusOnInit,
   onNameSelect,
   onSelect,
+  orientation = 'horizontal',
   selected,
 }: TabsProps) => {
   const id = useId()
@@ -186,8 +188,19 @@ const Tabs = ({
             },
           ),
           className: classNames?.tabList,
-          onArrowLeftKeyDown: selectPrevious,
-          onArrowRightKeyDown: selectNext,
+          orientation,
+          // Per the WAI-ARIA Tabs pattern, a vertical tablist is navigated
+          // with ArrowUp/ArrowDown; the unhandled axis keeps its default
+          // browser behavior.
+          ...(orientation === 'vertical'
+            ? {
+                onArrowUpKeyDown: selectPrevious,
+                onArrowDownKeyDown: selectNext,
+              }
+            : {
+                onArrowLeftKeyDown: selectPrevious,
+                onArrowRightKeyDown: selectNext,
+              }),
           onHomeKeyDown: selectFirst,
           onEndKeyDown: selectLast,
         })
@@ -231,6 +244,7 @@ const Tabs = ({
     currentIndex,
     focusOnInit,
     handleSelect,
+    orientation,
     selectFirst,
     selectLast,
     selectNext,
@@ -239,7 +253,11 @@ const Tabs = ({
     tabProps,
   ])
 
-  return <div className={className}>{getChildren()}</div>
+  return (
+    <div className={className} data-orientation={orientation}>
+      {getChildren()}
+    </div>
+  )
 }
 
 function computeState(

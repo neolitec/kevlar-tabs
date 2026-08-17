@@ -3,6 +3,7 @@ import { expect, type Page } from '@playwright/test'
 /** Ladle story ids, as exposed by http://127.0.0.1:61000/meta.json */
 export const STORY_IDS = [
   'tabs--default',
+  'tabs--vertical',
   'tabs--lazy-loading',
   'tabs--styled-components',
   'tabs--auto-activation-disabled',

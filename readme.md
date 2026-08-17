@@ -67,6 +67,7 @@ Panels are keyboard-focusable by default (`tabIndex={0}`), as [the APG recommend
 | `selected` | `number` \| `string` | The index or the name of the selected tab. |
 | `onSelect` | `function` | Callback function that is called when a tab is selected. Gives the index as a parameter. |
 | `onNameSelect` | `function` | Callback function that is called when a tab is selected. Gives the name as a parameter. |
+| `orientation` | `'horizontal'` \| `'vertical'` | (default: `'horizontal'`) The orientation of the tab list. When `vertical`, the tab list gets `aria-orientation="vertical"` and keyboard navigation uses <kbd>ArrowUp</kbd>/<kbd>ArrowDown</kbd> instead of <kbd>ArrowLeft</kbd>/<kbd>ArrowRight</kbd>, [as the APG requires](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/). |
 | `children` | `ReactNode` | `TabList` and `TabPanel` components. |
 
 ## Styling
@@ -83,6 +84,17 @@ For anything custom, you can use CSS classes that are set on the components:
   - `TabList` has the class `tablist`.
   - `Tab` has the class `tab` in addition to `tab--active` when selected and `tab--disabled` when disabled.
   - `TabPanel` has the class `tabpanel` in addition to `tabpanel--active` when selected.
+
+`Tabs` owns the orientation: it propagates its own value down to the `TabList`, overriding any `orientation` set on the `TabList` itself, so that the ARIA attribute and the arrow keys can never disagree.
+
+The root `Tabs` element and the `TabList` also carry a `data-orientation` attribute (`horizontal` or `vertical`) you can target to lay the tabs out:
+
+```css
+.my-tabs[data-orientation='vertical'] {
+  display: flex;
+  align-items: flex-start;
+}
+```
 
 ### Custom classes
 
@@ -137,6 +149,7 @@ CustomTab.displayName = 'Tab'
 ## Features
 
  - Disabled tabs
+ - Vertical orientation
  - Customizable classes
  - Styled-Components compliance
  - Lazy loading

@@ -1,0 +1,55 @@
+src/TabList.tsx
+  s_399e701fad8e33::t_30baa1a8f65465 8,11-12,20,23-24,31-45,49-56,62-63
+e2e/fixtures/story.ts
+  s_399e701fad8e33::t_cba08c7f0ff3ed 6
+e2e/keyboard-navigation.spec.ts
+  s_ec2454dfb071f4::t_40ff44e84edc75 134-166
+  s_399e701fad8e33::t_5434e68ef0ac64 84-110,112-133
+  s_ec2454dfb071f4::t_e8b7b84c23cd9d 184-193
+  s_399e701fad8e33::t_d89b8f857d191f 82-83
+readme.md
+  s_399e701fad8e33::t_e703bbc826d92e 70
+  s_399e701fad8e33::t_a7b72cb120cbbd 152
+  s_399e701fad8e33::t_53739d0a444fde 90-98
+  s_ec2454dfb071f4::t_19c053bcb79175 88-89
+src/__stories__/Tabs.stories.tsx
+  s_ec2454dfb071f4::t_d9f54e1c961935 111-115
+  s_399e701fad8e33::t_bbe15bc9d43733 100-110,116-130
+src/__tests__/Tabs.test.tsx
+  s_399e701fad8e33::t_9bb15a31e00fdb 676-815
+src/styles.scss
+  s_399e701fad8e33::t_0c82c0a86fc122 31-41,46-51
+  s_ec2454dfb071f4::t_8e5602bfeb8c01 42-45
+src/Tabs.tsx
+  s_399e701fad8e33::t_440635a4a3bf84 256-260
+  s_399e701fad8e33::t_27b03418e893fe 191-203
+  s_399e701fad8e33::t_49963175fa73a6 247
+  s_399e701fad8e33::t_ee591de0f2765b 34,46
+src/__tests__/TabList.test.tsx
+  s_399e701fad8e33::t_fb93e044cafae3 25-31,33-40
+  s_ec2454dfb071f4::t_0edc45595e38b0 32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "cfa9d75565df37a264d694f18d8dc0383e214b86",
+  "prompts": {},
+  "sessions": {
+    "s_399e701fad8e33": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "48a3bac9-ae04-42f8-b734-678878fe0e0b",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    },
+    "s_ec2454dfb071f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9c644fc6-5569-4993-8341-f1cd2aa82725",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

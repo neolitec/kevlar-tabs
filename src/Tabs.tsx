@@ -34,6 +34,8 @@ export interface TabsProps {
   selected?: number | string
 }
 
+type IndexComputer = (current: number, tabs: TabProps[]) => number
+
 const Tabs = ({
   autoActivate = true,
   children,
@@ -85,67 +87,19 @@ const Tabs = ({
     [currentIndex, currentName, onNameSelect, onSelect],
   )
 
-  const selectNext = useCallback(() => {
+  const moveTo = useCallback((computeIndex: IndexComputer) => {
     if (tabProps.every((tab) => tab.disabled)) {
       return
     }
 
-    const nextIndex = getNextIndex(currentFocusIndex.current, tabProps)
-    const nextName = tabNames[nextIndex]
+    const index = computeIndex(currentFocusIndex.current, tabProps)
+    const name = tabNames[index]
 
     if (autoActivate) {
-      handleSelect(nextIndex, nextName)
+      handleSelect(index, name)
     } else {
-      currentFocusIndex.current = nextIndex
-      tabRefs.current[nextIndex].focus()
-    }
-  }, [autoActivate, handleSelect, tabNames, tabProps])
-
-  const selectPrevious = useCallback(() => {
-    if (tabProps.every((tab) => tab.disabled)) {
-      return
-    }
-
-    const previousIndex = getPreviousIndex(currentFocusIndex.current, tabProps)
-    const previousName = tabNames[previousIndex]
-
-    if (autoActivate) {
-      handleSelect(previousIndex, previousName)
-    } else {
-      currentFocusIndex.current = previousIndex
-      tabRefs.current[previousIndex].focus()
-    }
-  }, [autoActivate, handleSelect, tabNames, tabProps])
-
-  const selectFirst = useCallback(() => {
-    if (tabProps.every((tab) => tab.disabled)) {
-      return
-    }
-
-    const firstIndex = getFirstIndex(tabProps)
-    const firstName = tabNames[firstIndex]
-
-    if (autoActivate) {
-      handleSelect(firstIndex, firstName)
-    } else {
-      currentFocusIndex.current = firstIndex
-      tabRefs.current[firstIndex].focus()
-    }
-  }, [autoActivate, handleSelect, tabNames, tabProps])
-
-  const selectLast = useCallback(() => {
-    if (tabProps.every((tab) => tab.disabled)) {
-      return
-    }
-
-    const lastIndex = getLastIndex(tabProps)
-    const lastName = tabNames[lastIndex]
-
-    if (autoActivate) {
-      handleSelect(lastIndex, lastName)
-    } else {
-      currentFocusIndex.current = lastIndex
-      tabRefs.current[lastIndex].focus()
+      currentFocusIndex.current = index
+      tabRefs.current[index]?.focus()
     }
   }, [autoActivate, handleSelect, tabNames, tabProps])
 
@@ -186,10 +140,10 @@ const Tabs = ({
             },
           ),
           className: classNames?.tabList,
-          onArrowLeftKeyDown: selectPrevious,
-          onArrowRightKeyDown: selectNext,
-          onHomeKeyDown: selectFirst,
-          onEndKeyDown: selectLast,
+          onArrowLeftKeyDown: () => moveTo(getPreviousIndex),
+          onArrowRightKeyDown: () => moveTo(getNextIndex),
+          onHomeKeyDown: () => moveTo(getFirstIndex),
+          onEndKeyDown: () => moveTo(getLastIndex),
         })
       }
 
@@ -231,10 +185,7 @@ const Tabs = ({
     currentIndex,
     focusOnInit,
     handleSelect,
-    selectFirst,
-    selectLast,
-    selectNext,
-    selectPrevious,
+    moveTo,
     tabIds,
     tabProps,
   ])
@@ -306,7 +257,7 @@ function getPreviousIndex(currentIndex: number, tabProps: TabProps[]) {
   return previousIndex
 }
 
-function getFirstIndex(tabProps: TabProps[]) {
+const getFirstIndex: IndexComputer = (_current, tabProps) => {
   let firstIndex = 0
   while (tabProps[firstIndex].disabled) {
     firstIndex += 1
@@ -315,7 +266,7 @@ function getFirstIndex(tabProps: TabProps[]) {
   return firstIndex
 }
 
-function getLastIndex(tabProps: TabProps[]) {
+const getLastIndex: IndexComputer = (_current, tabProps) => {
   let lastIndex = tabProps.length - 1
   while (tabProps[lastIndex].disabled) {
     lastIndex -= 1

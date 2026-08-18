@@ -97,6 +97,37 @@ export const Default = () => {
   )
 }
 
+const FlexTabs = styled(Tabs)`
+  display: flex;
+  align-items: flex-start;
+`
+
+export const Vertical = () => {
+  const { selected, setSelected, tabs } = useTabs()
+
+  return (
+    <>
+      <div>Selected index: {selected}</div>
+      <FlexTabs
+        onSelect={setSelected}
+        selected={selected}
+        orientation="vertical"
+      >
+        <TabList>
+          {tabs.map((tab, i) => (
+            <Tab key={tab} disabled={i >= 1 && i < 3}>
+              {tab}
+            </Tab>
+          ))}
+        </TabList>
+        {tabs.map((tab) => (
+          <TabPanel key={tab}>{tab} content</TabPanel>
+        ))}
+      </FlexTabs>
+    </>
+  )
+}
+
 export const LazyLoading = () => {
   const [content, setContent] = useState<string | null>(null)
   const timeoutId = useRef<NodeJS.Timeout | number | null>(null)

@@ -1,0 +1,38 @@
+src/Tabs.tsx
+  s_2bb20d62ca591c::t_80fcb27412d9bf 10-11,14
+  s_2bb20d62ca591c::t_da0de4775556db 35,48,56-57,202-203,210-213,215-216,258,271-276
+  s_2bb20d62ca591c::t_109654f3abc696 15
+src/__tests__/suts.tsx
+  s_2bb20d62ca591c::t_e3a6f2afc56e98 253-272
+e2e/fixtures/story.ts
+  s_2bb20d62ca591c::t_4a74a4e64a7de9 7
+readme.md
+  s_2bb20d62ca591c::t_53719b0622c912 74,91
+  s_2bb20d62ca591c::t_c4d7f92f5b0a81 70,75-90,172
+src/__stories__/Tabs.stories.tsx
+  s_2bb20d62ca591c::t_4a74a4e64a7de9 131-154
+src/helpers/useDirection.ts
+  s_2bb20d62ca591c::t_80e21c57740909 1-3,5-10,14,18-22,64-65,69,74,76-90
+  s_2bb20d62ca591c::t_b2b4df9d14b363 4,11-13,15-17,23-63,66-68,70-73,75
+src/__tests__/Tabs.test.tsx
+  s_2bb20d62ca591c::t_5f8c676286f57e 12,817-974
+  s_2bb20d62ca591c::t_8cfea6ef3680f2 975-976
+e2e/keyboard-navigation.spec.ts
+  s_2bb20d62ca591c::t_f2c86ef1e67b4c 84-144
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "210b1623d412ec6a37515a68ab0855501561ccb6",
+  "prompts": {},
+  "sessions": {
+    "s_2bb20d62ca591c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4aa008d3-4d13-41fd-9eae-686b35e62f62",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

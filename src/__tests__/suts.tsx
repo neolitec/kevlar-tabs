@@ -250,3 +250,23 @@ export const displayComponentWithHiddenTab = () =>
       <TabPanel>Tab content 3</TabPanel>
     </Tabs>
   )
+
+export function displayComponentInDirectionalContainer(
+  dir: 'ltr' | 'rtl',
+  props: Partial<TabsProps> = {}
+) {
+  return render(
+    <div dir={dir}>
+      <Tabs {...props}>
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+        </TabList>
+        <TabPanel>Tab 1 content</TabPanel>
+        <TabPanel>Tab 2 content</TabPanel>
+        <TabPanel>Tab 3 content</TabPanel>
+      </Tabs>
+    </div>
+  )
+}

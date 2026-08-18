@@ -7,7 +7,11 @@ import {
   isTabListElement,
   isTabPanelElement,
 } from './helpers/elementTypes'
+import type { Direction } from './helpers/useDirection'
+import { useDirection } from './helpers/useDirection'
 import type { TabProps } from './Tab'
+
+export type { Direction }
 
 export type TabsComponent<T> = ((props: T) => React.JSX.Element) & {
   tabsRole: string
@@ -28,6 +32,7 @@ export interface TabsProps {
   children: React.ReactNode
   className?: string
   classNames?: TabsClassNames
+  dir?: Direction
   focusOnInit?: boolean
   onSelect?: (index: number, lastIndex: number) => void
   onNameSelect?: (name?: string, lastName?: string) => void
@@ -40,6 +45,7 @@ const Tabs = ({
   children,
   className,
   classNames,
+  dir,
   focusOnInit,
   onNameSelect,
   onSelect,
@@ -47,6 +53,8 @@ const Tabs = ({
   selected,
 }: TabsProps) => {
   const id = useId()
+  const rootRef = useRef<HTMLDivElement>(null)
+  const direction = useDirection(rootRef, dir)
   const tabProps = useMemo(() => getTabProps(children), [children])
   const tabNames = useMemo(() => tabProps.map((tab) => tab.name), [tabProps])
   // Derived, not a ref: reading and growing a ref during render is unsafe
@@ -191,16 +199,21 @@ const Tabs = ({
           orientation,
           // Per the WAI-ARIA Tabs pattern, a vertical tablist is navigated
           // with ArrowUp/ArrowDown; the unhandled axis keeps its default
-          // browser behavior.
+          // browser behavior. The vertical axis is unaffected by the writing
+          // direction, which only mirrors the horizontal one.
           ...(orientation === 'vertical'
             ? {
                 onArrowUpKeyDown: selectPrevious,
                 onArrowDownKeyDown: selectNext,
               }
             : {
-                onArrowLeftKeyDown: selectPrevious,
-                onArrowRightKeyDown: selectNext,
+                onArrowLeftKeyDown:
+                  direction === 'rtl' ? selectNext : selectPrevious,
+                onArrowRightKeyDown:
+                  direction === 'rtl' ? selectPrevious : selectNext,
               }),
+          // Home and End are absolute: they always move to the first and the
+          // last tab in DOM order, whatever the direction.
           onHomeKeyDown: selectFirst,
           onEndKeyDown: selectLast,
         })
@@ -242,6 +255,7 @@ const Tabs = ({
     classNames?.tabPanelActive,
     classNames?.tabPanelDisabled,
     currentIndex,
+    direction,
     focusOnInit,
     handleSelect,
     orientation,
@@ -254,7 +268,12 @@ const Tabs = ({
   ])
 
   return (
-    <div className={className} data-orientation={orientation}>
+    <div
+      className={className}
+      data-orientation={orientation}
+      dir={dir}
+      ref={rootRef}
+    >
       {getChildren()}
     </div>
   )

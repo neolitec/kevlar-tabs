@@ -128,6 +128,30 @@ export const Vertical = () => {
   )
 }
 
+// The direction is set on an ancestor rather than on `Tabs` itself, so that
+// the story exercises the runtime detection rather than the `dir` prop.
+export const RightToLeft = () => {
+  const { selected, setSelected, tabs } = useTabs()
+
+  return (
+    <div dir="rtl">
+      <div>Selected index: {selected}</div>
+      <Tabs onSelect={setSelected} selected={selected}>
+        <TabList>
+          {tabs.map((tab, i) => (
+            <Tab key={tab} disabled={i >= 1 && i < 3}>
+              {tab}
+            </Tab>
+          ))}
+        </TabList>
+        {tabs.map((tab) => (
+          <TabPanel key={tab}>{tab} content</TabPanel>
+        ))}
+      </Tabs>
+    </div>
+  )
+}
+
 export const LazyLoading = () => {
   const [content, setContent] = useState<string | null>(null)
   const timeoutId = useRef<NodeJS.Timeout | number | null>(null)

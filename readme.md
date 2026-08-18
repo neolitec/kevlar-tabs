@@ -67,8 +67,27 @@ Panels are keyboard-focusable by default (`tabIndex={0}`), as [the APG recommend
 | `selected` | `number` \| `string` | The index or the name of the selected tab. |
 | `onSelect` | `function` | Callback function that is called when a tab is selected. Gives the index as a parameter. |
 | `onNameSelect` | `function` | Callback function that is called when a tab is selected. Gives the name as a parameter. |
+| `dir` | `'ltr'` \| `'rtl'` | (default: detected from the DOM) The writing direction of the tab list. In a right-to-left direction the horizontal arrow keys are mirrored: <kbd>ArrowRight</kbd> moves to the previous tab and <kbd>ArrowLeft</kbd> to the next one. |
 | `orientation` | `'horizontal'` \| `'vertical'` | (default: `'horizontal'`) The orientation of the tab list. When `vertical`, the tab list gets `aria-orientation="vertical"` and keyboard navigation uses <kbd>ArrowUp</kbd>/<kbd>ArrowDown</kbd> instead of <kbd>ArrowLeft</kbd>/<kbd>ArrowRight</kbd>, [as the APG requires](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/). |
 | `children` | `ReactNode` | `TabList` and `TabPanel` components. |
+
+## Right-to-left
+
+The horizontal arrow keys follow the writing direction: in a right-to-left tab list, <kbd>ArrowRight</kbd> moves to the **previous** tab and <kbd>ArrowLeft</kbd> to the **next** one. <kbd>Home</kbd> and <kbd>End</kbd> are unaffected — [the APG](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) keeps them on the first and the last tab in DOM order — and neither is a vertical tab list, whose <kbd>ArrowUp</kbd>/<kbd>ArrowDown</kbd> navigation does not mirror.
+
+You do not have to declare anything if the direction is already set on an ancestor, which is the usual case:
+
+```html
+<html dir="rtl">
+```
+
+`Tabs` reads the direction that actually applies to it, and follows a later change of the `dir` attribute. Set the `dir` prop when you want to state it explicitly, or when the direction comes from CSS alone and changes at runtime:
+
+```tsx
+<Tabs dir="rtl">
+```
+
+The prop always wins over the detected value, and is forwarded to the root element so the tabs are laid out in that direction too.
 
 ## Styling
 
@@ -150,6 +169,7 @@ CustomTab.displayName = 'Tab'
 
  - Disabled tabs
  - Vertical orientation
+ - Right-to-left writing modes
  - Customizable classes
  - Styled-Components compliance
  - Lazy loading

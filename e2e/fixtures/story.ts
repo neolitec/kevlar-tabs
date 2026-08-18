@@ -4,6 +4,7 @@ import { expect, type Page } from '@playwright/test'
 export const STORY_IDS = [
   'tabs--default',
   'tabs--vertical',
+  'tabs--right-to-left',
   'tabs--lazy-loading',
   'tabs--styled-components',
   'tabs--auto-activation-disabled',

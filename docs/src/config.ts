@@ -19,7 +19,7 @@ export const SITE: ISite = {
   // Keep the size in sync with a `pnpm build` at the repository root.
   highlights: [
     '0 dependencies',
-    '~2.4 kB min+gzip',
+    '~2.7 kB min+gzip',
     'WAI-ARIA APG',
     'React 17, 18, 19',
   ],

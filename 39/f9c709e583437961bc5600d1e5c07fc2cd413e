@@ -1,0 +1,38 @@
+readme.md
+  s_a9e37188bac9ce::t_df067b282e4602 208-209
+  s_a9e37188bac9ce::t_46a23c1e0f5c0c 167-169
+  s_a9e37188bac9ce::t_5502a38b6f0885 170-171,173,175,178-180,182-184,186,188-190,192-199,201,204
+  s_6509dd26e27ad7::t_2da285552eb8c8 7-14,172,174,176-177,181,185,187,191,200,202-203,205-206
+  s_6509dd26e27ad7::t_b1afb30aa868a0 207
+docs/src/config.ts
+  s_6509dd26e27ad7::t_8d10f1f0fe3bc5 17
+  s_6509dd26e27ad7::t_c4bf3f8213b6ab 6,16,18-25
+docs/src/components/Highlights.astro
+  s_6509dd26e27ad7::t_856c6e31d97b35 1-40
+docs/src/pages/index.astro
+  s_6509dd26e27ad7::t_c4bf3f8213b6ab 5,33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "39f9c709e583437961bc5600d1e5c07fc2cd413e",
+  "prompts": {},
+  "sessions": {
+    "s_6509dd26e27ad7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b9a9af1e-7a9e-4d2c-a99d-19d17cd80774",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    },
+    "s_a9e37188bac9ce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "59284cf6-06a0-4c20-97bd-cbd8d0b102d4",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

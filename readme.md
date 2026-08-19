@@ -4,13 +4,14 @@
 
 # Kevlar Tabs
 
-**Accessible React tabs in ~2.4 kB, with no runtime dependencies.**
+**Accessible, unstyled React tabs in ~2.7 kB, with no runtime dependencies.**
 
 [![npm](https://img.shields.io/npm/v/kevlar-tabs)](https://www.npmjs.com/package/kevlar-tabs)
 [![downloads](https://img.shields.io/npm/dm/kevlar-tabs)](https://www.npmjs.com/package/kevlar-tabs)
+![min + gzip](https://img.shields.io/badge/min%20%2B%20gzip-2.7%20kB-blue)
 [![license](https://img.shields.io/npm/l/kevlar-tabs)](license)
 
-Built to the [WAI-ARIA APG Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) and checked with axe on Chromium, Firefox and WebKit. TypeScript types included, React 17, 18 and 19, ESM-only.
+Built to the [WAI-ARIA APG Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) and checked with axe on Chromium, Firefox and WebKit. TypeScript types included, React 17, 18 and 19, React Server Components ready, ESM-only.
 
 _Inspired by [react-tabs](https://www.npmjs.com/package/react-tabs)_
 
@@ -65,6 +66,26 @@ Panels are keyboard-focusable by default (`tabIndex={0}`), as [the APG recommend
   <input placeholder="Already focusable" />
 </TabPanel>
 ```
+
+## Accessibility
+
+The components follow the [WAI-ARIA APG tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/): the roles, the states and the keyboard behaviour the pattern specifies are all implemented, with the one deviation noted below.
+
+  - **Roles and states** — `role="tablist"`, `role="tab"` and `role="tabpanel"`, with `aria-selected`, `aria-disabled`, `aria-orientation`, and the `aria-controls`/`aria-labelledby` pair that ties each tab to its panel.
+  - **A single tab stop** — only the selected tab is in the tab sequence (`tabIndex={0}`), the others get `tabIndex={-1}`. <kbd>Tab</kbd> therefore moves past the tab list as a whole instead of stopping on every tab.
+  - **Keyboard navigation** — <kbd>ArrowLeft</kbd>/<kbd>ArrowRight</kbd>, or <kbd>ArrowUp</kbd>/<kbd>ArrowDown</kbd> when the list is vertical, plus <kbd>Home</kbd> and <kbd>End</kbd>. With the default `autoActivate`, moving focus also selects the tab; with `autoActivate={false}`, focus moves alone and selection waits for <kbd>Enter</kbd>, <kbd>Space</kbd> or a click.
+  - **Orientation and direction** — a vertical tab list announces `aria-orientation="vertical"`, and the horizontal arrow keys mirror in right-to-left writing modes. See [Right-to-left](#right-to-left).
+  - **Focusable panels** — panels are focusable by default, as the pattern recommends for a panel that holds no focusable element of its own, and you can opt out per panel.
+
+One thing is left to you: the pattern expects the tab list to have an accessible name. `TabList` forwards any prop it does not consume, so pass `aria-label` or `aria-labelledby` when the surrounding content does not already name it.
+
+```tsx
+<TabList aria-label="Account settings">
+```
+
+Every [Ladle](https://ladle.dev) story is scanned with [axe-core](https://github.com/dequelabs/axe-core) in the Playwright suite, across Chromium, Firefox and WebKit, and has to come back with zero violations — including after keyboard navigation, and while focus and selection sit on different tabs.
+
+**Known deviation:** arrow-key navigation skips disabled tabs, so no keyboard route reaches one — clicking it still moves focus, since an `li[tabindex="-1"]` is focusable, but it does not select. The APG keeps disabled tabs in the arrow-key sequence instead, so that someone navigating with a screen reader can discover the tab exists at all. Tracked in [#198](https://github.com/neolitec/kevlar-tabs/issues/198).
 
 ## Tabs properties
 
@@ -219,7 +240,7 @@ CustomTab.displayName = 'Tab'
 
 ### Footprint & compatibility
 
- - No runtime dependencies, ~2.4 kB min+gzip
+ - No runtime dependencies, 7.9 kB minified and 2.7 kB min+gzip
  - React 17, 18 and 19
  - Ships TypeScript types for all components and props
  - Drops into the Next.js App Router and other React Server Components setups

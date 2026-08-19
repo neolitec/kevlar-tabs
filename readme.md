@@ -4,6 +4,14 @@
 
 # Kevlar Tabs
 
+**Accessible React tabs in ~2.4 kB, with no runtime dependencies.**
+
+[![npm](https://img.shields.io/npm/v/kevlar-tabs)](https://www.npmjs.com/package/kevlar-tabs)
+[![downloads](https://img.shields.io/npm/dm/kevlar-tabs)](https://www.npmjs.com/package/kevlar-tabs)
+[![license](https://img.shields.io/npm/l/kevlar-tabs)](license)
+
+Built to the [WAI-ARIA APG Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) and checked with axe on Chromium, Firefox and WebKit. TypeScript types included, React 17, 18 and 19, ESM-only.
+
 _Inspired by [react-tabs](https://www.npmjs.com/package/react-tabs)_
 
 ## Install
@@ -155,6 +163,49 @@ CustomTab.displayName = 'Tab'
  - Lazy loading
  - Keyboard navigation
  - Auto activation
+
+<details>
+<summary>Full feature list</summary>
+
+### Composition & selection
+
+ - Works uncontrolled out of the box, or driven from your own state with `selected` (by index or by name) and the `onSelect`/`onNameSelect` callbacks
+ - Named tabs (`name` prop) so selection and callbacks don't depend on array position
+ - An invalid `selected` — an out-of-range index, an unknown name — falls back to the first non-disabled tab instead of rendering nothing, and says so in a development-only warning
+ - Manual `index` override on `TabPanel`, for when a panel can't be defined in the same position as its tab
+ - Panels render lazily and then stay mounted: a panel's children only render the first time it becomes active, and stay in the DOM afterwards, so scroll position, form input and fetched data survive a tab switch
+ - Conditionally rendered tabs (`{condition && <Tab />}`) are skipped without breaking the pairing between tabs and panels
+
+### Accessibility (WAI-ARIA Tabs pattern)
+
+ - Built to the [WAI-ARIA APG Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) and checked with axe on Chromium, Firefox and WebKit in CI
+ - Full keyboard navigation: arrow keys, <kbd>Home</kbd> and <kbd>End</kbd> move focus/selection between tabs, skipping disabled ones
+ - `autoActivate` toggle to choose between automatic activation (arrow/Home/End select immediately) and manual activation (arrow/Home/End only move focus; <kbd>Enter</kbd>/<kbd>Space</kbd>/click select), per the APG
+ - `focusOnInit` to move keyboard focus to the initially selected tab
+ - Only the active tab is in the tab order, so a single <kbd>Tab</kbd> press moves past the whole tab list
+ - Tab panels are keyboard-focusable by default (`tabIndex={0}`) when they contain no focusable element, with an opt-out for panels that already start with one
+ - Disabled tabs are skipped by the arrow keys and ignore clicks
+
+### Orientation
+
+ - Horizontal (default) or vertical tab lists: `orientation="vertical"` swaps the navigation axis (<kbd>ArrowUp</kbd>/<kbd>ArrowDown</kbd>) and sets `aria-orientation`, with a `data-orientation` attribute to hang your layout on
+
+### Styling
+
+ - Ships unstyled by default, with an optional minimal stylesheet (`kevlar-tabs/styles.css`) for a working look out of the box
+ - Predictable state classes (`tab--active`, `tab--disabled`, `tabpanel--active`, `tabpanel--disabled`, etc.)
+ - Fully customizable class names, both globally (`classNames` prop on `Tabs`) and per-element (`className`/`classNameActive`/`classNameDisabled`)
+ - Styled-components compliance via `displayName`-based wrapping
+
+### Footprint & compatibility
+
+ - No runtime dependencies, ~2.4 kB min+gzip
+ - React 17, 18 and 19
+ - Ships TypeScript types for all components and props
+ - Drops into the Next.js App Router and other React Server Components setups
+ - ESM-only
+
+</details>
 
 ## TypeScript
 

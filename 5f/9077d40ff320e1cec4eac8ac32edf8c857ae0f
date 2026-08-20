@@ -1,0 +1,33 @@
+.claude/skills/reviewing-react-code/reference/accessibility.md
+  s_c14fad9b8fa0a2::t_ae439c88e82c9a 20-21
+.claude/skills/reviewing-react-code/reference/testing.md
+  s_c14fad9b8fa0a2::t_ae439c88e82c9a 25-27
+.claude/skills/reviewing-react-code/reference/security.md
+  s_c14fad9b8fa0a2::t_ae439c88e82c9a 24,59-60
+.claude/skills/reviewing-react-code/reference/typescript-and-api.md
+  s_c14fad9b8fa0a2::t_ae439c88e82c9a 136-137
+.claude/skills/reviewing-react-code/assets/review-report-template.md
+  s_c14fad9b8fa0a2::t_e5fe996d47f781 1,3-5,7,9-15,17,19-21,23-26,28-29,31,33-38,40,42-46,48,50-51,53-109,111-123,126,129-132
+.claude/skills/reviewing-react-code/SKILL.md
+  s_c14fad9b8fa0a2::t_e93e2dd57b13f6 94,96-98,112-132
+.claude/skills/reviewing-react-code/reference/performance-rendering.md
+  s_c14fad9b8fa0a2::t_ae439c88e82c9a 24-26
+.claude/skills/reviewing-react-code/reference/ssr-and-packaging.md
+  s_c14fad9b8fa0a2::t_ae439c88e82c9a 116
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "5f9077d40ff320e1cec4eac8ac32edf8c857ae0f",
+  "prompts": {},
+  "sessions": {
+    "s_c14fad9b8fa0a2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cd492c28-def6-4413-8d9f-cd9e56b80eab",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

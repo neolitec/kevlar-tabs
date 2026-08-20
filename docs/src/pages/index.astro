@@ -2,6 +2,7 @@
 import CodeSample from '../components/CodeSample.astro'
 import CopyLine from '../components/CopyLine'
 import Example from '../components/demo/Example'
+import Highlights from '../components/Highlights.astro'
 import rawCssCode from '../components/demo/Example.scss?raw'
 import tsCode from '../components/demo/Example.tsx?raw'
 import RoundedButtonLink from '../components/RoundedButtonLink.astro'
@@ -29,6 +30,7 @@ const cssCode = rawCssCode.replace('.example__tabs', '.tabs')
         <h1 class="title">{SITE.title}</h1>
         {SITE.subtitle && <p class="tag">{SITE.subtitle}</p>}
         {SITE.description && <p class="text">{SITE.description}</p>}
+        {SITE.highlights && <Highlights items={SITE.highlights} />}
         <div class="actions">
           {
             SITE.gettingStarted && (

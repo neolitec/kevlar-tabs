@@ -1,0 +1,40 @@
+---
+interface Props {
+  items: string[]
+}
+
+const { items } = Astro.props
+---
+
+{/* The Meyer reset drops `list-style`, which also stops VoiceOver from
+    announcing the list. `role="list"` puts the semantics back. */}
+<ul class="highlights" role="list">
+  {items.map((item) => <li class="highlights__item">{item}</li>)}
+</ul>
+<style lang="scss">
+  .highlights {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+
+    &__item {
+      padding: 0.3rem 0.9rem;
+      border: 1px solid $border1-color;
+      border-radius: 1rem;
+      background-color: $background2-color;
+      color: $text-color;
+      font-family: $font2;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+  }
+
+  @include media('<=small') {
+    .highlights {
+      justify-content: center;
+    }
+  }
+</style>

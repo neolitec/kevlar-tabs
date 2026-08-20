@@ -4,6 +4,15 @@
 
 # Kevlar Tabs
 
+**Accessible, unstyled React tabs in ~2.7 kB, with no runtime dependencies.**
+
+[![npm](https://img.shields.io/npm/v/kevlar-tabs)](https://www.npmjs.com/package/kevlar-tabs)
+[![downloads](https://img.shields.io/npm/dm/kevlar-tabs)](https://www.npmjs.com/package/kevlar-tabs)
+![min + gzip](https://img.shields.io/badge/min%20%2B%20gzip-2.7%20kB-blue)
+[![license](https://img.shields.io/npm/l/kevlar-tabs)](license)
+
+Built to the [WAI-ARIA APG Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) and checked with axe on Chromium, Firefox and WebKit. TypeScript types included, React 17, 18 and 19, React Server Components ready, ESM-only.
+
 _Inspired by [react-tabs](https://www.npmjs.com/package/react-tabs)_
 
 ## Install
@@ -58,6 +67,26 @@ Panels are keyboard-focusable by default (`tabIndex={0}`), as [the APG recommend
 </TabPanel>
 ```
 
+## Accessibility
+
+The components follow the [WAI-ARIA APG tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/): the roles, the states and the keyboard behaviour the pattern specifies are all implemented, with the one deviation noted below.
+
+  - **Roles and states** — `role="tablist"`, `role="tab"` and `role="tabpanel"`, with `aria-selected`, `aria-disabled`, `aria-orientation`, and the `aria-controls`/`aria-labelledby` pair that ties each tab to its panel.
+  - **A single tab stop** — only the selected tab is in the tab sequence (`tabIndex={0}`), the others get `tabIndex={-1}`. <kbd>Tab</kbd> therefore moves past the tab list as a whole instead of stopping on every tab.
+  - **Keyboard navigation** — <kbd>ArrowLeft</kbd>/<kbd>ArrowRight</kbd>, or <kbd>ArrowUp</kbd>/<kbd>ArrowDown</kbd> when the list is vertical, plus <kbd>Home</kbd> and <kbd>End</kbd>. With the default `autoActivate`, moving focus also selects the tab; with `autoActivate={false}`, focus moves alone and selection waits for <kbd>Enter</kbd>, <kbd>Space</kbd> or a click.
+  - **Orientation and direction** — a vertical tab list announces `aria-orientation="vertical"`, and the horizontal arrow keys mirror in right-to-left writing modes. See [Right-to-left](#right-to-left).
+  - **Focusable panels** — panels are focusable by default, as the pattern recommends for a panel that holds no focusable element of its own, and you can opt out per panel.
+
+One thing is left to you: the pattern expects the tab list to have an accessible name. `TabList` forwards any prop it does not consume, so pass `aria-label` or `aria-labelledby` when the surrounding content does not already name it.
+
+```tsx
+<TabList aria-label="Account settings">
+```
+
+Every [Ladle](https://ladle.dev) story is scanned with [axe-core](https://github.com/dequelabs/axe-core) in the Playwright suite, across Chromium, Firefox and WebKit, and has to come back with zero violations — including after keyboard navigation, and while focus and selection sit on different tabs.
+
+**Known deviation:** arrow-key navigation skips disabled tabs, so no keyboard route reaches one — clicking it still moves focus, since an `li[tabindex="-1"]` is focusable, but it does not select. The APG keeps disabled tabs in the arrow-key sequence instead, so that someone navigating with a screen reader can discover the tab exists at all. Tracked in [#198](https://github.com/neolitec/kevlar-tabs/issues/198).
+
 ## Tabs properties
 
 | Property | Type | Description |
@@ -67,7 +96,27 @@ Panels are keyboard-focusable by default (`tabIndex={0}`), as [the APG recommend
 | `selected` | `number` \| `string` | The index or the name of the selected tab. |
 | `onSelect` | `function` | Callback function that is called when a tab is selected. Gives the index as a parameter. |
 | `onNameSelect` | `function` | Callback function that is called when a tab is selected. Gives the name as a parameter. |
+| `dir` | `'ltr'` \| `'rtl'` | (default: detected from the DOM) The writing direction of the tab list. In a right-to-left direction the horizontal arrow keys are mirrored: <kbd>ArrowRight</kbd> moves to the previous tab and <kbd>ArrowLeft</kbd> to the next one. |
+| `orientation` | `'horizontal'` \| `'vertical'` | (default: `'horizontal'`) The orientation of the tab list. When `vertical`, the tab list gets `aria-orientation="vertical"` and keyboard navigation uses <kbd>ArrowUp</kbd>/<kbd>ArrowDown</kbd> instead of <kbd>ArrowLeft</kbd>/<kbd>ArrowRight</kbd>, [as the APG requires](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/). |
 | `children` | `ReactNode` | `TabList` and `TabPanel` components. |
+
+## Right-to-left
+
+The horizontal arrow keys follow the writing direction: in a right-to-left tab list, <kbd>ArrowRight</kbd> moves to the **previous** tab and <kbd>ArrowLeft</kbd> to the **next** one. <kbd>Home</kbd> and <kbd>End</kbd> are unaffected — [the APG](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) keeps them on the first and the last tab in DOM order — and neither is a vertical tab list, whose <kbd>ArrowUp</kbd>/<kbd>ArrowDown</kbd> navigation does not mirror.
+
+You do not have to declare anything if the direction is already set on an ancestor, which is the usual case:
+
+```html
+<html dir="rtl">
+```
+
+`Tabs` reads the direction that actually applies to it, and follows a later change of the `dir` attribute. Set the `dir` prop when you want to state it explicitly, or when the direction comes from CSS alone and changes at runtime:
+
+```tsx
+<Tabs dir="rtl">
+```
+
+The prop always wins over the detected value, and is forwarded to the root element so the tabs are laid out in that direction too.
 
 ## Styling
 
@@ -83,6 +132,17 @@ For anything custom, you can use CSS classes that are set on the components:
   - `TabList` has the class `tablist`.
   - `Tab` has the class `tab` in addition to `tab--active` when selected and `tab--disabled` when disabled.
   - `TabPanel` has the class `tabpanel` in addition to `tabpanel--active` when selected.
+
+`Tabs` owns the orientation: it propagates its own value down to the `TabList`, overriding any `orientation` set on the `TabList` itself, so that the ARIA attribute and the arrow keys can never disagree.
+
+The root `Tabs` element and the `TabList` also carry a `data-orientation` attribute (`horizontal` or `vertical`) you can target to lay the tabs out:
+
+```css
+.my-tabs[data-orientation='vertical'] {
+  display: flex;
+  align-items: flex-start;
+}
+```
 
 ### Custom classes
 
@@ -137,11 +197,56 @@ CustomTab.displayName = 'Tab'
 ## Features
 
  - Disabled tabs
+ - Vertical orientation
+ - Right-to-left writing modes
  - Customizable classes
  - Styled-Components compliance
  - Lazy loading
  - Keyboard navigation
  - Auto activation
+
+<details>
+<summary>Full feature list</summary>
+
+### Composition & selection
+
+ - Works uncontrolled out of the box, or driven from your own state with `selected` (by index or by name) and the `onSelect`/`onNameSelect` callbacks
+ - Named tabs (`name` prop) so selection and callbacks don't depend on array position
+ - An invalid `selected` — an out-of-range index, an unknown name — falls back to the first non-disabled tab instead of rendering nothing, and says so in a development-only warning
+ - Manual `index` override on `TabPanel`, for when a panel can't be defined in the same position as its tab
+ - Panels render lazily and then stay mounted: a panel's children only render the first time it becomes active, and stay in the DOM afterwards, so scroll position, form input and fetched data survive a tab switch
+ - Conditionally rendered tabs (`{condition && <Tab />}`) are skipped without breaking the pairing between tabs and panels
+
+### Accessibility (WAI-ARIA Tabs pattern)
+
+ - Built to the [WAI-ARIA APG Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) and checked with axe on Chromium, Firefox and WebKit in CI
+ - Full keyboard navigation: arrow keys, <kbd>Home</kbd> and <kbd>End</kbd> move focus/selection between tabs, skipping disabled ones
+ - `autoActivate` toggle to choose between automatic activation (arrow/Home/End select immediately) and manual activation (arrow/Home/End only move focus; <kbd>Enter</kbd>/<kbd>Space</kbd>/click select), per the APG
+ - `focusOnInit` to move keyboard focus to the initially selected tab
+ - Only the active tab is in the tab order, so a single <kbd>Tab</kbd> press moves past the whole tab list
+ - Tab panels are keyboard-focusable by default (`tabIndex={0}`) when they contain no focusable element, with an opt-out for panels that already start with one
+ - Disabled tabs are skipped by the arrow keys and ignore clicks
+
+### Orientation
+
+ - Horizontal (default) or vertical tab lists: `orientation="vertical"` swaps the navigation axis (<kbd>ArrowUp</kbd>/<kbd>ArrowDown</kbd>) and sets `aria-orientation`, with a `data-orientation` attribute to hang your layout on
+
+### Styling
+
+ - Ships unstyled by default, with an optional minimal stylesheet (`kevlar-tabs/styles.css`) for a working look out of the box
+ - Predictable state classes (`tab--active`, `tab--disabled`, `tabpanel--active`, `tabpanel--disabled`, etc.)
+ - Fully customizable class names, both globally (`classNames` prop on `Tabs`) and per-element (`className`/`classNameActive`/`classNameDisabled`)
+ - Styled-components compliance via `displayName`-based wrapping
+
+### Footprint & compatibility
+
+ - No runtime dependencies, 7.9 kB minified and 2.7 kB min+gzip
+ - React 17, 18 and 19
+ - Ships TypeScript types for all components and props
+ - Drops into the Next.js App Router and other React Server Components setups
+ - ESM-only
+
+</details>
 
 ## TypeScript
 

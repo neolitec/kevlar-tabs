@@ -9,6 +9,7 @@ import {
   displayComponentWithDisabledTab,
   displayComponentWithExternals,
   displayComponentWithFirstTabDisabled,
+  displayComponentInDirectionalContainer,
   displayComponentWithHiddenTab,
   displayComponentWithLastTabDisabled,
   displayComponentWithNamedTabs,
@@ -669,6 +670,306 @@ describe('Tabs', () => {
             expect(ui.tab1.get()).toHaveFocus()
           })
         })
+      })
+    })
+  })
+
+  describe('orientation', () => {
+    describe('by default (horizontal)', () => {
+      beforeEach(() => {
+        cleanup()
+        displayComponent({ focusOnInit: true })
+      })
+
+      it('should set aria-orientation to horizontal on the tablist', () => {
+        expect(ui.tabList.get()).toHaveAttribute(
+          'aria-orientation',
+          'horizontal'
+        )
+      })
+
+      it('should expose data-orientation on the tablist and the root', () => {
+        expect(ui.tabList.get()).toHaveAttribute(
+          'data-orientation',
+          'horizontal'
+        )
+        expect(ui.tabList.get().parentElement).toHaveAttribute(
+          'data-orientation',
+          'horizontal'
+        )
+      })
+
+      it('should not react to the vertical arrow keys', async () => {
+        await userEvent.type(ui.tab1.get(), '{arrowdown}')
+        await userEvent.type(ui.tab1.get(), '{arrowup}')
+
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+      })
+    })
+
+    describe('when vertical', () => {
+      beforeEach(() => {
+        cleanup()
+        displayComponent({ focusOnInit: true, orientation: 'vertical' })
+      })
+
+      it('should set aria-orientation to vertical on the tablist', () => {
+        expect(ui.tabList.get()).toHaveAttribute('aria-orientation', 'vertical')
+      })
+
+      it('should expose data-orientation on the tablist and the root', () => {
+        expect(ui.tabList.get()).toHaveAttribute('data-orientation', 'vertical')
+        expect(ui.tabList.get().parentElement).toHaveAttribute(
+          'data-orientation',
+          'vertical'
+        )
+      })
+
+      describe('when hitting the down arrow', () => {
+        beforeEach(async () => {
+          await userEvent.type(ui.tab1.get(), '{arrowdown}')
+        })
+
+        it('should select the next tab', () => {
+          expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+          expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
+          expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+        })
+
+        it('should give the focus to the next tab', () => {
+          expect(ui.tab2.get()).toHaveFocus()
+        })
+      })
+
+      describe('when hitting the up arrow', () => {
+        beforeEach(async () => {
+          await userEvent.type(ui.tab1.get(), '{arrowup}')
+        })
+
+        it('should select the last tab', () => {
+          expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+          expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+          expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+        })
+
+        it('should give the focus to the last tab', () => {
+          expect(ui.tab3.get()).toHaveFocus()
+        })
+      })
+
+      it('should not react to the horizontal arrow keys', async () => {
+        await userEvent.type(ui.tab1.get(), '{arrowright}')
+        await userEvent.type(ui.tab1.get(), '{arrowleft}')
+
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+      })
+
+      it('should still handle the home and end keys', async () => {
+        await userEvent.type(ui.tab1.get(), '{end}')
+
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+
+        await userEvent.type(ui.tab3.get(), '{home}')
+
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
+      })
+
+      describe('when a tab is disabled', () => {
+        beforeEach(async () => {
+          cleanup()
+          displayComponentWithDisabledTab({
+            focusOnInit: true,
+            orientation: 'vertical',
+          })
+          await userEvent.type(ui.tab1.get(), '{arrowdown}')
+        })
+
+        it('should skip it when hitting the down arrow', () => {
+          expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+          expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+          expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+        })
+      })
+
+      describe('when autoActivate is false', () => {
+        beforeEach(async () => {
+          cleanup()
+          displayComponent({ autoActivate: false, orientation: 'vertical' })
+          await userEvent.type(ui.tab1.get(), '{arrowdown}')
+        })
+
+        it('should not change the selected tab', () => {
+          expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
+          expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+        })
+
+        it('should give the focus to the next tab', () => {
+          expect(ui.tab2.get()).toHaveFocus()
+        })
+      })
+    })
+  })
+
+  describe('direction', () => {
+    describe('by default (ltr)', () => {
+      beforeEach(() => {
+        cleanup()
+        displayComponent({ focusOnInit: true })
+      })
+
+      it('should select the next tab when hitting the right arrow', async () => {
+        await userEvent.type(ui.tab1.get(), '{arrowright}')
+
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
+      })
+
+      it('should select the previous tab when hitting the left arrow', async () => {
+        await userEvent.type(ui.tab1.get(), '{arrowleft}')
+
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+      })
+
+      it('should not set a dir attribute on the root', () => {
+        expect(ui.tabList.get().parentElement).not.toHaveAttribute('dir')
+      })
+    })
+
+    describe('when dir is rtl', () => {
+      beforeEach(() => {
+        cleanup()
+        displayComponent({ dir: 'rtl', focusOnInit: true })
+      })
+
+      it('should set the dir attribute on the root', () => {
+        expect(ui.tabList.get().parentElement).toHaveAttribute('dir', 'rtl')
+      })
+
+      describe('when hitting the right arrow', () => {
+        beforeEach(async () => {
+          await userEvent.type(ui.tab1.get(), '{arrowright}')
+        })
+
+        it('should select the previous tab', () => {
+          expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+          expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'false')
+          expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+        })
+
+        it('should give the focus to the previous tab', () => {
+          expect(ui.tab3.get()).toHaveFocus()
+        })
+      })
+
+      describe('when hitting the left arrow', () => {
+        beforeEach(async () => {
+          await userEvent.type(ui.tab1.get(), '{arrowleft}')
+        })
+
+        it('should select the next tab', () => {
+          expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+          expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
+          expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+        })
+
+        it('should give the focus to the next tab', () => {
+          expect(ui.tab2.get()).toHaveFocus()
+        })
+      })
+
+      it('should keep Home on the first tab', async () => {
+        await userEvent.type(ui.tab1.get(), '{home}')
+
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
+      })
+
+      it('should keep End on the last tab', async () => {
+        await userEvent.type(ui.tab1.get(), '{end}')
+
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+      })
+
+      describe('when the tab list is vertical', () => {
+        beforeEach(() => {
+          cleanup()
+          displayComponent({
+            dir: 'rtl',
+            focusOnInit: true,
+            orientation: 'vertical',
+          })
+        })
+
+        it('should still select the next tab when hitting the down arrow', async () => {
+          await userEvent.type(ui.tab1.get(), '{arrowdown}')
+
+          expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
+        })
+
+        it('should still select the previous tab when hitting the up arrow', async () => {
+          await userEvent.type(ui.tab1.get(), '{arrowup}')
+
+          expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+        })
+      })
+    })
+
+    describe('when an ancestor is rtl', () => {
+      beforeEach(() => {
+        cleanup()
+        displayComponentInDirectionalContainer('rtl', { focusOnInit: true })
+      })
+
+      it('should select the previous tab when hitting the right arrow', async () => {
+        await userEvent.type(ui.tab1.get(), '{arrowright}')
+
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'true')
+      })
+
+      it('should select the next tab when hitting the left arrow', async () => {
+        await userEvent.type(ui.tab1.get(), '{arrowleft}')
+
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
+      })
+
+      it('should be overridden by an explicit dir prop', async () => {
+        cleanup()
+        displayComponentInDirectionalContainer('rtl', {
+          dir: 'ltr',
+          focusOnInit: true,
+        })
+
+        await userEvent.type(ui.tab1.get(), '{arrowright}')
+
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
+      })
+    })
+
+    describe('when the document direction changes after mount', () => {
+      beforeEach(() => {
+        cleanup()
+        displayComponent({ focusOnInit: true })
+      })
+
+      afterEach(() => {
+        document.documentElement.removeAttribute('dir')
+      })
+
+      it('should pick the new direction up', async () => {
+        await userEvent.type(ui.tab1.get(), '{arrowright}')
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
+
+        await act(async () => {
+          document.documentElement.setAttribute('dir', 'rtl')
+          // MutationObserver callbacks are delivered as a microtask.
+          await Promise.resolve()
+        })
+
+        await userEvent.type(ui.tab2.get(), '{arrowright}')
+
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'true')
       })
     })
   })

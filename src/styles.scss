@@ -28,4 +28,25 @@
       cursor: not-allowed;
     }
   }
+
+  &[data-orientation='vertical'] {
+    flex-direction: column;
+    border-bottom: 0;
+    border-right: 1px solid #ccc;
+    padding: 10px 0 10px 10px;
+
+    .tab {
+      border: 1px solid #ccc;
+      border-right: 0;
+      border-radius: 4px 0 0 4px;
+      // The rail sizes the tabs: a fixed width would leave them detached from
+      // the border, and centering reads poorly in a column.
+      width: auto;
+      text-align: left;
+
+      &--disabled {
+        border-color: #eee;
+      }
+    }
+  }
 }

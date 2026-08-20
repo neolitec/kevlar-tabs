@@ -22,4 +22,20 @@ describe('Tab', () => {
   it('is not in the tab sequence', () => {
     expect(ui.tabList.get()).not.toHaveAttribute('tabindex')
   })
+
+  it('should be horizontal by default', () => {
+    expect(ui.tabList.get()).toHaveAttribute('aria-orientation', 'horizontal')
+    expect(ui.tabList.get()).toHaveAttribute('data-orientation', 'horizontal')
+  })
+})
+
+describe('TabList with a vertical orientation', () => {
+  beforeEach(() => {
+    render(<TabList orientation="vertical">Content</TabList>)
+  })
+
+  it('should set the orientation attributes', () => {
+    expect(ui.tabList.get()).toHaveAttribute('aria-orientation', 'vertical')
+    expect(ui.tabList.get()).toHaveAttribute('data-orientation', 'vertical')
+  })
 })

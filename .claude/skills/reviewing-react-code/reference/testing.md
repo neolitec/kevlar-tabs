@@ -22,7 +22,9 @@ Ask it on **every** change, including one with no test in the diff. Two rules:
 2. **Bug fix, regression test.** A fix with no test is an invitation to reintroduce the bug.
    The test must reproduce the original failure, not merely exercise the touched line.
 
-Missing coverage for new behaviour is `[important]`, not a nit. Line-coverage percentages are
+Missing coverage for new behaviour is always worth reporting. When the exact test can be
+written out — the harness exists, the assertion is obvious — it is 🟢 *Auto-addressable*; when it
+needs a decision about what the right invariant even is, it is 🔴. Line-coverage percentages are
 not the metric — the metric is whether a plausible regression would be caught.
 
 Also check: did the diff **delete or weaken** a test (a removed assertion, a `.skip`, a widened

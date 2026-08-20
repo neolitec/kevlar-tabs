@@ -91,10 +91,11 @@ correct in the context of its call sites — grep for them.
 4. It is not a restatement of a rule the project deliberately turned off.
 
 When a suspicion cannot be verified, either verify it with a grep or a test run, or drop it.
-Report it as a `[question]` only when the answer genuinely needs the author's intent.
+Keep it only when the answer genuinely needs the author's intent — then it is a `(question)`.
 
-Prefer few high-confidence findings over broad coverage. Ten shaky findings train the author
-to ignore the review.
+Prefer few high-confidence findings over broad coverage: report a finding only when you would
+stake ≥ 80 on it, and keep the number to yourself. Ten shaky findings train the author to
+ignore the review.
 
 ### Step 5 — Run the project's own gates
 
@@ -108,21 +109,27 @@ Run whatever exists (the collector prints the commands): lint, typecheck, unit t
 
 ### Step 6 — Write the report
 
-Use `assets/review-report-template.md`. Severity, one label per finding:
+`assets/review-report-template.md` is the contract — buckets, tags, numbering, skeleton. Read it
+before writing. In short:
 
-| Label | Meaning |
-| --- | --- |
-| `[blocking]` | Wrong behaviour, data loss, security hole, a11y barrier, breaking change to a public API. Must not merge. |
-| `[important]` | Real defect with a narrow blast radius, missing test for new behaviour, notable perf regression. Should fix now. |
-| `[nit]` | Readability, naming, small duplication. Author's call. |
-| `[question]` | Needs the author's intent before it can be judged. |
-| `[praise]` | A non-obvious thing done well. Include at most two, only when earned. |
-
-Each finding: the claim in one line, `file:line`, the concrete failure, the smallest fix.
-Show a patch only when the fix is not obvious from the sentence.
-
-End with an explicit verdict and an explicit **Not covered** list — dimensions skipped, gates
-not run, files read only partially. Silence about coverage reads as full coverage.
+- **Two buckets, split by who acts.** 🔴 *Needs your review* — correctness, accessibility,
+  security, public API and breaking changes: judgment calls, shown in full. 🟢 *Auto-addressable*
+  — tests, conventions and lint, code quality, one-line performance wins: mechanical fixes, shown
+  as a one-line recap each.
+- **The split is by nature, not topic.** If you can write the exact fix and someone could apply
+  it without choosing between options, it is 🟢 whatever its topic. If it needs a decision, 🔴.
+- **Tag, don't rank.** No blocking/important/nit ladder, no confidence score in the output.
+  Untagged means a concern to address; `(question)` needs an answer to be actionable;
+  `(suggestion)` is a non-blocking alternative. Praise is not a finding — it goes in
+  *What looks good*.
+- **Number findings continuously across the whole report**, 1..N through both buckets, so any of
+  them can be discussed by number afterwards.
+- Group by topic inside a bucket, order by `file:line` inside a topic, lead every heading with
+  its count, omit empty topics and empty buckets.
+- Each 🔴 finding: the problem in plain language, `file:line`, what actually goes wrong, the
+  concrete fix. Show a patch only when the fix is not obvious from the sentence.
+- End with **Not covered** — dimensions skipped, gates not run, files read only partially.
+  Silence about coverage reads as full coverage.
 
 ## Reusing this skill in another React project
 

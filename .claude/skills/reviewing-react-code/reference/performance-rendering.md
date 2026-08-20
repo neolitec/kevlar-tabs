@@ -21,7 +21,9 @@ how often, and how much it costs*. "This could be slow" is not a finding. Accept
 a render counted in the diff's logic, a `useEffect` that runs on every render, an import that
 pulls a known-heavy module, an O(n²) inside a map, a missing `key` stability, a measured number.
 
-Micro-optimisations that add complexity to a component rendered twice are a `[nit]` at most.
+Micro-optimisations that add complexity to a component rendered twice are not worth reporting.
+A one-line win (a stable key, a formatter hoisted to module scope) is 🟢 *Auto-addressable*; a
+trade-off that depends on measurement is 🔴, because the call is the author's to make.
 Correctness beats speed: never accept a memoization that can serve stale output.
 
 ## Is the React Compiler enabled?

@@ -113,7 +113,7 @@ cannot exist on the server (accepting the extra render).
 - Support range in `peerDependencies` (for example `^17 || ^18 || ^19`) is the **hard constraint**
   on every API the code may use: `forwardRef` cannot be dropped, `useId`/`useSyncExternalStore`
   need ≥18, `use`/`useActionState`/ref-callback cleanup need 19 (see `react-correctness.md`).
-  Using a newer API without widening the floor is `[blocking]`.
+  Using a newer API without widening the floor is a concern, not a suggestion.
 - Narrowing the range is a breaking change; widening it needs a test or CI matrix that proves it.
 - A runtime dependency that should be a peer (React, a design system), or a peer that should be a
   regular dependency.

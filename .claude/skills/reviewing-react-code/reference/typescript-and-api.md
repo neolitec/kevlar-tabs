@@ -133,8 +133,8 @@ also uses is composed, not overwritten (`onClick={(e) => { rest.onClick?.(e); do
 
 ## Breaking changes and semver
 
-In a published library (the collector says so), flag as `[blocking]` unless the change is
-intentional and the version reflects it:
+In a published library (the collector says so), these go to 🔴 *Needs your review* unless the
+change is intentional and the version reflects it:
 
 - removed or renamed export, prop, or type;
 - prop type narrowed (a union member removed, an optional prop made required);

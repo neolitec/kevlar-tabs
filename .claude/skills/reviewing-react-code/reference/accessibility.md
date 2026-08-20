@@ -17,8 +17,8 @@
 - What automation catches, and what it cannot
 
 Target: **WCAG 2.2 level AA**, plus the ARIA Authoring Practices Guide keyboard contracts for
-composite widgets. An a11y defect that locks a keyboard or screen-reader user out is
-`[blocking]`, not a nit.
+composite widgets. An a11y defect that locks a keyboard or screen-reader user out belongs in
+🔴 *Needs your review* as a plain concern — never as a `(suggestion)`.
 
 ## Order of operations
 

@@ -21,7 +21,7 @@ checks it" as the control.
 - **`dangerouslySetInnerHTML`** with any value that is not a compile-time constant → XSS unless
   sanitised with a real sanitiser (DOMPurify or equivalent) on the way in. Markdown, rich-text
   editor output, a CMS field and a translation string all count as untrusted.
-  `[blocking]` when the source is user or third-party content.
+  A concern in 🔴 whenever the source is user or third-party content.
 - Sanitising with a regex or a `replace` chain → always bypassable.
 - Sanitising on write only, while another path writes the same field.
 - `innerHTML`, `outerHTML`, `insertAdjacentHTML`, `document.write` on a ref.
@@ -56,8 +56,8 @@ checks it" as the control.
 - A `.env` file, a `*.pem`, or a service-account JSON added to the diff.
 - Source maps for production shipped publicly when the code is not meant to be readable.
 
-Anything of this kind that is already committed: report it as `[blocking]`, and note that
-rotation is required — removing the line does not undo the exposure.
+Anything of this kind that is already committed goes in 🔴, with the note that rotation is
+required — removing the line does not undo the exposure.
 
 ## Tokens, storage and auth state
 

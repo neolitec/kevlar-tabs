@@ -1,0 +1,44 @@
+.claude/skills/reviewing-react-code/reference/testing.md
+  s_c14fad9b8fa0a2::t_f13478eb9da110 1-141
+.claude/skills/reviewing-react-code/project-notes.md
+  s_c14fad9b8fa0a2::t_5aa977b9330683 1-68
+.claude/skills/reviewing-react-code/reference/typescript-and-api.md
+  s_c14fad9b8fa0a2::t_47d7fa033ffd8c 1-158
+.claude/skills/reviewing-react-code/reference/accessibility.md
+  s_c14fad9b8fa0a2::t_27dddf811cd5ea 1-207
+.claude/skills/reviewing-react-code/reference/react-correctness.md
+  s_c14fad9b8fa0a2::t_034ca56507376c 1-238
+.claude/skills/reviewing-react-code/scripts/collect-context.sh
+  s_c14fad9b8fa0a2::t_afd1c23a7981a8 1-92,96-97,103-112,114-173,175-190,193-195,202-219
+  s_c14fad9b8fa0a2::t_5332978d2e406c 201
+  s_c14fad9b8fa0a2::t_4cd01aa0f9cae7 93-95,98-102,113
+  s_c14fad9b8fa0a2::t_f5c9aa057b95c2 174,191-192,196-200
+.claude/skills/reviewing-react-code/assets/review-report-template.md
+  s_c14fad9b8fa0a2::t_5aa977b9330683 1-61
+.claude/skills/reviewing-react-code/reference/styling-and-css.md
+  s_c14fad9b8fa0a2::t_f13478eb9da110 1-150
+.claude/skills/reviewing-react-code/reference/performance-rendering.md
+  s_c14fad9b8fa0a2::t_47d7fa033ffd8c 1-148
+.claude/skills/reviewing-react-code/reference/ssr-and-packaging.md
+  s_c14fad9b8fa0a2::t_3aaf8747dfe849 1-129
+.claude/skills/reviewing-react-code/reference/security.md
+  s_c14fad9b8fa0a2::t_3aaf8747dfe849 1-137
+.claude/skills/reviewing-react-code/SKILL.md
+  s_c14fad9b8fa0a2::t_d70514524f93eb 1-131
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "96f69b49f0a8ef550b7c1aff2b68bec00284d9c7",
+  "prompts": {},
+  "sessions": {
+    "s_c14fad9b8fa0a2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cd492c28-def6-4413-8d9f-cd9e56b80eab",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Kevin Manson <kevin.manson@qohash.com>"
+    }
+  }
+}

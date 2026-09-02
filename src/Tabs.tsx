@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useId, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { getTabProps } from './helpers/childrenUtils'
 import {
   isTabElement,
@@ -78,9 +78,18 @@ const Tabs = ({
   // synchronising props into state from an effect: React re-runs the component
   // immediately, without committing the intermediate result or painting it.
   if (previous.selected !== selected || previous.tabNamesKey !== tabNamesKey) {
+    const nextState =
+      previous.tabNamesKey !== tabNamesKey && selected === undefined
+        ? computeUncontrolledState(tabProps, currentIndex, currentName)
+        : computeState(tabProps, selected)
+
     setPrevious({ selected, tabNamesKey })
-    setSelected(computeState(tabProps, selected))
+    setSelected(nextState)
   }
+
+  useEffect(() => {
+    currentFocusIndex.current = currentIndex
+  }, [currentIndex])
 
   const handleSelect = useCallback(
     (index: number, name?: string) => {
@@ -301,6 +310,27 @@ function computeState(
     return fallbackState(tabProps, `no tab is named "${selected}"`)
   }
   return { index: 0, name: tabProps[0]?.name }
+}
+
+function computeUncontrolledState(
+  tabProps: TabProps[],
+  currentIndex: number,
+  currentName?: string,
+): {
+  index: number
+  name?: string
+} {
+  if (currentName) {
+    const index = tabProps.findIndex((tab) => tab.name === currentName)
+
+    if (index !== -1) {
+      return { index, name: currentName }
+    }
+  }
+
+  const index = Math.min(currentIndex, Math.max(tabProps.length - 1, 0))
+
+  return { index, name: tabProps[index]?.name }
 }
 
 // The library ships without node's ambient types: `process.env.NODE_ENV` is

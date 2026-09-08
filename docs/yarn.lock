@@ -71,10 +71,10 @@
   dependencies:
     "@astrojs/compiler-binding" "0.4.0"
 
-"@astrojs/internal-helpers@0.10.4":
-  version "0.10.4"
-  resolved "https://registry.yarnpkg.com/@astrojs/internal-helpers/-/internal-helpers-0.10.4.tgz#2974e67370f346a922af112c7c6bdc85135b96ac"
-  integrity sha512-nozZSy/mKYLqe4YrqbKtdOszedAfXYCtw3wZ0d+CAjz4GqQ4L9rl1ltIL5BlgwmYVinJg/RZ0MgGuWOdlyRZlA==
+"@astrojs/internal-helpers@0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@astrojs/internal-helpers/-/internal-helpers-0.11.0.tgz#e5b6119e7cc1a3520fe43e30d25a30b61576bb49"
+  integrity sha512-3rzxJ+xbo0+8YyqOzLziIN32wmsHdCjEVz2sGOpRxJ+Ben/KiLph4ItxBy1abEL+E8fkRzqjg0rfXmaHJGw9JA==
   dependencies:
     "@types/hast" "^3.0.4"
     "@types/mdast" "^4.0.4"
@@ -85,12 +85,12 @@
     smol-toml "^1.6.0"
     unified "^11.0.5"
 
-"@astrojs/markdown-satteri@0.3.8":
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/@astrojs/markdown-satteri/-/markdown-satteri-0.3.8.tgz#549362d0db2f7b5fc5e55bac4d76bfc2b9c4ca6b"
-  integrity sha512-n8ItpFTCmlDsVR5+rwDmehSf+jFCYLWmZiisZNGuF7xILqYhsVeBfcha4qgS2Seq3fAc9Tm58ZVrvqFQ6RQgRQ==
+"@astrojs/markdown-satteri@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@astrojs/markdown-satteri/-/markdown-satteri-0.4.0.tgz#59e269071e76aecae664b9a673d4914663f1647c"
+  integrity sha512-wykOOW9KsUVcZweOpY/CeXpdKcCKZy6fQbdcteWFuI75+sQCiqxYM7VKsGa5b+aGl3cYQscFY37rsbbyal5MRw==
   dependencies:
-    "@astrojs/internal-helpers" "0.10.4"
+    "@astrojs/internal-helpers" "0.11.0"
     "@astrojs/prism" "4.0.2"
     github-slugger "^2.0.0"
     satteri "^0.10.3"
@@ -102,12 +102,12 @@
   dependencies:
     prismjs "^1.30.0"
 
-"@astrojs/react@^6.0.4":
-  version "6.0.4"
-  resolved "https://registry.yarnpkg.com/@astrojs/react/-/react-6.0.4.tgz#fd40f1c11226666647304385e5aae5a7d9087818"
-  integrity sha512-0PDs0gM00vbUnw84Dh+YaxYaZzlppyzJub0J8wOO8/8AG4gV8L8X1ttiRp8cbSBGiWcu3UuspCaqIDO31ta8Uw==
+"@astrojs/react@^6.0.5":
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/@astrojs/react/-/react-6.0.5.tgz#aac7d7a54b90d24edf2d78949a71f9b9c87e389b"
+  integrity sha512-LiXkrO6mLxZ4dbUcLqiuasDd24fmO776NWPJZFUwu6fKP9rmxF3lt9BGo96d2M3B4/Ayy2YYe85evn5lETnokw==
   dependencies:
-    "@astrojs/internal-helpers" "0.10.4"
+    "@astrojs/internal-helpers" "0.11.0"
     "@vitejs/plugin-react" "^5.2.0"
     devalue "^5.8.1"
     ultrahtml "^1.6.0"
@@ -1178,14 +1178,14 @@ ast-types@^0.16.1:
   dependencies:
     tslib "^2.0.1"
 
-astro@^7.2.9:
-  version "7.2.9"
-  resolved "https://registry.yarnpkg.com/astro/-/astro-7.2.9.tgz#c3317f2f5629c948abb2f579f83eb8dfbd0bbca8"
-  integrity sha512-o5nZFo/bieF6rp4x9sQSLhI7GO7Bahpld38Y4LvX27nFoxNiuttjI+Hea81w5ksORLHgdPUlQpU9obPz5QRa8g==
+astro@^7.3.1:
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/astro/-/astro-7.3.1.tgz#4ef703a2faaedde4ff790ef880315fa2e780a8d4"
+  integrity sha512-A/bJYHtc6n0UAdROY9W948fW6lX0pnUA+JWKW+IGCXRyDIGN2MsXC0OlS8onZGJjr+sv8htemwOc9W5PBRXCkw==
   dependencies:
     "@astrojs/compiler-rs" "^0.4.0"
-    "@astrojs/internal-helpers" "0.10.4"
-    "@astrojs/markdown-satteri" "0.3.8"
+    "@astrojs/internal-helpers" "0.11.0"
+    "@astrojs/markdown-satteri" "0.4.0"
     "@astrojs/telemetry" "3.3.3"
     "@capsizecss/unpack" "^4.0.0"
     "@clack/prompts" "^1.1.0"
@@ -1235,7 +1235,7 @@ astro@^7.2.9:
     vitefu "^1.1.2"
     xxhash-wasm "^1.1.0"
     yargs-parser "^22.0.0"
-    zod "^4.3.6"
+    zod "^4.5.4"
   optionalDependencies:
     sharp "^0.35.4"
 
@@ -2439,10 +2439,10 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-sass@^1.103.1:
-  version "1.103.1"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.103.1.tgz#13b70f5ff69288db956dc27d27c8fb79f3a27c61"
-  integrity sha512-9icZURbP51S6S0QGoyaeqk9uB06GNWxsFYWfH5RgpFgqK5FA8tJcM3AdVxrZEVJ7dz+L87nG95gBKf4VuaMHGw==
+sass@^1.104.0:
+  version "1.104.0"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.104.0.tgz#40a6dfc42f8cc469f7f2c10b40c6a0b8577895ac"
+  integrity sha512-btHMApW2bgolvClhRW8AlQJzgI9lUB3pPSofBQQT+E46GWvf9o0TVQ13SYv5riWZVFyPN+JNz3TKW9XhBlc10w==
   dependencies:
     chokidar "^5.0.0"
     immutable "^5.1.5"
@@ -2837,10 +2837,10 @@ yocto-queue@^1.2.1:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-1.2.2.tgz#3e09c95d3f1aa89a58c114c99223edf639152c00"
   integrity sha512-4LCcse/U2MHZ63HAJVE+v71o7yOdIe4cZ70Wpf8D/IyjDKYQLV5GD46B+hSTjJsvV5PztjvHoU580EftxjDZFQ==
 
-zod@^4.3.6:
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-4.4.3.tgz#b680f172885d18bbebf21a834ea25e55a1bbf356"
-  integrity sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==
+zod@^4.5.4:
+  version "4.5.4"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-4.5.4.tgz#e215c62420c528dd7951e31fb52c5438f1fd184a"
+  integrity sha512-sC95tT5iHHH9gtpj6A81kh+NEaRAUFN+qlUPDUbRfOMvNf5QCBqsb3WgvnpVtK5Y+4UfA6KqufotuTvMGiTlsA==
 
 zwitch@^2.0.4:
   version "2.0.4"

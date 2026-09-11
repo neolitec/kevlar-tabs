@@ -93,6 +93,38 @@ export function displayComponentWithControls() {
   return render(<WithControls />)
 }
 
+export function displayComponentWithShrinkableTabs() {
+  const WithShrinkableTabs = () => {
+    const [tabs, setTabs] = React.useState([
+      'Tab 1',
+      'Tab 2',
+      'Tab 3',
+      'Tab 4',
+      'Tab 5',
+    ])
+
+    return (
+      <>
+        <Tabs>
+          <TabList>
+            {tabs.map((tab) => (
+              <Tab key={tab}>{tab}</Tab>
+            ))}
+          </TabList>
+          {tabs.map((tab) => (
+            <TabPanel key={tab}>{tab} content</TabPanel>
+          ))}
+        </Tabs>
+        <button type="button" onClick={() => setTabs(tabs.slice(0, 2))}>
+          Shrink
+        </button>
+      </>
+    )
+  }
+
+  return render(<WithShrinkableTabs />)
+}
+
 export function displayComponentWithExternals() {
   return render(
     <Tabs>

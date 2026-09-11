@@ -1,6 +1,13 @@
 'use client'
 
-import React, { useCallback, useId, useMemo, useRef, useState } from 'react'
+import React, {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { getTabProps } from './helpers/childrenUtils'
 import {
   isTabElement,
@@ -68,6 +75,10 @@ const Tabs = ({
     () => computeState(tabProps, selected),
   )
   const currentFocusIndex = useRef(currentIndex)
+
+  useEffect(() => {
+    currentFocusIndex.current = currentIndex
+  }, [currentIndex])
 
   // Compared as a string so that a children update producing an equal tab list
   // does not reset the selected tab.

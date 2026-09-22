@@ -93,6 +93,43 @@ export function displayComponentWithControls() {
   return render(<WithControls />)
 }
 
+export function displayComponentWithUncontrolledControls() {
+  const WithControls = () => {
+    const [tabs, setTabs] = React.useState(['Tab 1', 'Tab 2'])
+
+    const add = () => {
+      setTabs([...tabs, `Tab ${tabs.length + 1}`])
+    }
+
+    const remove = () => {
+      setTabs(tabs.slice(0, tabs.length - 1))
+    }
+
+    return (
+      <>
+        <Tabs>
+          <TabList>
+            {tabs.map((tab) => (
+              <Tab key={tab}>{tab}</Tab>
+            ))}
+          </TabList>
+          {tabs.map((tab) => (
+            <TabPanel key={tab}>{tab} content</TabPanel>
+          ))}
+        </Tabs>
+        <button type="button" onClick={add}>
+          Add
+        </button>
+        <button type="button" onClick={remove}>
+          Remove
+        </button>
+      </>
+    )
+  }
+
+  return render(<WithControls />)
+}
+
 export function displayComponentWithExternals() {
   return render(
     <Tabs>

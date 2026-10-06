@@ -30,6 +30,6 @@
 	},
 	"devDependencies": {
 		"acorn": "^8.18.0",
-		"sass": "^1.105.0"
+		"sass": "^1.105.1"
 	}
 }

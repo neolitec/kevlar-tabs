@@ -15,6 +15,7 @@ import {
   displayComponentWithNamedTabs,
   displayComponentWithoutAnyTab,
   displayComponentWithSparses,
+  displayComponentWithUncontrolledControls,
 } from './suts'
 
 const ui = {
@@ -353,6 +354,39 @@ describe('Tabs', () => {
 
       it('should remove the second tab', () => {
         expect(ui.tab2.query()).not.toBeInTheDocument()
+      })
+    })
+  })
+
+  describe('when an uncontrolled tab list changes', () => {
+    beforeEach(() => {
+      cleanup()
+      displayComponentWithUncontrolledControls()
+    })
+
+    describe('when adding a new tab after selecting another tab', () => {
+      beforeEach(async () => {
+        await userEvent.click(ui.tab2.get())
+        await userEvent.click(ui.addButton.get())
+      })
+
+      it('should keep the selected tab', () => {
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
+        expect(ui.tab3.get()).toHaveAttribute('aria-selected', 'false')
+      })
+    })
+
+    describe('when removing a later tab after selecting another tab', () => {
+      beforeEach(async () => {
+        await userEvent.click(ui.addButton.get())
+        await userEvent.click(ui.tab2.get())
+        await userEvent.click(ui.removeButton.get())
+      })
+
+      it('should keep the selected tab', () => {
+        expect(ui.tab1.get()).toHaveAttribute('aria-selected', 'false')
+        expect(ui.tab2.get()).toHaveAttribute('aria-selected', 'true')
       })
     })
   })

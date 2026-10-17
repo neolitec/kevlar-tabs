@@ -300,7 +300,12 @@ function computeState(
     }
     return fallbackState(tabProps, `no tab is named "${selected}"`)
   }
-  return { index: 0, name: tabProps[0]?.name }
+  // Uncontrolled: fall back to first non-disabled tab when the first tab is disabled
+  const firstEnabled = tabProps.findIndex((tab) => !tab.disabled)
+  if (firstEnabled === -1 || firstEnabled === 0) {
+    return { index: Math.max(firstEnabled, 0), name: tabProps[Math.max(firstEnabled, 0)]?.name }
+  }
+  return { index: firstEnabled, name: tabProps[firstEnabled]?.name }
 }
 
 // The library ships without node's ambient types: `process.env.NODE_ENV` is

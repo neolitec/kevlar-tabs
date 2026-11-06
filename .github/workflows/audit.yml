@@ -1,0 +1,61 @@
+name: Dependency Audit
+
+# Dependabot version updates only cover direct dependencies, and its security
+# updates never opened a PR for vulnerable transitive pnpm dependencies
+# (lodash-es and mdast-util-to-hast stayed vulnerable for ~3 months).
+# This job catches them: weekly, on demand, and on any PR touching a lockfile.
+on:
+  schedule:
+    # Monday 06:00 UTC, the day before Dependabot's Tuesday run.
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'pnpm-lock.yaml'
+      - 'package.json'
+      - 'docs/yarn.lock'
+      - 'docs/package.json'
+
+permissions:
+  contents: read
+
+jobs:
+  audit-library:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v7
+
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - uses: pnpm/action-setup@v6
+
+      # Reads pnpm-lock.yaml only, no install needed.
+      - name: Audit 🔍
+        run: pnpm audit --audit-level=high
+
+  audit-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v7
+
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      # yarn 1 exits with a bitmask of the severities found
+      # (1 info, 2 low, 4 moderate, 8 high, 16 critical): fail on high or critical.
+      - name: Audit 🔍
+        working-directory: docs
+        run: |
+          set +e
+          yarn audit --level high
+          code=$?
+          if [ $((code & 24)) -ne 0 ]; then exit 1; fi

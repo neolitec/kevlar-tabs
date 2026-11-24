@@ -18,7 +18,7 @@
 		"@astrojs/react": "^7.1.9",
 		"@types/react": "^18.0.21",
 		"@types/react-dom": "^18.0.6",
-		"astro": "^7.4.12",
+		"astro": "^7.4.13",
 		"copy-to-clipboard": "^4.0.2",
 		"gh-pages": "^6.3.0",
 		"include-media": "^2.0.0",
